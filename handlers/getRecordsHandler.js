@@ -1,4 +1,5 @@
-const { Client } = require('pg');
+//const { Client } = require('pg');
+const client = require('../lib/DatabaseMgr');
 
 class getRecordsHandler{
 
@@ -12,13 +13,13 @@ class getRecordsHandler{
 
   console.log("inside getRecords");
 
-  const client = new Client({
+  /*const client = new Client({
       host     : 'testpostgresdb.c0efkqdxrumb.us-west-1.rds.amazonaws.com',
       database     : 'postgres', 
       user : 'testDBuser',
       password : 'Social1mp4ct',
       port     : '5432'
-    })
+    })*/
 
     try {
         await client.connect();

@@ -81,7 +81,7 @@ module.exports.getSecrets = (event, context, callback) => {
     },
     body: JSON.stringify({
       message: 'Go Serverless v1.0! Your function executed successfully!',
-      data: 'some data'
+      data: secrets
     }),
   };
 
