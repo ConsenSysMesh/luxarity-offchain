@@ -4,7 +4,11 @@
   "description": "",
   "main": "handler.js",
   "dependencies": {
-    "pg": "^7.4.3"
+    "aws-sdk": "^2.286.2",
+    "pg": "^7.4.3",
+    "serverless-kms-secrets": "^1.0.3",
+    "serverless-webpack": "^5.2.0",
+    "webpack": "^4.16.4"
   },
   "devDependencies": {},
   "scripts": {

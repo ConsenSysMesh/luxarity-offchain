@@ -1,6 +1,7 @@
 'use strict';
 //const { Client } = require('pg');
 const GetRecordsHandler = require('./handlers/getRecordsHandler');
+const AWS = require("aws-sdk");
 
 const getRecordsHandler = new GetRecordsHandler();
 
@@ -23,7 +24,6 @@ module.exports.helloWorld = (event, context, callback) => {
 module.exports.helloWorld2 = (event, context, callback) => {
 
   console.log("num: "+getRecordsHandler.num)
-  //let reco = { 'error' : 'no reco error'};
   let reco;
 
   getRecordsHandler.getRecords(event, context, (err,resp) =>{
@@ -53,6 +53,39 @@ module.exports.helloWorld2 = (event, context, callback) => {
   });
 
  
+};
+
+module.exports.getSecrets = (event, context, callback) => {
+  console.log("inside getSecrets");
+  const kms = new AWS.KMS();
+  let secrets;
+
+  try{
+    console.log("inside try");
+    kms.decrypt({
+        CiphertextBlob: Buffer(process.env.SECRETS, 'base64')
+        }).promise()
+        .then(data => {
+          const decrypted = String(data.Plaintext);
+          console.log("decrypted: "+decrypted);
+          secrets = JSON.parse(decrypted);
+          console.log("secrets.seed: "+secrets.SEED);
+      })
+  }catch(error){console.log("kms decrypt error: "+error)}
+  
+
+  const response = {
+    statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*', // Required for CORS support to work
+    },
+    body: JSON.stringify({
+      message: 'Go Serverless v1.0! Your function executed successfully!',
+      data: 'some data'
+    }),
+  };
+
+  callback(null, response);
 };
 
 
