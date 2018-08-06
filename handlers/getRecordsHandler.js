@@ -1,38 +1,31 @@
-//const { Client } = require('pg');
-const client = require('../lib/DatabaseMgr');
+
 
 class getRecordsHandler{
 
-  constructor(){
-    this.num = 5;
-    console.log("constructor");
+  constructor(databaseMgr){
+    this.databaseMgr = databaseMgr;
   };
 
+ async handle(event, context, cb) {
 
-  async getRecords(event, context, callback) {
+  console.log("inside getRecordsHandler.handle");
+  
+    try{
 
-  console.log("inside getRecords");
+      console.log("inside try");
+      const records = await this.databaseMgr.getRecords();
+      console.log("after records await");
+      cb(null, records);
 
-  /*const client = new Client({
-      host     : 'testpostgresdb.c0efkqdxrumb.us-west-1.rds.amazonaws.com',
-      database     : 'postgres', 
-      user : 'testDBuser',
-      password : 'Social1mp4ct',
-      port     : '5432'
-    })*/
+    }catch(error){
+      console.log("getrecordshandler error"+error);
+      cb({ code: 500, message: "Sign Raw Tx Error: " + err.message });
+      return;
+    }
 
-    try {
-        await client.connect();
-        const res = await client.query("select * from test");
-        console.log("res: "+res.rows);
-        callback(null, res.rows[1]);
-      } catch (e) {
-        throw e;
-      } finally {
-        await client.end();
-      }
+  }
 
-  };
+
 
 };
 

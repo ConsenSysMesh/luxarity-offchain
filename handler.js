@@ -1,92 +1,78 @@
 'use strict';
-//const { Client } = require('pg');
+const DatabaseMgr = require('./lib/DatabaseMgr');
 const GetRecordsHandler = require('./handlers/getRecordsHandler');
 const AWS = require("aws-sdk");
 
-const getRecordsHandler = new GetRecordsHandler();
+let databaseMgr = new DatabaseMgr();
+let getRecordsHandler = new GetRecordsHandler(databaseMgr);
 
 
 module.exports.helloWorld = (event, context, callback) => {
-  const response = {
-    statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*', // Required for CORS support to work
-    },
-    body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: event,
-    }),
-  };
 
-  callback(null, response);
+  preHandler(event, context, callback);
+
 };
 
-module.exports.helloWorld2 = (event, context, callback) => {
 
-  console.log("num: "+getRecordsHandler.num)
-  let reco;
 
-  getRecordsHandler.getRecords(event, context, (err,resp) =>{
-   
-   console.log("in hw2 getRecordsHanlder.getRecords() "); 
-   if (err == null){
-      reco = resp;
-   }
-   else{
-      reco = { 'error' : 'reco error'};
-   }
-
-    const response = {
-    statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*', // Required for CORS support to work
-    },
-    body: JSON.stringify({
-      message: 'helloworld2',
-      data : reco
-      //input: event,
-    }),
-    };
-
-   callback(null, response);
-
-  });
-
- 
-};
-
-module.exports.getSecrets = (event, context, callback) => {
-  console.log("inside getSecrets");
-  const kms = new AWS.KMS();
-  let secrets;
-
-  try{
-    console.log("inside try");
-    kms.decrypt({
-        CiphertextBlob: Buffer(process.env.SECRETS, 'base64')
-        }).promise()
-        .then(data => {
-          const decrypted = String(data.Plaintext);
-          console.log("decrypted: "+decrypted);
-          secrets = JSON.parse(decrypted);
-          console.log("secrets.seed: "+secrets.SEED);
+const preHandler = (event, context, callback) => {
+  //console.log(event);
+  console.log("inside preHandler");
+  if (!databaseMgr.isSecretsSet() ) {
+    const kms = new AWS.KMS();
+    kms
+      .decrypt({
+        CiphertextBlob: Buffer(process.env.SECRETS, "base64")
       })
-  }catch(error){console.log("kms decrypt error: "+error)}
-  
+      .promise()
+      .then(data => {
+        const decrypted = String(data.Plaintext);
+        //ethereumMgr.setSecrets(JSON.parse(decrypted));
+        databaseMgr.setSecrets(JSON.parse(decrypted));
+        console.log("secrets:PG_HOST: "+databaseMgr.PG_HOST);
+        doHandler(event, context, callback);
+      });
+  } else {
+    //doHandler(handler, event, context, callback);
+     doHandler(event, context, callback);
+    console.log("prehandler error");
+  }
 
-  const response = {
-    statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*', // Required for CORS support to work
-    },
-    body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      data: secrets
-    }),
-  };
-
-  callback(null, response);
+  console.log("secrets:PG_HOST2: "+databaseMgr.PG_HOST);
 };
 
+const doHandler = ( event, context, callback) => {
 
+    console.log("in doHandler with PG.HOST"+databaseMgr.PG_HOST);
+    getRecordsHandler.handle(event, context, (err, resp) => {
+      let response;
+      console.log("response: "+response);
+
+       if (err == null) {
+            response = {
+              statusCode: 200,
+              body: JSON.stringify({
+                status: "success",
+                data: resp
+              })
+            };
+        } else {
+          //console.log(err);
+            let code = 500;
+            if (err.code) code = err.code;
+            let message = err;
+            if (err.message) message = err.message;
+
+            response = {
+              statusCode: code,
+              body: JSON.stringify({
+                status: "error",
+                message: message
+              })
+             };
+          }
+
+        callback(null, response);
+    });
+  }
 

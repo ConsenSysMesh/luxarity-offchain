@@ -53,21 +53,5 @@ functions:
           path: hello-world
           method: get
           cors: true
-  helloWorld2:
-    handler: handler.helloWorld2
-    description: Fund handler
-    timeout: 30
-    events:
-     - http:
-         path: hello-world2
-         method: get
-         cors: true
-  getSecrets:
-    handler: handler.getSecrets
-    # The `events` block defines how to trigger the handler.helloWorld code
-    events:
-      - http:
-          path: get-secrets
-          method: get
-          cors: true
+
 
