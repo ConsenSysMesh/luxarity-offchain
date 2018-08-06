@@ -1,0 +1,29 @@
+{
+  "paramDefaults": {
+    "minDeposit": 100,
+    "pMinDeposit": 100,
+    "applyStageLength": 0,
+    "pApplyStageLength": 0,
+    "commitStageLength": 28,
+    "pCommitStageLength": 28,
+    "revealStageLength": 0,
+    "pRevealStageLength": 0,
+    "dispensationPct": 60,
+    "pDispensationPct": 60,
+    "voteQuorum": 50,
+    "pVoteQuorum": 50
+	},
+  "name": "The Panda Registry",
+  "token": {
+    "address": "0xd886e2b3e597ba00b8cbbe7c98f664c1ebc0bf11",
+    "deployToken": false,
+    "decimals": "18",
+    "name": "PandaCoin",
+    "symbol": "PDC",
+    "supply": "10000000",
+    "tokenHolders": [
+      { "address": "0xD176f6907Ae1E699b39F78cf4582B019518E2B80",
+        "amount": "10000000" }
+    ]
+  }
+}

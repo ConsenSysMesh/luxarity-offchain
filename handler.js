@@ -2,14 +2,18 @@
 const AWS = require("aws-sdk");
 
 const DatabaseMgr = require('./lib/DatabaseMgr');
+const EthereumMgr = require('./lib/EthereumMgr');
 const GetRecordsHandler = require('./handlers/getRecordsHandler');
+const GetRecordsHandlerEth = require('./handlers/getRecordsHandlerEth');
 const AllProjectDetHandler = require('./handlers/allProjectDetHandler');
 const ProjectDetHandler = require('./handlers/projectDetHandler');
 const CreateProjectHandler = require('./handlers/createProjectHandler');
 
 
 let databaseMgr = new DatabaseMgr();
+let ethereumMgr = new EthereumMgr();
 let getRecordsHandler = new GetRecordsHandler(databaseMgr);
+let getRecordsHandlerEth = new GetRecordsHandlerEth(databaseMgr, ethereumMgr);
 let allProjectDetHandler = new AllProjectDetHandler(databaseMgr);
 let projectDetHandler = new ProjectDetHandler(databaseMgr);
 let createProjectHandler = new CreateProjectHandler(databaseMgr);
@@ -17,6 +21,10 @@ let createProjectHandler = new CreateProjectHandler(databaseMgr);
 //done
 module.exports.helloWorld = (event, context, callback) => {
    preHandler(getRecordsHandler, event, context, callback);
+};
+
+module.exports.helloWorldEth = (event, context, callback) => {
+   preHandler(getRecordsHandlerEth, event, context, callback);
 };
 
 //done

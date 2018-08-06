@@ -53,6 +53,14 @@ functions:
           path: hello-world
           method: get
           cors: true
+  helloWorldEth:
+    handler: handler.helloWorldEth
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: helloWorldEth
+          method: get
+          cors: true
   allProjectDet:
     handler: handler.allProjectDet
     # The `events` block defines how to trigger the handler.helloWorld code
