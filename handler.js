@@ -1,22 +1,40 @@
 'use strict';
+const AWS = require("aws-sdk");
+
 const DatabaseMgr = require('./lib/DatabaseMgr');
 const GetRecordsHandler = require('./handlers/getRecordsHandler');
-const AWS = require("aws-sdk");
+const AllProjectDetHandler = require('./handlers/allProjectDetHandler');
+const ProjectDetHandler = require('./handlers/projectDetHandler');
+const CreateProjectHandler = require('./handlers/createProjectHandler');
+
 
 let databaseMgr = new DatabaseMgr();
 let getRecordsHandler = new GetRecordsHandler(databaseMgr);
+let allProjectDetHandler = new AllProjectDetHandler(databaseMgr);
+let projectDetHandler = new ProjectDetHandler(databaseMgr);
+let createProjectHandler = new CreateProjectHandler(databaseMgr);
 
-
+//done
 module.exports.helloWorld = (event, context, callback) => {
-
-  preHandler(event, context, callback);
-
+   preHandler(getRecordsHandler, event, context, callback);
 };
 
+//done
+module.exports.allProjectDet = (event, context, callback) => {
+   preHandler(allProjectDetHandler, event, context, callback);
+};
 
+//done
+module.exports.projectDet = (event, context, callback) => {
+   preHandler(projectDetHandler, event, context, callback);
+};
 
-const preHandler = (event, context, callback) => {
-  //console.log(event);
+module.exports.createProject = (event, context, callback) => {
+   preHandler(createProjectHandler, event, context, callback);
+};
+
+const preHandler = (handler, event, context, callback) => {
+  console.log("event: "+event);
   console.log("inside preHandler");
   if (!databaseMgr.isSecretsSet() ) {
     const kms = new AWS.KMS();
@@ -30,21 +48,21 @@ const preHandler = (event, context, callback) => {
         //ethereumMgr.setSecrets(JSON.parse(decrypted));
         databaseMgr.setSecrets(JSON.parse(decrypted));
         console.log("secrets:PG_HOST: "+databaseMgr.PG_HOST);
-        doHandler(event, context, callback);
+        doHandler(handler, event, context, callback);
       });
   } else {
     //doHandler(handler, event, context, callback);
-     doHandler(event, context, callback);
+     doHandler(handler, event, context, callback);
     console.log("prehandler error");
   }
 
   console.log("secrets:PG_HOST2: "+databaseMgr.PG_HOST);
 };
 
-const doHandler = ( event, context, callback) => {
+const doHandler = (handler, event, context, callback) => {
 
     console.log("in doHandler with PG.HOST"+databaseMgr.PG_HOST);
-    getRecordsHandler.handle(event, context, (err, resp) => {
+    handler.handle(event, context, (err, resp) => {
       let response;
       console.log("response: "+response);
 
@@ -57,7 +75,7 @@ const doHandler = ( event, context, callback) => {
               })
             };
         } else {
-          //console.log(err);
+          console.log(err);
             let code = 500;
             if (err.code) code = err.code;
             let message = err;

@@ -53,5 +53,29 @@ functions:
           path: hello-world
           method: get
           cors: true
+  allProjectDet:
+    handler: handler.allProjectDet
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: allProjectDet
+          method: get
+          cors: true
+  projectDet:
+    handler: handler.projectDet
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: projectDet
+          method: post
+          cors: true
+  createProject:
+    handler: handler.createProject
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: createProject
+          method: post
+          cors: true
 
 

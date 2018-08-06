@@ -1,0 +1,31 @@
+SELECT *
+FROM information_schema.columns
+WHERE table_schema = 'public'
+  AND table_name   = 'projects_det'
+
+CREATE TABLE PROJECTS_DET (
+    project_Id INTEGER CONSTRAINT pk PRIMARY KEY,
+    title VARCHAR (255),
+    location VARCHAR(255), 
+    description_short VARCHAR (300),
+    description_long VARCHAR,
+    team_number VARCHAR (255),
+    team_name VARCHAR (255),
+    submitter_id VARCHAR (255),
+    submission_date  DATE,
+    status VARCHAR (255),
+    rejection_Date DATE,
+    tags VARCHAR (255),
+    video VARCHAR (255),
+    media_title VARCHAR (255),
+    images VARCHAR (255),
+    attachments VARCHAR (255)  
+);
+
+SELECT * FROM PROJECTS_DET
+
+INSERT INTO PROJECTS_DET (project_id, title, location, description_short, description_long, team_number, team_name, submitter_id, submission_date, status, tags, media_title, images)
+VALUES (1, 'Some Project 1', 'Cedar Rapids', 'short description 1', 'long description 1', 'team2','Rocky Mtn Techies', '01', '2018-07-29', 'Applied', 'Environment Rehabhilitation', 'alpineImage', 'http://linkToS3')
+
+INSERT INTO PROJECTS_DET (project_id, title, location, description_short, description_long, team_number, team_name, submitter_id, submission_date, status, tags, media_title, images)
+VALUES (2, 'Some Project 2', 'San Diego', 'short description 2', 'long description 2', 'team3','La Jolla Tech', '02', '2018-07-29', 'PROMOTED', 'Ocean Awareness', 'oceanImage', 'http://linkToS3')
