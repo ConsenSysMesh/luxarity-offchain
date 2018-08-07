@@ -10,13 +10,13 @@ const ProjectDetHandler = require('./handlers/projectDetHandler');
 const CreateProjectHandler = require('./handlers/createProjectHandler');
 
 
-let databaseMgr = new DatabaseMgr();
-let ethereumMgr = new EthereumMgr();
-let getRecordsHandler = new GetRecordsHandler(databaseMgr);
-let getRecordsHandlerEth = new GetRecordsHandlerEth(databaseMgr, ethereumMgr);
-let allProjectDetHandler = new AllProjectDetHandler(databaseMgr);
-let projectDetHandler = new ProjectDetHandler(databaseMgr);
-let createProjectHandler = new CreateProjectHandler(databaseMgr);
+const databaseMgr = new DatabaseMgr();
+const ethereumMgr = new EthereumMgr();
+const getRecordsHandler = new GetRecordsHandler(databaseMgr);
+const getRecordsHandlerEth = new GetRecordsHandlerEth(databaseMgr, ethereumMgr);
+const allProjectDetHandler = new AllProjectDetHandler(databaseMgr);
+const projectDetHandler = new ProjectDetHandler(databaseMgr);
+const createProjectHandler = new CreateProjectHandler(databaseMgr);
 
 //done
 module.exports.helloWorld = (event, context, callback) => {
