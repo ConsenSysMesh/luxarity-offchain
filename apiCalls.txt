@@ -5,3 +5,7 @@ sls invoke local -f allProjectDet
 sls invoke local -f projectDet -d '{"projectId" : "1"}'
 
 sls invoke local -f createProject -d '{"projectId" : "3", "title" : "proj3", "location" : "Quebec", "descriptionShort" : "short desc3", "descriptionLong" : "long desc3", "teamNumber" : "3", "teamName" : "Ramparts", "submitterId" : "03", "submissionDate" : "2018-07-29", "status" : "CHALLENGED", "tags" : "Global Warming", "mediaTitle" : "pondImage", "images" : "http:/linktoS3"}'
+
+sls invoke local -f createUser -d '{"userId" : "2", "userType" : "Curator", "userName" : "Jane Smith", "userEmail" : "jsmith@gmail.com", "userPassword" : "anothergoodpw"}'
+
+sls invoke local -f user -d '{"userEmail" : "jsmith@gmail.com"}'

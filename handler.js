@@ -8,7 +8,8 @@ const GetRecordsHandlerEth = require('./handlers/getRecordsHandlerEth');
 const AllProjectDetHandler = require('./handlers/allProjectDetHandler');
 const ProjectDetHandler = require('./handlers/projectDetHandler');
 const CreateProjectHandler = require('./handlers/createProjectHandler');
-
+const CreateUserHandler = require('./handlers/createUserHandler');
+const UserHandler = require('./handlers/userHandler');
 
 let databaseMgr = new DatabaseMgr();
 let ethereumMgr = new EthereumMgr();
@@ -17,6 +18,8 @@ let getRecordsHandlerEth = new GetRecordsHandlerEth(databaseMgr, ethereumMgr);
 let allProjectDetHandler = new AllProjectDetHandler(databaseMgr);
 let projectDetHandler = new ProjectDetHandler(databaseMgr);
 let createProjectHandler = new CreateProjectHandler(databaseMgr);
+let createUserHandler = new CreateUserHandler(databaseMgr);
+let userHandler = new UserHandler(databaseMgr);
 
 //done
 module.exports.helloWorld = (event, context, callback) => {
@@ -37,8 +40,17 @@ module.exports.projectDet = (event, context, callback) => {
    preHandler(projectDetHandler, event, context, callback);
 };
 
+//done
 module.exports.createProject = (event, context, callback) => {
    preHandler(createProjectHandler, event, context, callback);
+};
+
+module.exports.createUser = (event, context, callback) => {
+   preHandler(createUserHandler, event, context, callback);
+};
+
+module.exports.user = (event, context, callback) => {
+   preHandler(userHandler, event, context, callback);
 };
 
 const preHandler = (handler, event, context, callback) => {

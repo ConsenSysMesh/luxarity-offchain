@@ -29,3 +29,18 @@ VALUES (1, 'Some Project 1', 'Cedar Rapids', 'short description 1', 'long descri
 
 INSERT INTO PROJECTS_DET (project_id, title, location, description_short, description_long, team_number, team_name, submitter_id, submission_date, status, tags, media_title, images)
 VALUES (2, 'Some Project 2', 'San Diego', 'short description 2', 'long description 2', 'team3','La Jolla Tech', '02', '2018-07-29', 'PROMOTED', 'Ocean Awareness', 'oceanImage', 'http://linkToS3')
+
+####################
+
+CREATE TABLE USERS (
+    user_id INTEGER CONSTRAINT user_pk PRIMARY KEY,
+    user_type VARCHAR (255),
+    name VARCHAR (255),
+    email VARCHAR(255), 
+    password VARCHAR (255)
+);
+
+SELECT * FROM USERS
+
+INSERT INTO USERS (user_id, user_type, name, email, password)
+VALUES (1, 'Curator', 'John Doe', 'jdoe@gmail.com', 'goodpassword')
