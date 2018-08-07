@@ -83,17 +83,24 @@ class createProjectHandler{
       return;
     }
 
-    if (!body.images) {
+    if (!body.images || !body.images.length) {
       cb({ code: 400, message: "report parameter missing - images" });
       return;
     }
 
-
-  
     try{
 
       console.log("inside try");
+
+      // upload all images first, replace image data array in project with image URLs array
+      const images = await Promise.all(body.images.map(i => this.bucketMgr.writeImage(body.projectId, i)));
+      body.images = images;
+
+      console.log("after image processing");
+
+      // now, save the project record itself
       const records = await this.databaseMgr.createProject(body);
+
       console.log("after records await");
       cb(null, records);
 
