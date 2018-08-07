@@ -2,8 +2,9 @@
 
 class createProjectHandler{
 
-  constructor(databaseMgr){
+  constructor(databaseMgr, bucketMgr){
     this.databaseMgr = databaseMgr;
+    this.bucketMgr = bucketMgr;
   };
 
  async handle(event, context, cb) {
@@ -26,7 +27,7 @@ class createProjectHandler{
       return;
     }
 
-   
+
     if (!body.projectId) {
       cb({ code: 400, message: "report parameter missing - projectId" });
       return;

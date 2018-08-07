@@ -3,6 +3,7 @@ const AWS = require("aws-sdk");
 
 const DatabaseMgr = require('./lib/DatabaseMgr');
 const EthereumMgr = require('./lib/EthereumMgr');
+const BucketMgr = require('./lib/BucketMgr');
 const GetRecordsHandler = require('./handlers/getRecordsHandler');
 const GetRecordsHandlerEth = require('./handlers/getRecordsHandlerEth');
 const AllProjectDetHandler = require('./handlers/allProjectDetHandler');
@@ -12,11 +13,12 @@ const CreateProjectHandler = require('./handlers/createProjectHandler');
 
 const databaseMgr = new DatabaseMgr();
 const ethereumMgr = new EthereumMgr();
+const bucketMgr = new BucketMgr();
 const getRecordsHandler = new GetRecordsHandler(databaseMgr);
 const getRecordsHandlerEth = new GetRecordsHandlerEth(databaseMgr, ethereumMgr);
 const allProjectDetHandler = new AllProjectDetHandler(databaseMgr);
 const projectDetHandler = new ProjectDetHandler(databaseMgr);
-const createProjectHandler = new CreateProjectHandler(databaseMgr);
+const createProjectHandler = new CreateProjectHandler(databaseMgr, bucketMgr);
 
 //done
 module.exports.helloWorld = (event, context, callback) => {
@@ -44,7 +46,7 @@ module.exports.createProject = (event, context, callback) => {
 const preHandler = (handler, event, context, callback) => {
   console.log("event: "+event);
   console.log("inside preHandler");
-  if (!databaseMgr.isSecretsSet() ) {
+  if (!databaseMgr.isSecretsSet() || !bucketMgr.isSecretsSet()) {
     const kms = new AWS.KMS();
     kms
       .decrypt({
@@ -52,10 +54,11 @@ const preHandler = (handler, event, context, callback) => {
       })
       .promise()
       .then(data => {
-        const decrypted = String(data.Plaintext);
-        //ethereumMgr.setSecrets(JSON.parse(decrypted));
-        databaseMgr.setSecrets(JSON.parse(decrypted));
-        console.log("secrets:PG_HOST: "+databaseMgr.PG_HOST);
+        const decrypted = JSON.parse(String(data.Plaintext));
+        //ethereumMgr.setSecrets(decrypted);
+        databaseMgr.setSecrets(decrypted);
+        bucketMgr.setSecrets(decrypted);
+        console.log("secrets:", decrypted);
         doHandler(handler, event, context, callback);
       });
   } else {
@@ -63,8 +66,6 @@ const preHandler = (handler, event, context, callback) => {
      doHandler(handler, event, context, callback);
     console.log("prehandler error");
   }
-
-  console.log("secrets:PG_HOST2: "+databaseMgr.PG_HOST);
 };
 
 const doHandler = (handler, event, context, callback) => {
