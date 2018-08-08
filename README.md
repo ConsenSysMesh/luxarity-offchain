@@ -72,7 +72,7 @@ $ sls invoke local -f allProjectDet
 
 ## README INFO
 
-### Repo Guide
+### Folder Structure
 **primary application:**<br/>
 handler.js <br/>
 handlers *- current structure is one handler.js file per endpoint* <br/>
