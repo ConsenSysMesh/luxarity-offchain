@@ -21,11 +21,29 @@ $ sls encrypt -n SECRETS:PG_DATABASE -v 'dbname' -k arnkey -s develop <br/>
 $ sls encrypt -n SECRETS:PG_USER -v 'user' -k arnkey -s develop <br/>
 $ sls encrypt -n SECRETS:PG_PASSWORD -v 'password' -k arnkey -s develop <br/>
 $ sls encrypt -n SECRETS:PG_PORT -v 'port' -k arnkey -s develop<br/>
+$ sls encrypt -n SECRETS:SEED -v 'port' -k arnkey -s develop<br/>
 
-if no build/contracts directory: <br/>
+* if no build/contracts directory: <br/>
+```
 	$ truffle compile <br/>
-if no installed_contracts directory or you are missing EIP20.json: <br/>
+```
+* if no installed_contracts directory or you are missing EIP20.json: <br/>
+```
 	$ truffle install <br/>
+```
+* if nonce too low error when calling relay <br/>
+run node cmd in any terminal :<br/>
+```
+	Web3 = require('web3')
+	web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/Vk9GN4X6SXCy4BqnuEHq "));
+	console.log("nonce: "+web3.eth.getTransactionCount('address'));
+```
+then in psequel, set latest nonce value (replace 10 with result from above) :<br/>
+```
+	UPDATE nonces SET nonce = 10 WHERE address = 'addr'
+```
+* projects_det primary key : project_id
+* users primary key : user_id
 
 ## DEPLOY
 
