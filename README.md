@@ -35,7 +35,7 @@ $ sls encrypt -n SECRETS:SEED -v 'port' -k arnkey -s develop<br/>
 run node cmd in any terminal :<br/>
 ```
 	Web3 = require('web3')
-	web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/Vk9GN4X6SXCy4BqnuEHq "));
+	web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/INFURA_ADDR "));
 	console.log("nonce: "+web3.eth.getTransactionCount('address'));
 ```
 then in psequel, set latest nonce value (replace 10 with result from above) :<br/>
