@@ -3,9 +3,9 @@ For supporting WWF's ImpactFolio TCR deployment. <br/>
 Serverless provides lambda function endpoints for interacting with postgres database. <br/>
 Lambda-Sensui's relay function is also available for sending signed meta transactions. <br/>
  
-[WWF Technical Architecture Doc](https://docs.google.com/presentation/d/1c0_-6NLb3zSFwZoRipR61ZYAWnpHLSEbhy_f66GJLYk/edit#slide=id.g3e0cd18cee_0_402)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[WWF Technical Architecture Doc](https://docs.google.com/presentation/d/1c0_-6NLb3zSFwZoRipR61ZYAWnpHLSEbhy_f66GJLYk/edit#slide=id.g3e0cd18cee_0_402)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [WWF TCR Parameters Doc](https://docs.google.com/presentation/d/1UT11ReifnIXT-PaXYplvHWXDeT8_dB4ECmEHJvmY7Fo/edit#slide=id.g3caa06f710_0_1136) <br/>
-[Social Impact TCR Deployment Repo](https://github.com/ConsenSys/SI_TCR)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[Social Impact TCR Deployment Repo](https://github.com/ConsenSys/SI_TCR)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [Social Impact WWF Front End:](https://github.com/ConsenSys/WWF-TCR-UI)<br/>
 
 ### README guide: 
