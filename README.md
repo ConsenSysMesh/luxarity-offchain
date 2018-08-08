@@ -87,6 +87,11 @@ $ sls encrypt -n SECRETS:PG_PASSWORD -v 'password' -k arnkey -s develop <br/>
 $ sls encrypt -n SECRETS:PG_PORT -v 'port' -k arnkey -s develop<br/>
 $ sls encrypt -n SECRETS:SEED -v 'port' -k arnkey -s develop<br/>
 
+## Debugging Suggestions
+*serverless debug function*<br.>
+```
+sls logs --function functionName
+```
 *if no build/contracts directory:* <br/>
 ```
 $ truffle compile <br/>
@@ -128,7 +133,3 @@ $ sls invoke local -f allProjectDet
 * AWS.KMS().decrypt(buffer(process.env.SECRETS) only works inside lambda function.  cannot simply run node.js file with node <br/>
 * make sure sls encrypt -n doesn't get tripped up when copying and pasting values.  DOUBLE CHECK '' <br/>
 
-debugging: <br/>
-```
-sls logs --function helloWorld
-```
