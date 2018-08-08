@@ -14,12 +14,13 @@ administrator: testServerless<br/>
 apiCalls.txt for examples calls<br/>
 
 ## SETUP
-$ npm install $ sls config credentials --provder aws --key AKIAJ2YSHPRHNQ3PUT6Q --secret SECRETKEY <br/>
-$ sls encrypt -n SECRETS:PG_HOST -v hosturl -k arnkey -s develop <br/>
-$ sls encrypt -n SECRETS:PG_DATABASE -v hosturl -k arnkey -s develop <br/>
-$ sls encrypt -n SECRETS:PG_USER -v hosturl -k arnkey -s develop <br/>
-$ sls encrypt -n SECRETS:PG_PASSWORD -v hosturl -k arnkey -s develop <br/>
-$ sls encrypt -n SECRETS:PG_PORT -v hosturl -k arnkey -s develop<br/>
+$ npm install <br/>
+$ sls config credentials --provder aws --key AKIAJ2YSHPRHNQ3PUT6Q --secret SECRETKEY <br/>
+$ sls encrypt -n SECRETS:PG_HOST -v 'hosturl' -k arnkey -s develop <br/>
+$ sls encrypt -n SECRETS:PG_DATABASE -v 'dbname' -k arnkey -s develop <br/>
+$ sls encrypt -n SECRETS:PG_USER -v 'user' -k arnkey -s develop <br/>
+$ sls encrypt -n SECRETS:PG_PASSWORD -v 'password' -k arnkey -s develop <br/>
+$ sls encrypt -n SECRETS:PG_PORT -v 'port' -k arnkey -s develop<br/>
 
 if no build/contracts directory: <br/>
 	$ truffle compile <br/>
