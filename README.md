@@ -118,7 +118,8 @@ $ sls invoke local -f allProjectDet
 &nbsp;&nbsp;&nbsp;&nbsp;**PG_HOST:** 
 &nbsp;&nbsp;&nbsp;&nbsp;**PG_DATABASE:** postgres
 &nbsp;&nbsp;&nbsp;&nbsp;**PG_USER:** 
-&nbsp;&nbsp;&nbsp;&nbsp;**PG_PORT:**
+&nbsp;&nbsp;&nbsp;&nbsp;**PG_PASSWORD:** 
+&nbsp;&nbsp;&nbsp;&nbsp;**PG_PORT:**<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;Get Database Details not listed here:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;https://us-west-1.console.aws.amazon.com/rds/home?region=us-west-1#dbinstance:id=testpostgresdb<br/>
 
