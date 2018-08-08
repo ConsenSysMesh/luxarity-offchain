@@ -63,8 +63,9 @@ UPDATE nonces SET nonce = 10 WHERE address = 'addr'
 
 
 ## DEPLOY
-
+```
 $ sls deploy
+```
 
 ## Test Endpoints
 ```
