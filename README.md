@@ -16,7 +16,7 @@ DEPLOY<br/>
 -test Endpoints<br/>
 
 README INFO<br/>
--Repo Guide<br/>
+-Folder Structure<br/>
 -AWS Details for Social Impact<br/>
 -Infura Details<br/>
 -Notes<br/>
