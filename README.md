@@ -32,14 +32,15 @@ $ truffle compile <br/>
 $ truffle install <br/>
 ```
 * if nonce too low error when calling relay <br/>
-run node cmd in any terminal :<br/>
 ```
+//run node cmd in any terminal :
 Web3 = require('web3')
 web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/INFURA_ADDR "));
 console.log("nonce: "+web3.eth.getTransactionCount('address'));
 ```
-then in psequel, set latest nonce value (replace 10 with result from above) :<br/>
+
 ```
+## then in psequel, set latest nonce value (replace 10 with result from above) :
 UPDATE nonces SET nonce = 10 WHERE address = 'addr'
 ```
 * projects_det primary key : project_id
