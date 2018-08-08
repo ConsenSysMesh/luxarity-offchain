@@ -72,10 +72,10 @@ Get Database Details not listed here:<br/>
 https://us-west-1.console.aws.amazon.com/rds/home?region=us-west-1#dbinstance:id=testpostgresdb
 
 ### Infura Details
-public key: 0xD176f6907Ae1E699b39F78cf4582B019518E2B80
-infura address: Vk9GN4X6SXCy4BqnuEHq 
-seed: 
-private key:
+public key: 0xD176f6907Ae1E699b39F78cf4582B019518E2B80<br/>
+infura address: Vk9GN4X6SXCy4BqnuEHq <br/>
+seed: <br/>
+private key:<br/>
 
 ## SETUP
 $ npm install <br/>
