@@ -31,7 +31,7 @@ $ sls encrypt -n SECRETS:PG_DATABASE -v 'dbname' -k arnkey -s develop
 $ sls encrypt -n SECRETS:PG_USER -v 'user' -k arnkey -s develop 
 $ sls encrypt -n SECRETS:PG_PASSWORD -v 'password' -k arnkey -s develop 
 $ sls encrypt -n SECRETS:PG_PORT -v 'port' -k arnkey -s develop
-$ sls encrypt -n SECRETS:SEED -v 'port' -k arnkey -s develop
+$ sls encrypt -n SECRETS:SEED -v 'seed' -k arnkey -s develop
 ```
 
 ## Debugging Suggestions
