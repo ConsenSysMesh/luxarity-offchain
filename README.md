@@ -75,28 +75,28 @@ $ sls invoke local -f allProjectDet
 
 ### Folder Structure
 **primary application:** <br/>
-handler.js <br/>
-handlers *- current structure is one handler.js file per endpoint* <br/>
-lib <br/>
+	handler.js <br/>
+	handlers *- current structure is one handler.js file per endpoint* <br/>
+	lib <br/>
 
 **fyi reference:** <br/>
-apiCalls.txt *- examples api calls* <br/>
-sql.txt *- SQL tables* <br/>
+	apiCalls.txt *- examples api calls* <br/>
+	sql.txt *- SQL tables* <br/>
 
 **serverless related:** <br/>
-serverless.yml *- sls config and more importantly endpoints* <br/>
-kms-secrets.develop.us-west-1.yml *- auto-generated when running sls-kms-secrets* <br/>
+	serverless.yml *- sls config and more importantly endpoints* <br/>
+	kms-secrets.develop.us-west-1.yml *- auto-generated when running sls-kms-secrets* <br/>
 
 **tcr related:** <br/>
-conf/config.json *- parameters for tcr deployment* <br/>
+	
 
 
 **truffle related:** <br/>
-ethpm.js <br/>
-installed_contracts/ <br/>
-build/contracts/ <br/>
-migrations/ <br/>
-truffle.js <br/>
+	ethpm.js <br/>
+	installed_contracts/ <br/>
+	build/contracts/ <br/>
+	migrations/ <br/>
+	truffle.js <br/>
 
 ### AWS Details for Social Impact
 
