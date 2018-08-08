@@ -8,74 +8,17 @@ Lambda-Sensui's relay function is also available for sending signed meta transac
 [Social Impact TCR Deployment Repo](https://github.com/ConsenSys/SI_TCR)<br/>
 [Social Impact WWF Front End:](https://github.com/ConsenSys/WWF-TCR-UI)<br/>
 
-### Directory Guide
-
-**primary application:**<br/>
-handler.js <br/>
-handlers *- current structure is one handler.js file per endpoint* <br/>
-lib <br/>
-
-**fyi reference:**<br/>
-apiCalls.txt *- examples api calls*<br/>
-sql.txt *- SQL tables*<br/>
-
-**serverless related:**<br/>
-serverless.yml *- sls config and more importantly endpoints*<br/>
-kms-secrets.develop.us-west-1.yml *- auto-generated when running sls-kms-secrets*<br/>
-
-**tcr related:**<br/>
-conf/config.json *- parameters for tcr deployment*<br/>
-
-
-**truffle related:**<br/>
-ethpm.js<br/>
-installed_contracts/<br/>
-build/contracts/<br/>
-migrations/<br/>
-truffle.js<br/>
-
-### Links
-[TCR:](https://github.com/skmgoldin/tcr)<br/>
-[TCR-UI events doc:](https://github.com/kangarang/tcr-ui/blob/master/docs/Events.md)<br/>
-[TCR-UI tx doc:](https://github.com/kangarang/tcr-ui/blob/master/docs/Events.md)<br/>
-
-Other Useful Links:<br/>
-https://consensys.invisionapp.com/share/ZBM4PCYSVFW#/screens/305195774<br/>
-https://github.com/ConsenSys/WWF-Simple/blob/master/app/scripts/index.js<br/>
-https://github.com/ConsenSys/hala-contracts/blob/watch-events/testEvents.js<br/>
-https://github.com/ConsenSys/wwf-db<br/>
-https://github.com/ConsenSys/lambda-sensui/tree/simple<br/>
-
-
-### AWS Details for Social Impact
-
-**Account:** b4siga<br/>
-**Pw:** short social impact password<br/>
-https://aws.amazon.com/console/<br/>
-
-**Serverless User:** testServerless <br/>
-**AWS access key id:** AKIAJ2YSHPRHNQ3PUT6Q <br/>
-https://console.aws.amazon.com/iam/home?region=us-west-1#/users<br/>
-https://console.aws.amazon.com/iam/home?region=us-west-1#/users/testServerless?section=security_credentials<br/>
-
-**Region:** us-west-1<br/>
-**ARN:** <br/>
-**Alias:** kms-serverless<br/>
-**administrator:** testServerless<br/>
-https://console.aws.amazon.com/iam/home?region=us-west-1#/encryptionKeys/us-west-1<br/>
-
-**PG_HOST:** 
-**PG_DATABASE:** postgres
-**PG_USER:** 
-**PG_PORT:**
-Get Database Details not listed here:<br/>
-https://us-west-1.console.aws.amazon.com/rds/home?region=us-west-1#dbinstance:id=testpostgresdb<br/>
-
-### Infura Details
-**public key:** 0xD176f6907Ae1E699b39F78cf4582B019518E2B80<br/>
-**infura address:** Vk9GN4X6SXCy4BqnuEHq <br/>
-**seed:** <br/>
-**private key:**<br/>
+### README guide: 
+SETUP
+- Debugging Suggestions
+DEPLOY
+TEST ENDPOINTS
+README INFO
+- Repo Guide
+- AWS Details for Social Impact
+- Infura Details
+- Notes
+- Links
 
 ## SETUP
 $ npm install <br/>
@@ -125,6 +68,75 @@ $ sls invoke local -f projectDet -d '{"projectId" : "1"}'
 $ sls invoke local -f allProjectDet
 ```
 
+## README INFO
+
+### Repo Guide
+**primary application:**<br/>
+handler.js <br/>
+handlers *- current structure is one handler.js file per endpoint* <br/>
+lib <br/>
+
+**fyi reference:**<br/>
+apiCalls.txt *- examples api calls*<br/>
+sql.txt *- SQL tables*<br/>
+
+**serverless related:**<br/>
+serverless.yml *- sls config and more importantly endpoints*<br/>
+kms-secrets.develop.us-west-1.yml *- auto-generated when running sls-kms-secrets*<br/>
+
+**tcr related:**<br/>
+conf/config.json *- parameters for tcr deployment*<br/>
+
+
+**truffle related:**<br/>
+ethpm.js<br/>
+installed_contracts/<br/>
+build/contracts/<br/>
+migrations/<br/>
+truffle.js<br/>
+
+### AWS Details for Social Impact
+
+**Account:** b4siga<br/>
+**Pw:** short social impact password<br/>
+https://aws.amazon.com/console/<br/>
+
+**Serverless User:** testServerless <br/>
+**AWS access key id:** AKIAJ2YSHPRHNQ3PUT6Q <br/>
+https://console.aws.amazon.com/iam/home?region=us-west-1#/users<br/>
+https://console.aws.amazon.com/iam/home?region=us-west-1#/users/testServerless?section=security_credentials<br/>
+
+**Region:** us-west-1<br/>
+**ARN:** <br/>
+**Alias:** kms-serverless<br/>
+**administrator:** testServerless<br/>
+https://console.aws.amazon.com/iam/home?region=us-west-1#/encryptionKeys/us-west-1<br/>
+
+**PG_HOST:** 
+**PG_DATABASE:** postgres
+**PG_USER:** 
+**PG_PORT:**
+Get Database Details not listed here:<br/>
+https://us-west-1.console.aws.amazon.com/rds/home?region=us-west-1#dbinstance:id=testpostgresdb<br/>
+
+### Infura Details
+**public key:** 0xD176f6907Ae1E699b39F78cf4582B019518E2B80<br/>
+**infura address:** Vk9GN4X6SXCy4BqnuEHq <br/>
+**seed:** <br/>
+**private key:**<br/>
+
+### Links
+[TCR:](https://github.com/skmgoldin/tcr)<br/>
+[TCR-UI events doc:](https://github.com/kangarang/tcr-ui/blob/master/docs/Events.md)<br/>
+[TCR-UI tx doc:](https://github.com/kangarang/tcr-ui/blob/master/docs/Events.md)<br/>
+
+Other Useful Links:<br/>
+https://consensys.invisionapp.com/share/ZBM4PCYSVFW#/screens/305195774<br/>
+https://github.com/ConsenSys/WWF-Simple/blob/master/app/scripts/index.js<br/>
+https://github.com/ConsenSys/hala-contracts/blob/watch-events/testEvents.js<br/>
+https://github.com/ConsenSys/wwf-db<br/>
+https://github.com/ConsenSys/lambda-sensui/tree/simple<br/>
+
 ## NOTES
 **in serverless.yml:** <br/>
 * Must have region set to us-west-1 if database instance is in us-west-1 <br/>
@@ -132,4 +144,3 @@ $ sls invoke local -f allProjectDet
 **other:**<br/>
 * AWS.KMS().decrypt(buffer(process.env.SECRETS) only works inside lambda function.  cannot simply run node.js file with node <br/>
 * make sure sls encrypt -n doesn't get tripped up when copying and pasting values.  DOUBLE CHECK '' <br/>
-
