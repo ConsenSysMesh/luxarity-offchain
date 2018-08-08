@@ -76,29 +76,29 @@ $ sls invoke local -f allProjectDet
 ## README INFO
 
 ### Folder Structure
-**primary application:** <br/>
-	&nbsp;&nbsp;&nbsp;&nbsp;handler.js <br/>
-	&nbsp;&nbsp;&nbsp;&nbsp;handlers *- current structure is one handler.js file per endpoint* <br/>
-	&nbsp;&nbsp;&nbsp;&nbsp;lib <br/>
+&nbsp;&nbsp;**primary application:** <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handler.js <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handlers *- current structure is one handler.js file per endpoint* <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lib <br/>
 
-**fyi reference:** <br/>
-	&nbsp;&nbsp;&nbsp;&nbsp;apiCalls.txt *- examples api calls* <br/>
-	&nbsp;&nbsp;&nbsp;&nbsp;sql.txt *- SQL tables* <br/>
+&nbsp;&nbsp;**fyi reference:** <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apiCalls.txt *- examples api calls* <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sql.txt *- SQL tables* <br/>
 
-**serverless related:** <br/>
-	&nbsp;&nbsp;&nbsp;&nbsp;serverless.yml *- sls config and more importantly endpoints* <br/>
-	&nbsp;&nbsp;&nbsp;&nbsp;kms-secrets.develop.us-west-1.yml *- auto-generated when running sls-kms-secrets* <br/>
+&nbsp;&nbsp;**serverless related:** <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;serverless.yml *- sls config and more importantly endpoints* <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kms-secrets.develop.us-west-1.yml *- auto-generated when running sls-kms-secrets* <br/>
 
-**tcr related:** <br/>
-	&nbsp;&nbsp;&nbsp;&nbsp;conf/config.json *- parameters for TCR deployment* <br/>
+&nbsp;&nbsp;**tcr related:** <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;conf/config.json *- parameters for TCR deployment* <br/>
 
 
-**truffle related:** <br/>
-	&nbsp;&nbsp;&nbsp;&nbsp;ethpm.js <br/>
-	&nbsp;&nbsp;&nbsp;&nbsp;installed_contracts/ <br/>
-	&nbsp;&nbsp;&nbsp;&nbsp;build/contracts/ <br/>
-	&nbsp;&nbsp;&nbsp;&nbsp;migrations/ <br/>
-	&nbsp;&nbsp;&nbsp;&nbsp;truffle.js <br/>
+&nbsp;&nbsp;**truffle related:** <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ethpm.js <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;installed_contracts/ <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;build/contracts/ <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;migrations/ <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;truffle.js <br/>
 
 ### AWS Details for Social Impact
 
