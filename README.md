@@ -25,22 +25,22 @@ $ sls encrypt -n SECRETS:SEED -v 'port' -k arnkey -s develop<br/>
 
 * if no build/contracts directory: <br/>
 ```
-	$ truffle compile <br/>
+$ truffle compile <br/>
 ```
 * if no installed_contracts directory or you are missing EIP20.json: <br/>
 ```
-	$ truffle install <br/>
+$ truffle install <br/>
 ```
 * if nonce too low error when calling relay <br/>
 run node cmd in any terminal :<br/>
 ```
-	Web3 = require('web3')
-	web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/INFURA_ADDR "));
-	console.log("nonce: "+web3.eth.getTransactionCount('address'));
+Web3 = require('web3')
+web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/INFURA_ADDR "));
+console.log("nonce: "+web3.eth.getTransactionCount('address'));
 ```
 then in psequel, set latest nonce value (replace 10 with result from above) :<br/>
 ```
-	UPDATE nonces SET nonce = 10 WHERE address = 'addr'
+UPDATE nonces SET nonce = 10 WHERE address = 'addr'
 ```
 * projects_det primary key : project_id
 * users primary key : user_id
