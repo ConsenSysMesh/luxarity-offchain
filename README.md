@@ -35,41 +35,41 @@ migrations/<br/>
 truffle.js<br/>
 
 ### Links
-[TCR:](https://github.com/skmgoldin/tcr)
-[TCR-UI events doc:](https://github.com/kangarang/tcr-ui/blob/master/docs/Events.md)
-[TCR-UI tx doc:](https://github.com/kangarang/tcr-ui/blob/master/docs/Events.md)
+[TCR:](https://github.com/skmgoldin/tcr)<br/>
+[TCR-UI events doc:](https://github.com/kangarang/tcr-ui/blob/master/docs/Events.md)<br/>
+[TCR-UI tx doc:](https://github.com/kangarang/tcr-ui/blob/master/docs/Events.md)<br/>
 
-Other Useful Links:
-https://consensys.invisionapp.com/share/ZBM4PCYSVFW#/screens/305195774
-https://github.com/ConsenSys/WWF-Simple/blob/master/app/scripts/index.js
-https://github.com/ConsenSys/hala-contracts/blob/watch-events/testEvents.js
-https://github.com/ConsenSys/wwf-db
-https://github.com/ConsenSys/lambda-sensui/tree/simple
+Other Useful Links:<br/>
+https://consensys.invisionapp.com/share/ZBM4PCYSVFW#/screens/305195774<br/>
+https://github.com/ConsenSys/WWF-Simple/blob/master/app/scripts/index.js<br/>
+https://github.com/ConsenSys/hala-contracts/blob/watch-events/testEvents.js<br/>
+https://github.com/ConsenSys/wwf-db<br/>
+https://github.com/ConsenSys/lambda-sensui/tree/simple<br/>
 
 
 ### AWS Details for Social Impact
 
-**Account:** b4siga
-**Pw:** short social impact password
-https://aws.amazon.com/console/
+**Account:** b4siga<br/>
+**Pw:** short social impact password<br/>
+https://aws.amazon.com/console/<br/>
 
 **Serverless User:** testServerless <br/>
 **AWS access key id:** AKIAJ2YSHPRHNQ3PUT6Q <br/>
-https://console.aws.amazon.com/iam/home?region=us-west-1#/users
-https://console.aws.amazon.com/iam/home?region=us-west-1#/users/testServerless?section=security_credentials
+https://console.aws.amazon.com/iam/home?region=us-west-1#/users<br/>
+https://console.aws.amazon.com/iam/home?region=us-west-1#/users/testServerless?section=security_credentials<br/>
 
 **Region:** us-west-1<br/>
 **ARN:** <br/>
 **Alias:** kms-serverless<br/>
 **administrator:** testServerless<br/>
-https://console.aws.amazon.com/iam/home?region=us-west-1#/encryptionKeys/us-west-1
+https://console.aws.amazon.com/iam/home?region=us-west-1#/encryptionKeys/us-west-1<br/>
 
 **PG_HOST:** 
 **PG_DATABASE:** postgres
 **PG_USER:** 
 **PG_PORT:**
 Get Database Details not listed here:<br/>
-https://us-west-1.console.aws.amazon.com/rds/home?region=us-west-1#dbinstance:id=testpostgresdb
+https://us-west-1.console.aws.amazon.com/rds/home?region=us-west-1#dbinstance:id=testpostgresdb<br/>
 
 ### Infura Details
 **public key:** 0xD176f6907Ae1E699b39F78cf4582B019518E2B80<br/>
