@@ -8,17 +8,17 @@ Lambda-Sensui's relay function is also available for sending signed meta transac
 [Social Impact TCR Deployment Repo](https://github.com/ConsenSys/SI_TCR)<br/>
 [Social Impact WWF Front End:](https://github.com/ConsenSys/WWF-TCR-UI)<br/>
 
-### README guide: 
-SETUP
-- Debugging Suggestions
-DEPLOY
-TEST ENDPOINTS
-README INFO
-- Repo Guide
-- AWS Details for Social Impact
-- Infura Details
-- Notes
-- Links
+### README guide: <br/>
+SETUP<br/>
+- Debugging Suggestions<br/>
+DEPLOY<br/>
+TEST ENDPOINTS<br/>
+README INFO<br/>
+- Repo Guide<br/>
+- AWS Details for Social Impact<br/>
+- Infura Details<br/>
+- Notes<br/>
+- Links<br/>
 
 ## SETUP
 $ npm install <br/>
@@ -125,6 +125,14 @@ https://us-west-1.console.aws.amazon.com/rds/home?region=us-west-1#dbinstance:id
 **seed:** <br/>
 **private key:**<br/>
 
+## NOTES
+**in serverless.yml:** <br/>
+* Must have region set to us-west-1 if database instance is in us-west-1 <br/>
+* Must use nodejs810  <br/>
+**other:**<br/>
+* AWS.KMS().decrypt(buffer(process.env.SECRETS) only works inside lambda function.  cannot simply run node.js file with node <br/>
+* make sure sls encrypt -n doesn't get tripped up when copying and pasting values.  DOUBLE CHECK '' <br/>
+
 ### Links
 [TCR:](https://github.com/skmgoldin/tcr)<br/>
 [TCR-UI events doc:](https://github.com/kangarang/tcr-ui/blob/master/docs/Events.md)<br/>
@@ -137,10 +145,4 @@ https://github.com/ConsenSys/hala-contracts/blob/watch-events/testEvents.js<br/>
 https://github.com/ConsenSys/wwf-db<br/>
 https://github.com/ConsenSys/lambda-sensui/tree/simple<br/>
 
-## NOTES
-**in serverless.yml:** <br/>
-* Must have region set to us-west-1 if database instance is in us-west-1 <br/>
-* Must use nodejs810  <br/>
-**other:**<br/>
-* AWS.KMS().decrypt(buffer(process.env.SECRETS) only works inside lambda function.  cannot simply run node.js file with node <br/>
-* make sure sls encrypt -n doesn't get tripped up when copying and pasting values.  DOUBLE CHECK '' <br/>
+
