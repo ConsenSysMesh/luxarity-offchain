@@ -75,58 +75,58 @@ $ sls invoke local -f allProjectDet
 
 ### Folder Structure
 **primary application:** <br/>
-	handler.js <br/>
-	handlers *- current structure is one handler.js file per endpoint* <br/>
-	lib <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;handler.js <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;handlers *- current structure is one handler.js file per endpoint* <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;lib <br/>
 
 **fyi reference:** <br/>
-	apiCalls.txt *- examples api calls* <br/>
-	sql.txt *- SQL tables* <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;apiCalls.txt *- examples api calls* <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;sql.txt *- SQL tables* <br/>
 
 **serverless related:** <br/>
-	serverless.yml *- sls config and more importantly endpoints* <br/>
-	kms-secrets.develop.us-west-1.yml *- auto-generated when running sls-kms-secrets* <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;serverless.yml *- sls config and more importantly endpoints* <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;kms-secrets.develop.us-west-1.yml *- auto-generated when running sls-kms-secrets* <br/>
 
 **tcr related:** <br/>
-	
+	&nbsp;&nbsp;&nbsp;&nbsp;conf/config.json *- parameters for TCR deployment* <br/>
 
 
 **truffle related:** <br/>
-	ethpm.js <br/>
-	installed_contracts/ <br/>
-	build/contracts/ <br/>
-	migrations/ <br/>
-	truffle.js <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;ethpm.js <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;installed_contracts/ <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;build/contracts/ <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;migrations/ <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;truffle.js <br/>
 
 ### AWS Details for Social Impact
 
-**Account:** b4siga<br/>
-**Pw:** short social impact password<br/>
-https://aws.amazon.com/console/<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;**Account:** b4siga<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;**Pw:** short social impact password<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;https://aws.amazon.com/console/<br/>
 
-**Serverless User:** testServerless <br/>
-**AWS access key id:** AKIAJ2YSHPRHNQ3PUT6Q <br/>
-https://console.aws.amazon.com/iam/home?region=us-west-1#/users<br/>
-https://console.aws.amazon.com/iam/home?region=us-west-1#/users/testServerless?section=security_credentials<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;**Serverless User:** testServerless <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;**AWS access key id:** AKIAJ2YSHPRHNQ3PUT6Q <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;https://console.aws.amazon.com/iam/home?region=us-west-1#/users<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;https://console.aws.amazon.com/iam/home?region=us-west-1#/users/testServerless?section=security_credentials<br/>
 
-**Region:** us-west-1<br/>
-**ARN:** <br/>
-**Alias:** kms-serverless<br/>
-**administrator:** testServerless<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;**Region:** us-west-1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;**ARN:** <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;**Alias:** kms-serverless<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;**administrator:** testServerless<br/>
 https://console.aws.amazon.com/iam/home?region=us-west-1#/encryptionKeys/us-west-1<br/>
 
-**PG_HOST:** 
-**PG_DATABASE:** postgres
-**PG_USER:** 
-**PG_PORT:**
-Get Database Details not listed here:<br/>
-https://us-west-1.console.aws.amazon.com/rds/home?region=us-west-1#dbinstance:id=testpostgresdb<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;**PG_HOST:** 
+&nbsp;&nbsp;&nbsp;&nbsp;**PG_DATABASE:** postgres
+&nbsp;&nbsp;&nbsp;&nbsp;**PG_USER:** 
+&nbsp;&nbsp;&nbsp;&nbsp;**PG_PORT:**
+&nbsp;&nbsp;&nbsp;&nbsp;Get Database Details not listed here:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;https://us-west-1.console.aws.amazon.com/rds/home?region=us-west-1#dbinstance:id=testpostgresdb<br/>
 
 ### Infura Details
-**public key:** 0xD176f6907Ae1E699b39F78cf4582B019518E2B80<br/>
-**infura address:** Vk9GN4X6SXCy4BqnuEHq <br/>
-**seed:** <br/>
-**private key:**<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;**public key:** 0xD176f6907Ae1E699b39F78cf4582B019518E2B80<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;**infura address:** Vk9GN4X6SXCy4BqnuEHq <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;**seed:** <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;**private key:**<br/>
 
 ## NOTES
 **in serverless.yml:** <br/>
