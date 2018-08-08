@@ -10,15 +10,15 @@ Lambda-Sensui's relay function is also available for sending signed meta transac
 
 ### README guide: <br/>
 SETUP<br/>
-- Debugging Suggestions<br/>
+-Debugging Suggestions<br/>
 DEPLOY<br/>
 TEST ENDPOINTS<br/>
 README INFO<br/>
-- Repo Guide<br/>
-- AWS Details for Social Impact<br/>
-- Infura Details<br/>
-- Notes<br/>
-- Links<br/>
+-Repo Guide<br/>
+-AWS Details for Social Impact<br/>
+-Infura Details<br/>
+-Notes<br/>
+-Links<br/>
 
 ## SETUP
 $ npm install <br/>
