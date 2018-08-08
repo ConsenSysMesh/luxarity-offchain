@@ -8,7 +8,7 @@ Lambda-Sensui's relay function is also available for sending signed meta transac
 [Social Impact TCR Deployment Repo](https://github.com/ConsenSys/SI_TCR)<br/>
 [Social Impact WWF Front End:](https://github.com/ConsenSys/WWF-TCR-UI)<br/>
 
-#### Directory Guide
+### Directory Guide
 
 **primary application:**<br/>
 handler.js <br/>
@@ -34,7 +34,7 @@ build/contracts/<br/>
 migrations/<br/>
 truffle.js<br/>
 
-#### Links
+### Links
 [TCR:](https://github.com/skmgoldin/tcr)
 [TCR-UI events doc:](https://github.com/kangarang/tcr-ui/blob/master/docs/Events.md)
 [TCR-UI tx doc:](https://github.com/kangarang/tcr-ui/blob/master/docs/Events.md)
@@ -47,7 +47,7 @@ https://github.com/ConsenSys/wwf-db
 https://github.com/ConsenSys/lambda-sensui/tree/simple
 
 
-#### AWS Details for Social Impact
+### AWS Details for Social Impact
 
 Account: b4siga
 Pw: short social impact password
@@ -71,7 +71,7 @@ PG_PORT:
 Get Database Details not listed here:<br/>
 https://us-west-1.console.aws.amazon.com/rds/home?region=us-west-1#dbinstance:id=testpostgresdb
 
-#### Infura Details
+### Infura Details
 public key: 0xD176f6907Ae1E699b39F78cf4582B019518E2B80
 infura address: Vk9GN4X6SXCy4BqnuEHq 
 seed: 
@@ -87,15 +87,15 @@ $ sls encrypt -n SECRETS:PG_PASSWORD -v 'password' -k arnkey -s develop <br/>
 $ sls encrypt -n SECRETS:PG_PORT -v 'port' -k arnkey -s develop<br/>
 $ sls encrypt -n SECRETS:SEED -v 'port' -k arnkey -s develop<br/>
 
-* if no build/contracts directory: <br/>
+*if no build/contracts directory:* <br/>
 ```
 $ truffle compile <br/>
 ```
-* if no installed_contracts directory or you are missing EIP20.json: <br/>
+*if no installed_contracts directory or you are missing EIP20.json:* <br/>
 ```
 $ truffle install <br/>
 ```
-* if nonce too low error when calling relay <br/>
+*if nonce too low error when calling relay* <br/>
 ```
 //run node cmd in any terminal :
 Web3 = require('web3')
@@ -107,8 +107,8 @@ console.log("nonce: "+web3.eth.getTransactionCount('address'));
 ## then in psequel, set latest nonce value (replace 10 with result from above) :
 UPDATE nonces SET nonce = 10 WHERE address = 'addr'
 ```
-* projects_det primary key : project_id
-* users primary key : user_id
+*projects_det table primary key : project_id & users table  primary key : user_id*
+
 
 ## DEPLOY
 
