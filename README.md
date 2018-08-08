@@ -9,6 +9,7 @@ Lambda-Sensui's relay function is also available for sending signed meta transac
 [Social Impact WWF Front End:](https://github.com/ConsenSys/WWF-TCR-UI)<br/>
 
 ### README guide: 
+SETUP<br/>
 -Debugging Suggestions<br/>
 
 DEPLOY<br/>
@@ -138,9 +139,9 @@ $ sls invoke local -f allProjectDet
 * make sure sls encrypt -n doesn't get tripped up when copying and pasting values.  DOUBLE CHECK '' <br/>
 
 ### Links
-[TCR:](https://github.com/skmgoldin/tcr)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-[TCR-UI events doc:](https://github.com/kangarang/tcr-ui/blob/master/docs/Events.md)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-[TCR-UI tx doc:](https://github.com/kangarang/tcr-ui/blob/master/docs/Events.md)
+[TCR](https://github.com/skmgoldin/tcr)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[TCR-UI events doc](https://github.com/kangarang/tcr-ui/blob/master/docs/Events.md)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[TCR-UI tx doc](https://github.com/kangarang/tcr-ui/blob/master/docs/Events.md)
 
 Other Useful Links:<br/>
 https://consensys.invisionapp.com/share/ZBM4PCYSVFW#/screens/305195774<br/>
