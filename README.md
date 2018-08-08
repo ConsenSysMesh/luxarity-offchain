@@ -15,7 +15,7 @@ handler.js <br/>
 handlers *- current structure is one handler.js file per endpoint* <br/>
 lib <br/>
 
-**fyi reference:** <br/>
+**fyi reference:**<br/>
 apiCalls.txt *- examples api calls*<br/>
 sql.txt *- SQL tables*<br/>
 
