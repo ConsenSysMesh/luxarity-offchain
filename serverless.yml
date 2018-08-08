@@ -101,5 +101,12 @@ functions:
           path: user
           method: post
           cors: true
-
+  relay:
+    handler: handler.relay
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: relay
+          method: post
+          cors: true
 

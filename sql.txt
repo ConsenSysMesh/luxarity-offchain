@@ -44,3 +44,51 @@ SELECT * FROM USERS
 
 INSERT INTO USERS (user_id, user_type, name, email, password)
 VALUES (1, 'Curator', 'John Doe', 'jdoe@gmail.com', 'goodpassword')
+
+########
+ethereumMgr tables from sensui
+
+CREATE TABLE public.nonces
+(
+    address VARCHAR(44) NOT NULL, --Funding account address
+    network VARCHAR(64), -- Network name
+    nonce integer, --Nonce
+    CONSTRAINT nonces_pkey PRIMARY KEY (address,network)
+)
+WITH (
+  OIDS=FALSE
+);
+
+ALTER TABLE public.nonces
+  OWNER TO root;
+
+CREATE TABLE public.tx
+(
+    tx_hash VARCHAR(128) NOT NULL, --Tx Hash 
+    network VARCHAR(64) NOT NULL, -- Network name
+    tx_options JSONB NULL, --Transaction Options,
+    tx_receipt JSONB NULL, --Transaction Receipt,
+    created TIMESTAMP WITH TIME zone  NOT NULL DEFAULT now(), --Created ON
+    updated TIMESTAMP WITH TIME zone      NULL, --Updated ON
+    CONSTRAINT tx_pkey PRIMARY KEY (tx_hash)
+)
+WITH (
+  OIDS=FALSE
+);
+
+SELECT day, network, sum(pending) AS pending, sum(created) AS created
+  FROM (
+    SELECT date_trunc('day', created) AS day, network, count(*) AS pending, 0 AS created
+      FROM tx
+     WHERE tx_receipt IS NULL
+       AND created < now() - INTERVAL '1 hour' --ONLY pending FOR more than 1 HOUR
+     GROUP BY day,network
+    UNION ALL
+    SELECT date_trunc('day', created) AS day, network, 0 AS pending, count(*) AS created
+      FROM tx
+     WHERE tx_receipt IS NOT NULL
+     GROUP BY day,network
+ ) t
+-- WHERE network='rinkeby'
+ GROUP BY day, network
+ ORDER BY DAY desc, network DESC
