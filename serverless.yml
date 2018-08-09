@@ -85,5 +85,28 @@ functions:
           path: createProject
           method: post
           cors: true
-
+  createUser:
+    handler: handler.createUser
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: createUser
+          method: post
+          cors: true
+  user:
+    handler: handler.user
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: user
+          method: post
+          cors: true
+  relay:
+    handler: handler.relay
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: relay
+          method: post
+          cors: true
 

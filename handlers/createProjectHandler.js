@@ -88,6 +88,12 @@ class createProjectHandler{
       return;
     }
 
+    if (!body.deliverer_id) {
+      cb({ code: 400, message: "report parameter missing - deliverer_id" });
+      return;
+    }
+
+
     try{
 
       console.log("inside try");
