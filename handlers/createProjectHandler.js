@@ -27,16 +27,10 @@ class createProjectHandler{
       return;
     }
 
-<<<<<<< HEAD
+
     //note: body.projectId automatically incremented in postgres
 
-=======
 
-    if (!body.projectId) {
-      cb({ code: 400, message: "report parameter missing - projectId" });
-      return;
-    }
->>>>>>> s3-upload-storage
 
     if (!body.title) {
       cb({ code: 400, message: "report parameter missing - title" });
