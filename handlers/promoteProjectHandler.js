@@ -30,14 +30,16 @@ class promoteProjectHandler{
     //insert listingHash, insert promoter_publickey, set status = 'PROMOTED'
     //where projectId = ''
 
+    //registry.apply()
+    //Event _application ()
 
     if (!body.listingHash) {
       cb({ code: 400, message: "report parameter missing - listingHash" });
       return;
     }
 
-    if (!body.promoter_publickey) {
-      cb({ code: 400, message: "report parameter missing - promoter_publickey" });
+    if (!body.promoterPublickey) {
+      cb({ code: 400, message: "report parameter missing - promoterPublickey" });
       return;
     }
 

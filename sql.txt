@@ -4,7 +4,7 @@ WHERE table_schema = 'public'
   AND table_name   = 'projects_det'
 
 CREATE TABLE PROJECTS_DET (
-    project_Id INTEGER CONSTRAINT pk PRIMARY KEY,
+    project_Id SERIAL PRIMARY KEY,
     title VARCHAR (255),
     location VARCHAR(255), 
     description_short VARCHAR (300),

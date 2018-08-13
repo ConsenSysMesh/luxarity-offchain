@@ -2,8 +2,9 @@
 
 class createProjectHandler{
 
-  constructor(databaseMgr){
+  constructor(databaseMgr, bucketMgr){
     this.databaseMgr = databaseMgr;
+    this.bucketMgr = bucketMgr;
   };
 
  async handle(event, context, cb) {
@@ -26,8 +27,16 @@ class createProjectHandler{
       return;
     }
 
+<<<<<<< HEAD
     //note: body.projectId automatically incremented in postgres
 
+=======
+
+    if (!body.projectId) {
+      cb({ code: 400, message: "report parameter missing - projectId" });
+      return;
+    }
+>>>>>>> s3-upload-storage
 
     if (!body.title) {
       cb({ code: 400, message: "report parameter missing - title" });
@@ -79,7 +88,7 @@ class createProjectHandler{
       return;
     }
 
-    if (!body.images) {
+    if (!body.images || !body.images.length) {
       cb({ code: 400, message: "report parameter missing - images" });
       return;
     }
@@ -90,11 +99,19 @@ class createProjectHandler{
     }
 
 
-  
     try{
 
       console.log("inside try");
+
+      // upload all images first, replace image data array in project with image URLs array
+      const images = await Promise.all(body.images.map(i => this.bucketMgr.writeImage(body.projectId, i)));
+      body.images = images;
+
+      console.log("after image processing");
+
+      // now, save the project record itself
       const records = await this.databaseMgr.createProject(body);
+
       console.log("after records await");
       cb(null, records);
 
