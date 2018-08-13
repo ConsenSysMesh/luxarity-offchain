@@ -26,11 +26,8 @@ class createProjectHandler{
       return;
     }
 
-   
-    if (!body.projectId) {
-      cb({ code: 400, message: "report parameter missing - projectId" });
-      return;
-    }
+    //note: body.projectId automatically incremented in postgres
+
 
     if (!body.title) {
       cb({ code: 400, message: "report parameter missing - title" });

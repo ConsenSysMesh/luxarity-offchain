@@ -12,6 +12,7 @@ const CreateProjectHandler = require('./handlers/createProjectHandler');
 const CreateUserHandler = require('./handlers/createUserHandler');
 const UserHandler = require('./handlers/userHandler');
 const RelayHandler = require('./handlers/relayHandler');
+const PromotePojectHandler = reequire('./handlers/promoteProjectHandler');
 
 let databaseMgr = new DatabaseMgr();
 //let ethereumMgr = new EthereumMgr();
@@ -24,6 +25,7 @@ let createProjectHandler = new CreateProjectHandler(databaseMgr);
 let createUserHandler = new CreateUserHandler(databaseMgr);
 let userHandler = new UserHandler(databaseMgr);
 let relayHandler = new RelayHandler(ethereumMgr);
+let promoteProjectHandler = new promoteProjectHandler(databaseMgr);
 
 //done
 module.exports.helloWorld = (event, context, callback) => {
@@ -50,16 +52,24 @@ module.exports.createProject = (event, context, callback) => {
    preHandler(createProjectHandler, event, context, callback);
 };
 
+//done
 module.exports.createUser = (event, context, callback) => {
    preHandler(createUserHandler, event, context, callback);
 };
 
+//done
 module.exports.user = (event, context, callback) => {
    preHandler(userHandler, event, context, callback);
 };
 
+//done
 module.exports.relay = (event, context, callback) => {
    preHandlerSensui(relayHandler, event, context, callback);
+};
+
+//update project when promoted
+module.exports.promoteProject = (event, context, callback) => {
+   preHandlerSensui(promoteProjectHandler, event, context, callback);
 };
 
 const preHandler = (handler, event, context, callback) => {

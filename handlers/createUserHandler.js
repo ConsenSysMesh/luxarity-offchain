@@ -27,10 +27,7 @@ class createUserHandler{
     }
 
    
-    if (!body.userId) {
-      cb({ code: 400, message: "report parameter missing - userId" });
-      return;
-    }
+    //note body.userid is autoincremented in postgres
 
     if (!body.userType) {
       cb({ code: 400, message: "report parameter missing - userType" });
