@@ -141,4 +141,13 @@ functions:
           path: createAccount
           method: post
           cors: true
+  challenge:
+    handler: handler.challenge
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: challenge
+          method: post
+          cors: true
+
 

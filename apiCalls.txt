@@ -20,4 +20,7 @@ sls invoke local -f revertPromoteProject -d '{"projectId" : "5"}'
 
 
 
-sls invoke local -f createAccount -d '{"userId" : "3", "projectCategory" : "test", "projectProblem" : "test",  "projectApproach" : "test", "projectStage" : "test", "projetImpact" : "test", "fundingGoal" : "test", "teamInfo" : "test"}'
+sls invoke local -f createAccount -d '{"userId" : "3", "projectCategory" : "test", "projectProblem" : "test",  "projectApproach" : "test", "projectStage" : "test", "projectImpact" : "test", "fundingGoal" : "test", "teamInfo" : "test"}'
+
+
+sls invoke local -f challenge -d '{"userId" : "3", "userType" : "test", "projectId" : "test",  "vote" : "y", "submissionDate" : "2018-07-29"}'

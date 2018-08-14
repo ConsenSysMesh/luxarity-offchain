@@ -13,9 +13,10 @@ const CreateUserHandler = require('./handlers/createUserHandler');
 const UserHandler = require('./handlers/userHandler');
 const RelayHandler = require('./handlers/relayHandler');
 const PromoteProjectHandler = require('./handlers/promoteProjectHandler');
-const CreateAccountHandler = require('./handlers/createAccountHandler')
-const ConfirmProjectHandler = require('./handlers/confirmProjectHandler')
-const RevertPromoteProjectHandler = require('./handlers/revertPromoteProjectHandler')
+const CreateAccountHandler = require('./handlers/createAccountHandler');
+const ConfirmProjectHandler = require('./handlers/confirmProjectHandler');
+const RevertPromoteProjectHandler = require('./handlers/revertPromoteProjectHandler');
+const ChallengeHandler = require('./handlers/challengeHandler');
 
 const databaseMgr = new DatabaseMgr();
 const ethereumMgr = new EthereumMgr();
@@ -32,6 +33,7 @@ const promoteProjectHandler = new PromoteProjectHandler(databaseMgr);
 const createAccountHandler = new CreateAccountHandler(databaseMgr);
 const confirmProjectHandler = new ConfirmProjectHandler(databaseMgr);
 const revertPromoteProjectHandler = new RevertPromoteProjectHandler(databaseMgr);
+const challengeHandler = new ChallengeHandler(databaseMgr);
 
 //done
 module.exports.helloWorld = (event, context, callback) => {
@@ -95,11 +97,12 @@ module.exports.createAccount = (event, context, callback) => {
 };
 
 //serverless methods for Challenge Phase
-//not started
+
+//done
 //update status = challenge, record_status = not confirmed n projects_det
 //create challenge in challenge table
 module.exports.challenge = (event, context, callback) => {
-   //preHandler(challengeHandler, event, context, callback);
+   preHandler(challengeHandler, event, context, callback);
 };
 
 //not started
