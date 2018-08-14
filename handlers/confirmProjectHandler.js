@@ -1,6 +1,6 @@
 
 
-class promoteProjectHandler{
+class confirmProjectHandler{
 
   constructor(databaseMgr){
     this.databaseMgr = databaseMgr;
@@ -8,9 +8,9 @@ class promoteProjectHandler{
 
  async handle(event, context, cb) {
 
-  console.log("inside promoteProjectHandler.handle");
+  console.log("inside confirmProjectHandler.handle");
 
-    let body;
+  let body;
 
     if (event && !event.body) {
       body = event;
@@ -27,24 +27,38 @@ class promoteProjectHandler{
     }
 
     // applied --> promoted
-    //set status = 'PROMOTED'
+    //insert listingHash, insert promoter_publickey, set status = 'PROMOTED', set record_status = 'confirmed'
     //where projectId = ''
-    //record_status = not_confirmed
 
-     if (!body.projectId) {
+    //registry.apply()
+    //Event _application ()
+
+    if (!body.listingHash) {
+      cb({ code: 400, message: "report parameter missing - listingHash" });
+      return;
+    }
+
+    if (!body.promoterPublickey) {
+      cb({ code: 400, message: "report parameter missing - promoterPublickey" });
+      return;
+    }
+
+    if (!body.projectId) {
       cb({ code: 400, message: "report parameter missing - projectId" });
       return;
     }
+
+
   
     try{
 
       console.log("inside try");
-      const records = await this.databaseMgr.promoteProject(body);
+      const records = await this.databaseMgr.confirmProject(body);
       console.log("after records await");
       cb(null, records);
 
     }catch(error){
-      console.log("promoteProjectHandler error"+error);
+      console.log("confirmProjectHandler error"+error);
       cb({ code: 500, message: "getTestRecrodsError: " + err.message });
       return;
     }
@@ -55,4 +69,4 @@ class promoteProjectHandler{
 
 };
 
-module.exports = promoteProjectHandler;
+module.exports = confirmProjectHandler;

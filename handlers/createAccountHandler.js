@@ -37,38 +37,38 @@ class createAccountHandler{
       return;
     }
 
-     if (!body.projectCateogry) {
-      cb({ code: 400, message: "report parameter missing - location" });
+     if (!body.projectCategory) {
+      cb({ code: 400, message: "report parameter missing - projectCategory" });
       return;
     }
 
     if (!body.projectProblem) {
-      cb({ code: 400, message: "report parameter missing - descriptionShort" });
+      cb({ code: 400, message: "report parameter missing - projectProblem" });
       return;
     }
 
     if (!body.projectApproach) {
-      cb({ code: 400, message: "report parameter missing - descriptionLong" });
+      cb({ code: 400, message: "report parameter missing - projectApproach" });
       return;
     }
 
     if (!body.projectStage) {
-      cb({ code: 400, message: "report parameter missing - teamNumber" });
+      cb({ code: 400, message: "report parameter missing - projectStage" });
       return;
     }
 
-     if (!body.projetImpact) {
-      cb({ code: 400, message: "report parameter missing - teamName" });
+     if (!body.projectImpact) {
+      cb({ code: 400, message: "report parameter missing - projectImpact" });
       return;
     }
 
     if (!body.fundingGoal) {
-      cb({ code: 400, message: "report parameter missing - submitterId" });
+      cb({ code: 400, message: "report parameter missing - fundingGoal" });
       return;
     }
 
     if (!body.teamInfo) {
-      cb({ code: 400, message: "report parameter missing - status" });
+      cb({ code: 400, message: "report parameter missing - teamInfo" });
       return;
     }
 

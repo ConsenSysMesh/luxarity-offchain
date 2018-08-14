@@ -109,4 +109,36 @@ functions:
           path: relay
           method: post
           cors: true
+  promoteProject:
+    handler: handler.promoteProject
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: handler.promoteProject
+          method: post
+          cors: true
+  confirmProject:
+    handler: handler.confirmProject
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: confirmProject
+          method: post
+          cors: true
+  revertPromoteProject:
+    handler: handler.revertPromoteProject
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: revertPromoteProject
+          method: post
+          cors: true
+  createAccount:
+    handler: handler.createAccount
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: createAccount
+          method: post
+          cors: true
 

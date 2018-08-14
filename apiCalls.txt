@@ -4,7 +4,7 @@ sls invoke local -f allProjectDet
 
 sls invoke local -f projectDet -d '{"projectId" : "1"}'
 
-sls invoke local -f createProject -d '{"title" : "proj3", "location" : "Quebec", "descriptionShort" : "short desc3", "descriptionLong" : "long desc3", "teamNumber" : "3", "teamName" : "Ramparts", "submitterId" : "03", "submissionDate" : "2018-07-29", "status" : "CHALLENGED", "tags" : "Global Warming", "mediaTitle" : "pondImage", "images" : "http:/linktoS3", "deliverer_id" : "1"}'
+sls invoke local -f createProject -d '{"title" : "proj14", "location" : "Quebec", "descriptionShort" : "short desc14", "descriptionLong" : "long desc3", "teamNumber" : "3", "teamName" : "Ramparts", "submitterId" : "03", "submissionDate" : "2018-07-29", "status" : "CHALLENGED", "tags" : "Global Warming", "mediaTitle" : "pondImage", "images" : "{"http://wwf-serverless-dev-blobs.s3-website-us-west-1.amazonaws.com/9-1533620206779.png"}", "deliverer_id" : "1"}'
 
 sls invoke local -f createUser -d '{"userType" : "Curator", "userName" : "Jane Smith", "userEmail" : "jsmith@gmail.com", "userPassword" : "anothergoodpw"}'
 
@@ -12,4 +12,12 @@ sls invoke local -f user -d '{"userEmail" : "jsmith@gmail.com"}'
 
 sls invoke local -f relay -d '{"metaSignedTx" : "f9022380808094da8c6dce9e9a85e6f9df7b09b2354da44cb4833180b90204c3f44c0a000000000000000000000000000000000000000000000000000000000000001b8f350a51bad1e9786436aff379b12576287a343ac927e590ad22bf31d9a3f94738174cdb10457408c8acccc0f1a65db1c1bdcea4e406434c1689a63fb10ec92e00000000000000000000000087ea811785c4bd30fc104c2543cf8ed90f7eeec700000000000000000000000000000000000000000000000000000000000000c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000104701b8826000000000000000000000000f978f6a993d595e67b2662cbe04b140b4b675c2b000000000000000000000000b4238d73e491e97bcabdc10e9787f53ba929f44800000000000000000000000061e0cebf793fa4a0092404e928f80b4b5bb8de72000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000002460fe47b1000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001c8080", "blockchain" : "rinkeby"}'
 
-sls invoke local -f promoteProject -d '{"listinghash" : "0x7456", "curatorPublickey" : "0x453", "projectId" : "4"}'
+sls invoke local -f promoteProject -d '{"projectId" : "5"}'
+
+sls invoke local -f confirmProject -d '{"listingHash" : "0x7456", "promoterPublickey" : "0x453", "projectId" : "4"}'
+
+sls invoke local -f revertPromoteProject -d '{"projectId" : "5"}'
+
+
+
+sls invoke local -f createAccount -d '{"userId" : "3", "projectCategory" : "test", "projectProblem" : "test",  "projectApproach" : "test", "projectStage" : "test", "projetImpact" : "test", "fundingGoal" : "test", "teamInfo" : "test"}'

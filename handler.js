@@ -12,9 +12,10 @@ const CreateProjectHandler = require('./handlers/createProjectHandler');
 const CreateUserHandler = require('./handlers/createUserHandler');
 const UserHandler = require('./handlers/userHandler');
 const RelayHandler = require('./handlers/relayHandler');
-const PromotePojectHandler = reequire('./handlers/promoteProjectHandler');
+const PromoteProjectHandler = require('./handlers/promoteProjectHandler');
 const CreateAccountHandler = require('./handlers/createAccountHandler')
-
+const ConfirmProjectHandler = require('./handlers/confirmProjectHandler')
+const RevertPromoteProjectHandler = require('./handlers/revertPromoteProjectHandler')
 
 const databaseMgr = new DatabaseMgr();
 const ethereumMgr = new EthereumMgr();
@@ -27,9 +28,10 @@ const createProjectHandler = new CreateProjectHandler(databaseMgr, bucketMgr);
 const createUserHandler = new CreateUserHandler(databaseMgr);
 const userHandler = new UserHandler(databaseMgr);
 const relayHandler = new RelayHandler(ethereumMgr);
-let promoteProjectHandler = new PromoteProjectHandler(databaseMgr);
-let createAccountHandler = new CreateAccountHandler(databaseMgr);
-
+const promoteProjectHandler = new PromoteProjectHandler(databaseMgr);
+const createAccountHandler = new CreateAccountHandler(databaseMgr);
+const confirmProjectHandler = new ConfirmProjectHandler(databaseMgr);
+const revertPromoteProjectHandler = new RevertPromoteProjectHandler(databaseMgr);
 
 //done
 module.exports.helloWorld = (event, context, callback) => {
@@ -41,12 +43,13 @@ module.exports.helloWorldEth = (event, context, callback) => {
    console.log("fix import testEthMgr.js");
 };
 
-//done
+//serverless methods for Pre-tcr Submission Phase and Promote Project Phase
+//fix for not_Confirmed
 module.exports.allProjectDet = (event, context, callback) => {
    preHandler(allProjectDetHandler, event, context, callback);
 };
 
-//done
+//fix for not_Confirmed
 module.exports.projectDet = (event, context, callback) => {
    preHandler(projectDetHandler, event, context, callback);
 };
@@ -73,12 +76,46 @@ module.exports.relay = (event, context, callback) => {
 
 //done
 module.exports.promoteProject = (event, context, callback) => {
-   preHandlerSensui(promoteProjectHandler, event, context, callback);
+   preHandler(promoteProjectHandler, event, context, callback);
 };
 
-module.exports.createAccount = (event, context, callback) => {
-   preHandlerSensui(createAccountHandler, event, context, callback);
+//done
+module.exports.confirmProject = (event, context, callback) => {
+   preHandler(confirmProjectHandler, event, context, callback);
 };
+
+//done
+module.exports.revertPromoteProject = (event, context, callback) => {
+   preHandler(revertPromoteProjectHandler, event, context, callback);
+};
+
+//done
+module.exports.createAccount = (event, context, callback) => {
+   preHandler(createAccountHandler, event, context, callback);
+};
+
+//serverless methods for Challenge Phase
+//not started
+//update status = challenge, record_status = not confirmed n projects_det
+//create challenge in challenge table
+module.exports.challenge = (event, context, callback) => {
+   //preHandler(challengeHandler, event, context, callback);
+};
+
+//not started
+//update record_status = confirmed in projects_det
+//update challenge in challenge table
+module.exports.confirmChallenge = (event, context, callback) => {
+   //preHandler(confirmChallengeHandler, event, context, callback);
+};
+
+//not started
+//update status = PROMOTED, record_status = ''
+
+module.exports.revertChallenge = (event, context, callback) => {
+   //preHandler(revertChallengeHandler, event, context, callback);
+};
+
 
 const preHandler = (handler, event, context, callback) => {
   console.log("event: "+event);
@@ -106,6 +143,7 @@ const preHandler = (handler, event, context, callback) => {
 };
 
 const preHandlerSensui = (handler, event, context, callback) => {
+  console.log("in prehandlerSensui");
   console.log(event);
   if (!ethereumMgr.isSecretsSet() || !databaseMgr.isSecretsSet()) {
     const kms = new AWS.KMS();
