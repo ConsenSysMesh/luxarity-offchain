@@ -28,24 +28,13 @@ class challengeHandler{
 
    
     //note body.challengeId is autoincremented in postgres
-
-    if (!body.userId) {
-      cb({ code: 400, message: "report parameter missing - userId" });
-      return;
-    }
-
-     if (!body.userType) {
-      cb({ code: 400, message: "report parameter missing - userType" });
-      return;
-    }
-
-    if (!body.projectId) {
+     if (!body.projectId) {
       cb({ code: 400, message: "report parameter missing - projectId" });
       return;
     }
 
-    if (!body.vote) {
-      cb({ code: 400, message: "report parameter missing - vote" });
+    if (!body.userId) {
+      cb({ code: 400, message: "report parameter missing - userId" });
       return;
     }
 
