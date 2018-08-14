@@ -149,5 +149,13 @@ functions:
           path: challenge
           method: post
           cors: true
+  confirmChallenge:
+    handler: handler.confirmChallenge
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: confirmChallenge
+          method: post
+          cors: true
 
 

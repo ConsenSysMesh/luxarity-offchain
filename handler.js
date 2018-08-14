@@ -17,6 +17,8 @@ const CreateAccountHandler = require('./handlers/createAccountHandler');
 const ConfirmProjectHandler = require('./handlers/confirmProjectHandler');
 const RevertPromoteProjectHandler = require('./handlers/revertPromoteProjectHandler');
 const ChallengeHandler = require('./handlers/challengeHandler');
+const ConfirmChallengeHandler = require('./handlers/confirmChallengeHandler');
+
 
 const databaseMgr = new DatabaseMgr();
 const ethereumMgr = new EthereumMgr();
@@ -34,6 +36,7 @@ const createAccountHandler = new CreateAccountHandler(databaseMgr);
 const confirmProjectHandler = new ConfirmProjectHandler(databaseMgr);
 const revertPromoteProjectHandler = new RevertPromoteProjectHandler(databaseMgr);
 const challengeHandler = new ChallengeHandler(databaseMgr);
+const confirmChallengeHandler = new ConfirmChallengeHandler(databaseMgr);
 
 //done
 module.exports.helloWorld = (event, context, callback) => {
@@ -109,7 +112,7 @@ module.exports.challenge = (event, context, callback) => {
 //update record_status = confirmed in projects_det
 //update challenge in challenge table
 module.exports.confirmChallenge = (event, context, callback) => {
-   //preHandler(confirmChallengeHandler, event, context, callback);
+   preHandler(confirmChallengeHandler, event, context, callback);
 };
 
 //not started
