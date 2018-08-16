@@ -44,6 +44,9 @@ module.exports.testEndpoint = (event, context, callback) => {
 
   let response = {
               statusCode: 200,
+              headers: {
+              "Access-Control-Allow-Origin" : "*"
+              },
               body: JSON.stringify({
                 status: "success"
               })
