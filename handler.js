@@ -5,7 +5,7 @@ const DatabaseMgr = require('./lib/DatabaseMgr');
 //const EthereumMgr = require('./lib/EthereumMgr');
 const BucketMgr = require('./lib/BucketMgr');
 const GetRecordsHandler = require('./handlers/getRecordsHandler');
-const GetRecordsHandlerEth = require('./handlers/getRecordsHandlerEth');
+//const GetRecordsHandlerEth = require('./handlers/getRecordsHandlerEth');
 const AllProjectDetHandler = require('./handlers/allProjectDetHandler');
 const ProjectDetHandler = require('./handlers/projectDetHandler');
 const CreateProjectHandler = require('./handlers/createProjectHandler');
@@ -18,7 +18,7 @@ const ConfirmProjectHandler = require('./handlers/confirmProjectHandler');
 const RevertPromoteProjectHandler = require('./handlers/revertPromoteProjectHandler');
 const ChallengeHandler = require('./handlers/challengeHandler');
 const ConfirmChallengeHandler = require('./handlers/confirmChallengeHandler');
-
+const WatchEventHandler = require('./handlers/watchEventHandler');
 
 const databaseMgr = new DatabaseMgr();
 //const ethereumMgr = new EthereumMgr();
@@ -37,6 +37,7 @@ const confirmProjectHandler = new ConfirmProjectHandler(databaseMgr);
 const revertPromoteProjectHandler = new RevertPromoteProjectHandler(databaseMgr);
 const challengeHandler = new ChallengeHandler(databaseMgr);
 const confirmChallengeHandler = new ConfirmChallengeHandler(databaseMgr);
+const watchEventHandler = new WatchEventHandler();
 
 //done
 module.exports.helloWorld = (event, context, callback) => {
@@ -108,7 +109,7 @@ module.exports.challenge = (event, context, callback) => {
    preHandler(challengeHandler, event, context, callback);
 };
 
-//not started
+//done
 //update record_status = confirmed in projects_det
 //update challenge in challenge table
 module.exports.confirmChallenge = (event, context, callback) => {
@@ -120,6 +121,11 @@ module.exports.confirmChallenge = (event, context, callback) => {
 
 module.exports.revertChallenge = (event, context, callback) => {
    //preHandler(revertChallengeHandler, event, context, callback);
+};
+
+module.exports.watchEvent = (event, context, callback) => {
+    //watchEventHandler.handle();
+    preHandlerEvents(watchEventHandler, event, context, callback);
 };
 
 
@@ -148,6 +154,13 @@ const preHandler = (handler, event, context, callback) => {
   }
 };
 
+const preHandlerEvents = (handler, event, context, callback) => {
+  console.log("event: "+event);
+  console.log("inside preHandlerEvents");
+  doHandler(handler, event, context, callback);
+    
+};
+
 const preHandlerSensui = (handler, event, context, callback) => {
   console.log("in prehandlerSensui");
   console.log(event);
@@ -171,7 +184,7 @@ const preHandlerSensui = (handler, event, context, callback) => {
 
 const doHandler = (handler, event, context, callback) => {
 
-    console.log("in doHandler with PG.HOST"+databaseMgr.PG_HOST);
+    //console.log("in doHandler with PG.HOST"+databaseMgr.PG_HOST);
     handler.handle(event, context, (err, resp) => {
       let response;
       console.log("response: "+response);

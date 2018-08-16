@@ -40,6 +40,13 @@ class promoteProjectHandler{
       cb({ code: 400, message: "report parameter missing - projectId" });
       return;
     }
+
+    if (!body.listingHash) {
+      cb({ code: 400, message: "report parameter missing - listingHash" });
+      return;
+    }
+
+     
   
     try{
 
@@ -50,7 +57,7 @@ class promoteProjectHandler{
 
     }catch(error){
       console.log("promoteProjectHandler error"+error);
-      cb({ code: 500, message: "getTestRecrodsError: " + err.message });
+      cb({ code: 500, message: "promoteProjectHandler: " + err.message });
       return;
     }
 

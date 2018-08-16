@@ -45,22 +45,6 @@ custom:
   kmsSecrets: ${file(kms-secrets.${opt:stage, self:provider.stage}.${opt:region, self:provider.region}.yml)}
 # The `functions` block defines what code to deploy
 functions:
-  helloWorld:
-    handler: handler.helloWorld
-    # The `events` block defines how to trigger the handler.helloWorld code
-    events:
-      - http:
-          path: hello-world
-          method: get
-          cors: true
-  helloWorldEth:
-    handler: handler.helloWorldEth
-    # The `events` block defines how to trigger the handler.helloWorld code
-    events:
-      - http:
-          path: helloWorldEth
-          method: get
-          cors: true
   allProjectDet:
     handler: handler.allProjectDet
     # The `events` block defines how to trigger the handler.helloWorld code
@@ -101,20 +85,12 @@ functions:
           path: user
           method: post
           cors: true
-  relay:
-    handler: handler.relay
-    # The `events` block defines how to trigger the handler.helloWorld code
-    events:
-      - http:
-          path: relay
-          method: post
-          cors: true
   promoteProject:
     handler: handler.promoteProject
     # The `events` block defines how to trigger the handler.helloWorld code
     events:
       - http:
-          path: handler.promoteProject
+          path: promoteProject
           method: post
           cors: true
   confirmProject:
@@ -157,5 +133,14 @@ functions:
           path: confirmChallenge
           method: post
           cors: true
+  watchEvent:
+    handler: handler.watchEvent
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: watchEvent
+          method: get
+          cors: true
+
 
 
