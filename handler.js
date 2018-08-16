@@ -2,7 +2,7 @@
 const AWS = require("aws-sdk");
 
 const DatabaseMgr = require('./lib/DatabaseMgr');
-const EthereumMgr = require('./lib/EthereumMgr');
+//const EthereumMgr = require('./lib/EthereumMgr');
 const BucketMgr = require('./lib/BucketMgr');
 const GetRecordsHandler = require('./handlers/getRecordsHandler');
 const GetRecordsHandlerEth = require('./handlers/getRecordsHandlerEth');
@@ -21,7 +21,7 @@ const ConfirmChallengeHandler = require('./handlers/confirmChallengeHandler');
 
 
 const databaseMgr = new DatabaseMgr();
-const ethereumMgr = new EthereumMgr();
+//const ethereumMgr = new EthereumMgr();
 const bucketMgr = new BucketMgr();
 const getRecordsHandler = new GetRecordsHandler(databaseMgr);
 // const getRecordsHandlerEth = new GetRecordsHandlerEth(databaseMgr, ethereumMgr);
@@ -30,7 +30,7 @@ const projectDetHandler = new ProjectDetHandler(databaseMgr);
 const createProjectHandler = new CreateProjectHandler(databaseMgr, bucketMgr);
 const createUserHandler = new CreateUserHandler(databaseMgr);
 const userHandler = new UserHandler(databaseMgr);
-const relayHandler = new RelayHandler(ethereumMgr);
+//const relayHandler = new RelayHandler(ethereumMgr);
 const promoteProjectHandler = new PromoteProjectHandler(databaseMgr);
 const createAccountHandler = new CreateAccountHandler(databaseMgr);
 const confirmProjectHandler = new ConfirmProjectHandler(databaseMgr);
@@ -43,10 +43,10 @@ module.exports.helloWorld = (event, context, callback) => {
    preHandler(getRecordsHandler, event, context, callback);
 };
 
-module.exports.helloWorldEth = (event, context, callback) => {
+//module.exports.helloWorldEth = (event, context, callback) => {
    //preHandler(getRecordsHandlerEth, event, context, callback);
-   console.log("fix import testEthMgr.js");
-};
+  // console.log("fix import testEthMgr.js");
+//};
 
 //serverless methods for Pre-tcr Submission Phase and Promote Project Phase
 //fix for not_Confirmed
@@ -75,9 +75,9 @@ module.exports.user = (event, context, callback) => {
 };
 
 //done
-module.exports.relay = (event, context, callback) => {
-   preHandlerSensui(relayHandler, event, context, callback);
-};
+//module.exports.relay = (event, context, callback) => {
+  // preHandlerSensui(relayHandler, event, context, callback);
+//};
 
 //done
 module.exports.promoteProject = (event, context, callback) => {

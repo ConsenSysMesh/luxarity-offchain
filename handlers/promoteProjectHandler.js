@@ -35,6 +35,11 @@ class promoteProjectHandler{
       cb({ code: 400, message: "report parameter missing - projectId" });
       return;
     }
+
+    if (!body.promoterPublicKey) {
+      cb({ code: 400, message: "report parameter missing - projectId" });
+      return;
+    }
   
     try{
 
