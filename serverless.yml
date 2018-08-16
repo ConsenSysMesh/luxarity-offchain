@@ -90,7 +90,7 @@ functions:
     # The `events` block defines how to trigger the handler.helloWorld code
     events:
       - http:
-          path: handler.promoteProject
+          path: promoteProject
           method: post
           cors: true
   confirmProject:
