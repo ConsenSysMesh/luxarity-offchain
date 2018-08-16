@@ -19,6 +19,7 @@ const RevertPromoteProjectHandler = require('./handlers/revertPromoteProjectHand
 const ChallengeHandler = require('./handlers/challengeHandler');
 const ConfirmChallengeHandler = require('./handlers/confirmChallengeHandler');
 const WatchEventHandler = require('./handlers/watchEventHandler');
+const IntegratePromoteWatchHandler = require('./handlers/integratePromoteWatchHandler');
 
 const databaseMgr = new DatabaseMgr();
 //const ethereumMgr = new EthereumMgr();
@@ -38,12 +39,16 @@ const revertPromoteProjectHandler = new RevertPromoteProjectHandler(databaseMgr)
 const challengeHandler = new ChallengeHandler(databaseMgr);
 const confirmChallengeHandler = new ConfirmChallengeHandler(databaseMgr);
 const watchEventHandler = new WatchEventHandler();
+const integratePromoteWatchHandler = new IntegratePromoteWatchHandler(databaseMgr);
 
 //done
 module.exports.testEndpoint = (event, context, callback) => {
 
   let response = {
               statusCode: 200,
+              headers: {
+              "Access-Control-Allow-Origin" : "*"
+              },
               body: JSON.stringify({
                 status: "success"
               })
@@ -133,6 +138,10 @@ module.exports.revertChallenge = (event, context, callback) => {
 module.exports.watchEvent = (event, context, callback) => {
     //watchEventHandler.handle();
     preHandlerEvents(watchEventHandler, event, context, callback);
+};
+
+module.exports.integratePromoteWatch = (event, context, callback) => {
+   preHandler(integratePromoteWatchHandler, event, context, callback);
 };
 
 

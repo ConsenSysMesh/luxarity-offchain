@@ -156,6 +156,14 @@ functions:
           path: watchEvent
           method: get
           cors: true
+  integratePromoteWatch:
+    handler: handler.integratePromoteWatch
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: integratePromoteWatch
+          method: get
+          cors: true
 
 
 

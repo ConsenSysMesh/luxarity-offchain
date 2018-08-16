@@ -10,7 +10,7 @@ const Token = require('../build/contracts/Registry.json')
 
 class watchEventHandler{
 
-  constructor(databaseMgr){
+  constructor(){
     console.log("watchEventHandler")
   };
 
