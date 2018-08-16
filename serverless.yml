@@ -45,6 +45,21 @@ custom:
   kmsSecrets: ${file(kms-secrets.${opt:stage, self:provider.stage}.${opt:region, self:provider.region}.yml)}
 # The `functions` block defines what code to deploy
 functions:
+  testEndpoint:
+    handler: handler.testEndpoint
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: testEndpoint
+          method: get
+  testEndpoint2:
+    handler: handler.testEndpoint
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: testEndpoint2
+          method: get
+          cors: true
   allProjectDet:
     handler: handler.allProjectDet
     # The `events` block defines how to trigger the handler.helloWorld code

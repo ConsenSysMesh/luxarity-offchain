@@ -40,8 +40,15 @@ const confirmChallengeHandler = new ConfirmChallengeHandler(databaseMgr);
 const watchEventHandler = new WatchEventHandler();
 
 //done
-module.exports.helloWorld = (event, context, callback) => {
-   preHandler(getRecordsHandler, event, context, callback);
+module.exports.testEndpoint = (event, context, callback) => {
+
+  let response = {
+              statusCode: 200,
+              body: JSON.stringify({
+                status: "success"
+              })
+            };
+   callback(null, response);
 };
 
 //module.exports.helloWorldEth = (event, context, callback) => {
