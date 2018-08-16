@@ -15,8 +15,9 @@ sls invoke local -f relay -d '{"metaSignedTx" : "f9022380808094da8c6dce9e9a85e6f
 
 sls invoke local -f promoteProject -d '{"projectId" : "5", "promoterPublicKey" : "x0304"}'
 
-sls invoke local -f promoteProject -d '{"projectId" : "5", "listingHash" : "0x9ba3bc1a9e475cf8b380fd84b25e87c641ecddae375b6894bd6f2c368f933079" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
+sls invoke local -f promoteProject -d '{"projectId" : "5", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
 
+sls invoke local -f integratePromoteWatch -d '{"projectId" : "5", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
 
 sls invoke local -f confirmProject -d '{"listingHash" : "0x7456", "promoterPublickey" : "0x453", "projectId" : "4"}'
 
