@@ -2,10 +2,10 @@
 const AWS = require("aws-sdk");
 
 const DatabaseMgr = require('./lib/DatabaseMgr');
-const EthereumMgr = require('./lib/EthereumMgr');
+//const EthereumMgr = require('./lib/EthereumMgr');
 const BucketMgr = require('./lib/BucketMgr');
 const GetRecordsHandler = require('./handlers/getRecordsHandler');
-const GetRecordsHandlerEth = require('./handlers/getRecordsHandlerEth');
+//const GetRecordsHandlerEth = require('./handlers/getRecordsHandlerEth');
 const AllProjectDetHandler = require('./handlers/allProjectDetHandler');
 const ProjectDetHandler = require('./handlers/projectDetHandler');
 const CreateProjectHandler = require('./handlers/createProjectHandler');
@@ -21,7 +21,7 @@ const ConfirmChallengeHandler = require('./handlers/confirmChallengeHandler');
 const WatchEventHandler = require('./handlers/watchEventHandler');
 
 const databaseMgr = new DatabaseMgr();
-const ethereumMgr = new EthereumMgr();
+//const ethereumMgr = new EthereumMgr();
 const bucketMgr = new BucketMgr();
 const getRecordsHandler = new GetRecordsHandler(databaseMgr);
 // const getRecordsHandlerEth = new GetRecordsHandlerEth(databaseMgr, ethereumMgr);
@@ -30,14 +30,14 @@ const projectDetHandler = new ProjectDetHandler(databaseMgr);
 const createProjectHandler = new CreateProjectHandler(databaseMgr, bucketMgr);
 const createUserHandler = new CreateUserHandler(databaseMgr);
 const userHandler = new UserHandler(databaseMgr);
-const relayHandler = new RelayHandler(ethereumMgr);
+//const relayHandler = new RelayHandler(ethereumMgr);
 const promoteProjectHandler = new PromoteProjectHandler(databaseMgr);
 const createAccountHandler = new CreateAccountHandler(databaseMgr);
 const confirmProjectHandler = new ConfirmProjectHandler(databaseMgr);
 const revertPromoteProjectHandler = new RevertPromoteProjectHandler(databaseMgr);
 const challengeHandler = new ChallengeHandler(databaseMgr);
 const confirmChallengeHandler = new ConfirmChallengeHandler(databaseMgr);
-const watchEventHandler = new WatchEventHandler(databaseMgr);
+const watchEventHandler = new WatchEventHandler();
 
 //done
 module.exports.helloWorld = (event, context, callback) => {
@@ -124,7 +124,9 @@ module.exports.revertChallenge = (event, context, callback) => {
 };
 
 module.exports.watchEvent = (event, context, callback) => {
-   preHandler(watchEventHandler, event, context, callback);
+    //watchEventHandler.handle();
+    
+    watchEventHandler.watchEvents();
 };
 
 
