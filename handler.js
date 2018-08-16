@@ -44,10 +44,10 @@ module.exports.helloWorld = (event, context, callback) => {
    preHandler(getRecordsHandler, event, context, callback);
 };
 
-module.exports.helloWorldEth = (event, context, callback) => {
+//module.exports.helloWorldEth = (event, context, callback) => {
    //preHandler(getRecordsHandlerEth, event, context, callback);
-   console.log("fix import testEthMgr.js");
-};
+  // console.log("fix import testEthMgr.js");
+//};
 
 //serverless methods for Pre-tcr Submission Phase and Promote Project Phase
 //fix for not_Confirmed
@@ -76,9 +76,9 @@ module.exports.user = (event, context, callback) => {
 };
 
 //done
-module.exports.relay = (event, context, callback) => {
-   preHandlerSensui(relayHandler, event, context, callback);
-};
+//module.exports.relay = (event, context, callback) => {
+  // preHandlerSensui(relayHandler, event, context, callback);
+//};
 
 //done
 module.exports.promoteProject = (event, context, callback) => {
@@ -125,8 +125,7 @@ module.exports.revertChallenge = (event, context, callback) => {
 
 module.exports.watchEvent = (event, context, callback) => {
     //watchEventHandler.handle();
-    
-    watchEventHandler.watchEvents();
+    preHandlerEvents(watchEventHandler, event, context, callback);
 };
 
 
@@ -155,6 +154,13 @@ const preHandler = (handler, event, context, callback) => {
   }
 };
 
+const preHandlerEvents = (handler, event, context, callback) => {
+  console.log("event: "+event);
+  console.log("inside preHandlerEvents");
+  doHandler(handler, event, context, callback);
+    
+};
+
 const preHandlerSensui = (handler, event, context, callback) => {
   console.log("in prehandlerSensui");
   console.log(event);
@@ -178,7 +184,7 @@ const preHandlerSensui = (handler, event, context, callback) => {
 
 const doHandler = (handler, event, context, callback) => {
 
-    console.log("in doHandler with PG.HOST"+databaseMgr.PG_HOST);
+    //console.log("in doHandler with PG.HOST"+databaseMgr.PG_HOST);
     handler.handle(event, context, (err, resp) => {
       let response;
       console.log("response: "+response);
