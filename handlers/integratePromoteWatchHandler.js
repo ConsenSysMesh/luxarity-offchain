@@ -103,27 +103,22 @@ class integratePromoteWatchHandler{
         //_to: '0x6dbd66c23f636c39380b2ff40ac59569d6a6d63e'
       }
 
+      var applicationEvent = false;
       // async
       try{
       ethEvents.getLogs(fromBlock, toBlock, eventNames, indexedFilterValues).then(logs => {
         logs.map(log => {
           console.log(log)
-          // {
-          //   logData: {
-          //     _value: <BN: 16bcc41e90>,
-          //     _from: '0xDEADBEEFCAFE12345678912456789',
-          //     _to: '0xCAFEDEADBEEF12345678912456789',
-          //     _eventName: 'Transfer',
-          //   },
-          //   txData: {
-          //     txHash: '0xBEEFDEADCAFE12345678912456789',
-          //     logIndex: '53',
-          //     blockNumber: '6000000',
-          //     blockTimestamp: '12341234',
-          //   },
-          //   eventName: 'Transfer',
-          // }
+          console.log("logListingHash: "+log.logData.listingHash);
+          if(log.logData.listingHash==body.listingHash){
+
+              console.log("listinghashes equal"); 
+              applicationEvent = true; 
+              } 
+
+          
         })
+
       })
       }catch(error){
           console.log("watchEvent error"+error);
@@ -131,6 +126,25 @@ class integratePromoteWatchHandler{
             return;
       }
 
+      //console.log("listing hash same "+logListingHash=body.listingHash);
+      console.log("applicationEvent: "+applicationEvent);
+      if(applicationEvent=true){
+
+          try{
+
+              console.log("inside try");
+              const records = await this.databaseMgr.promoteEventConfirm(body);
+              console.log("after records await");
+              cb(null, records);
+
+            }catch(error){
+              console.log("integratePromoteWatch error"+error);
+              cb({ code: 500, message: "integratePromoteWatch: " + err.message });
+              return;
+            }
+
+      }
+      
 
   }
 

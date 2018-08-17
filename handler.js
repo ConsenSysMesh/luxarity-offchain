@@ -47,7 +47,9 @@ module.exports.testEndpoint = (event, context, callback) => {
   let response = {
               statusCode: 200,
               headers: {
-              "Access-Control-Allow-Origin" : "*"
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials": true,
+                "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT"
               },
               body: JSON.stringify({
                 status: "success"
@@ -208,6 +210,11 @@ const doHandler = (handler, event, context, callback) => {
        if (err == null) {
             response = {
               statusCode: 200,
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials": true,
+                "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT"
+              },
               body: JSON.stringify({
                 status: "success",
                 data: resp
@@ -222,6 +229,11 @@ const doHandler = (handler, event, context, callback) => {
 
             response = {
               statusCode: code,
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials": true,
+                "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT"
+              },
               body: JSON.stringify({
                 status: "error",
                 message: message
