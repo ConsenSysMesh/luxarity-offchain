@@ -2,10 +2,8 @@
 const AWS = require("aws-sdk");
 
 const DatabaseMgr = require('./lib/DatabaseMgr');
-//const EthereumMgr = require('./lib/EthereumMgr');
 const BucketMgr = require('./lib/BucketMgr');
 const GetRecordsHandler = require('./handlers/getRecordsHandler');
-//const GetRecordsHandlerEth = require('./handlers/getRecordsHandlerEth');
 const AllProjectDetHandler = require('./handlers/allProjectDetHandler');
 const ProjectDetHandler = require('./handlers/projectDetHandler');
 const CreateProjectHandler = require('./handlers/createProjectHandler');
@@ -22,16 +20,13 @@ const WatchEventHandler = require('./handlers/watchEventHandler');
 const IntegratePromoteWatchHandler = require('./handlers/integratePromoteWatchHandler');
 
 const databaseMgr = new DatabaseMgr();
-//const ethereumMgr = new EthereumMgr();
 const bucketMgr = new BucketMgr();
 const getRecordsHandler = new GetRecordsHandler(databaseMgr);
-// const getRecordsHandlerEth = new GetRecordsHandlerEth(databaseMgr, ethereumMgr);
 const allProjectDetHandler = new AllProjectDetHandler(databaseMgr);
 const projectDetHandler = new ProjectDetHandler(databaseMgr);
 const createProjectHandler = new CreateProjectHandler(databaseMgr, bucketMgr);
 const createUserHandler = new CreateUserHandler(databaseMgr);
 const userHandler = new UserHandler(databaseMgr);
-//const relayHandler = new RelayHandler(ethereumMgr);
 const promoteProjectHandler = new PromoteProjectHandler(databaseMgr);
 const createAccountHandler = new CreateAccountHandler(databaseMgr);
 const confirmProjectHandler = new ConfirmProjectHandler(databaseMgr);
@@ -58,18 +53,14 @@ module.exports.testEndpoint = (event, context, callback) => {
    callback(null, response);
 };
 
-//module.exports.helloWorldEth = (event, context, callback) => {
-   //preHandler(getRecordsHandlerEth, event, context, callback);
-  // console.log("fix import testEthMgr.js");
-//};
 
 //serverless methods for Pre-tcr Submission Phase and Promote Project Phase
-//fix for not_Confirmed
+//done
 module.exports.allProjectDet = (event, context, callback) => {
    preHandler(allProjectDetHandler, event, context, callback);
 };
 
-//fix for not_Confirmed
+//done
 module.exports.projectDet = (event, context, callback) => {
    preHandler(projectDetHandler, event, context, callback);
 };
@@ -94,17 +85,17 @@ module.exports.user = (event, context, callback) => {
   // preHandlerSensui(relayHandler, event, context, callback);
 //};
 
-//done
+//done not needed
 module.exports.promoteProject = (event, context, callback) => {
    preHandler(promoteProjectHandler, event, context, callback);
 };
 
-//done
+//done not needed
 module.exports.confirmProject = (event, context, callback) => {
    preHandler(confirmProjectHandler, event, context, callback);
 };
 
-//done
+//done possibly not needed
 module.exports.revertPromoteProject = (event, context, callback) => {
    preHandler(revertPromoteProjectHandler, event, context, callback);
 };
@@ -137,13 +128,24 @@ module.exports.revertChallenge = (event, context, callback) => {
    //preHandler(revertChallengeHandler, event, context, callback);
 };
 
+//done - not needed
 module.exports.watchEvent = (event, context, callback) => {
     //watchEventHandler.handle();
     preHandlerEvents(watchEventHandler, event, context, callback);
 };
 
+
+//done 
+// promoteProject, watch event, confirmProject
 module.exports.integratePromoteWatch = (event, context, callback) => {
    preHandler(integratePromoteWatchHandler, event, context, callback);
+};
+
+//done
+//update status = challenge, record_status = not confirmed n projects_det
+//create challenge in challenge table
+module.exports.challenge = (event, context, callback) => {
+   preHandler(challengeHandler, event, context, callback);
 };
 
 
