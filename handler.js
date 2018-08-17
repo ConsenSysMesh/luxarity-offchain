@@ -110,6 +110,8 @@ module.exports.createAccount = (event, context, callback) => {
 //done
 //update status = challenge, record_status = not confirmed n projects_det
 //create challenge in challenge table
+//watch challenge event
+//confirm challenge event
 module.exports.challenge = (event, context, callback) => {
    preHandler(challengeHandler, event, context, callback);
 };

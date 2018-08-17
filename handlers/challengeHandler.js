@@ -68,11 +68,24 @@ class challengeHandler{
       console.log("inside try");
       const records = await this.databaseMgr.challenge(body);
       console.log("after records await");
-      cb(null, records);
+      //cb(null, records);
 
     }catch(error){
-      console.log("challengeHandler error"+error);
-      cb({ code: 500, message: "challengeHandler: " + err.message });
+      console.log("challenge db error"+error);
+      cb({ code: 500, message: "challenge db error: " + err.message });
+      return;
+    }
+
+    try{
+
+      console.log("inside try");
+      const records = await this.databaseMgr.projectChallenge(body);
+      console.log("after records await");
+      //cb(null, records);
+
+    }catch(error){
+      console.log("projectChallenge db error"+error);
+      cb({ code: 500, message: "projectChallenge db error: " + err.message });
       return;
     }
 
