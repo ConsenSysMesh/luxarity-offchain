@@ -126,7 +126,7 @@ class challengeHandler{
       var applicationEvent = false;
       // async
       try{
-      ethEvents.getLogs(fromBlock, toBlock, eventNames, indexedFilterValues).then(logs => {
+      await ethEvents.getLogs(fromBlock, toBlock, eventNames, indexedFilterValues).then(logs => {
         logs.map(log => {
           console.log(log)
           console.log("logListingHash: "+log.logData.listingHash);
@@ -158,8 +158,21 @@ class challengeHandler{
               cb(null, records);
 
             }catch(error){
-              console.log("integratePromoteWatch error"+error);
-              cb({ code: 500, message: "integratePromoteWatch: " + err.message });
+              console.log("challengeEventConfirm db error"+error);
+              cb({ code: 500, message: "challengeEventConfirm db error: " + err.message });
+              return;
+            }
+
+            try{
+
+              console.log("inside try");
+              const records = await this.databaseMgr.challengeProjectEventConfirm(body);
+              console.log("after records await");
+              cb(null, records);
+
+            }catch(error){
+              console.log("challengeProjectEventConfirm db error"+error);
+              cb({ code: 500, message: "challengeProjectEventConfirm db error: " + err.message });
               return;
             }
 
