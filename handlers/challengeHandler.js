@@ -65,7 +65,7 @@ class challengeHandler{
   
     try{
 
-      console.log("inside try");
+      console.log("inside challenge try");
       const records = await this.databaseMgr.challenge(body);
       console.log("after records await");
       //cb(null, records);
@@ -78,7 +78,7 @@ class challengeHandler{
 
     try{
 
-      console.log("inside try");
+      console.log("inside project Challenge try");
       const records = await this.databaseMgr.projectChallenge(body);
       console.log("after records await");
       //cb(null, records);
@@ -124,6 +124,7 @@ class challengeHandler{
       }
 
       var applicationEvent = false;
+      let eventLogData;
       // async
       try{
       await ethEvents.getLogs(fromBlock, toBlock, eventNames, indexedFilterValues).then(logs => {
@@ -134,6 +135,13 @@ class challengeHandler{
 
               console.log("listinghashes equal"); 
               applicationEvent = true; 
+              eventLogData = log.logData;
+              console.log("log.logData.listingHash: "+log.logData.listingHash);
+              console.log("log.logData.challengeID: "+log.logData.challengeID);
+              console.log("log.logData.data: "+log.logData.data)
+              console.log("log.logData.commitEndDate: "+log.logData.commitEndDate)
+              console.log("log.logData.revealEndDate: "+log.logData.revealEndDate)
+              console.log("log.logData.challenger: "+log.logData.challenger)
               } 
 
           
@@ -146,16 +154,23 @@ class challengeHandler{
             return;
       }
 
+              console.log("eventLogData.listingHash: "+eventLogData.listingHash);
+              console.log("eventLogData.challengeID: "+eventLogData.challengeID);
+              console.log("eventLogData.data: "+eventLogData.data)
+              console.log("eventLogData.commitEndDate: "+eventLogData.commitEndDate)
+              console.log("eventLogData.revealEndDate: "+eventLogData.revealEndDate)
+              console.log("eventLogData.challenger: "+eventLogData.challenger)
+
       //if challenge event confirm challenge in db
       console.log("applicationEvent: "+applicationEvent);
       if(applicationEvent===true){
 
           try{
 
-              console.log("inside try");
-              const records = await this.databaseMgr.challengeEventConfirm(body);
+              console.log("inside challengeEventConfirm try");
+              const records = await this.databaseMgr.challengeEventConfirm(eventLogData);
               console.log("after records await");
-              cb(null, records);
+              //cb(null, records);
 
             }catch(error){
               console.log("challengeEventConfirm db error"+error);
@@ -165,7 +180,7 @@ class challengeHandler{
 
             try{
 
-              console.log("inside try");
+              console.log("inside challengeProjectEventConfirm try");
               const records = await this.databaseMgr.challengeProjectEventConfirm(body);
               console.log("after records await");
               cb(null, records);

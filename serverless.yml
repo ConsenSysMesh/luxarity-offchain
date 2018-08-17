@@ -172,6 +172,14 @@ functions:
           path: commitVote
           method: post
           cors: true
+  test1:
+    handler: handler.test1
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: test1
+          method: post
+          cors: true
 
 
 
