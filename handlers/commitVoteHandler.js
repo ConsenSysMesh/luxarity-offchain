@@ -1,6 +1,6 @@
 const Ethjs = require('ethjs')
 const EthEvents = require('eth-events')
-const Token = require('../build/contracts/Registry.json')
+const Token = require('../build/contracts/PLCRVoting.json')
 
 //ImpCoin:           0xe828317ca817b557184b72e094c14f759b602d51
 //PLCRVoting:        0x4a4853a3102869511c263e18b9666437d17132b3
@@ -169,4 +169,4 @@ class commitVoteHandler{
 
 };
 
-module.exports = challengeHandler;
+module.exports = commitVoteHandler;

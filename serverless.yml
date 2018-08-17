@@ -164,6 +164,14 @@ functions:
           path: integratePromoteWatch
           method: post
           cors: true
+  commitVote:
+    handler: handler.commitVote
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: commitVote
+          method: post
+          cors: true
 
 
 
