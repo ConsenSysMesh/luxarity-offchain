@@ -162,7 +162,7 @@ functions:
     events:
       - http:
           path: integratePromoteWatch
-          method: get
+          method: post
           cors: true
 
 

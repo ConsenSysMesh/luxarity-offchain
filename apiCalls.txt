@@ -17,7 +17,12 @@ sls invoke local -f promoteProject -d '{"projectId" : "5", "promoterPublicKey" :
 
 sls invoke local -f promoteProject -d '{"projectId" : "5", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
 
-sls invoke local -f integratePromoteWatch -d '{"projectId" : "5", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
+//returns success
+sls invoke local -f integratePromoteWatch -d '{"projectId" : "2", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
+
+//bad listingHash returns error
+sls invoke local -f integratePromoteWatch -d '{"projectId" : "3", "listingHash" : "0xbd61837be06d94e1ae9192878e518907b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
+
 
 sls invoke local -f confirmProject -d '{"listingHash" : "0x7456", "promoterPublickey" : "0x453", "projectId" : "4"}'
 
@@ -27,7 +32,7 @@ sls invoke local -f revertPromoteProject -d '{"projectId" : "5"}'
 
 sls invoke local -f createAccount -d '{"userId" : "3", "projectCategory" : "test", "projectProblem" : "test",  "projectApproach" : "test", "projectStage" : "test", "projectImpact" : "test", "fundingGoal" : "test", "teamInfo" : "test"}'
 
-sls invoke local -f challenge -d '{"projectId" : "3", "userId" : "4", "submissionDate" : "2018-07-29"}'
+sls invoke local -f challenge -d '{"projectId" : "3", "userId" : "4", "submissionDate" : "2018-07-29", "listingHash": "0x4", "challengerPublicKey" : "0x45"}'
 
 [body.listingHash, body.challengeId, body.data, body.commitEndDate,  body.revealEndDate,  body.challenger
 

@@ -61,17 +61,17 @@ class integratePromoteWatchHandler{
       console.log("inside try");
       const records = await this.databaseMgr.promoteProject(body);
       console.log("after records await");
-      cb(null, records);
+      //cb(null, records);
 
     }catch(error){
-      console.log("integratePromoteWatch error"+error);
-      cb({ code: 500, message: "integratePromoteWatch: " + err.message });
+      console.log("integratePromoteWatch: promoteProject to DB error"+error);
+      cb({ code: 500, message: "integratePromoteWatch: promoteProject to DB error: " + err.message });
       return;
     }
 
 
     //watch events
-      console.log("inside createUserHandler.handle");
+      console.log("watching _Application Event");
 
       // setup ethjs
       const provider = new Ethjs.HttpProvider('https://rinkeby.infura.io');
@@ -106,7 +106,7 @@ class integratePromoteWatchHandler{
       var applicationEvent = false;
       // async
       try{
-      ethEvents.getLogs(fromBlock, toBlock, eventNames, indexedFilterValues).then(logs => {
+      await ethEvents.getLogs(fromBlock, toBlock, eventNames, indexedFilterValues).then(logs => {
         logs.map(log => {
           console.log(log)
           console.log("logListingHash: "+log.logData.listingHash);
@@ -121,18 +121,18 @@ class integratePromoteWatchHandler{
 
       })
       }catch(error){
-          console.log("watchEvent error"+error);
-            cb({ code: 500, message: "wacthEventError: " + err.message });
+          console.log("watch _Application Event error"+error);
+            cb({ code: 500, message: "watch _Application Event error: " + err.message });
             return;
       }
 
       //console.log("listing hash same "+logListingHash=body.listingHash);
       console.log("applicationEvent: "+applicationEvent);
-      if(applicationEvent=true){
+      if(applicationEvent===true){
 
           try{
 
-              console.log("inside try");
+              console.log("inside try for promoteEventConfirm");
               const records = await this.databaseMgr.promoteEventConfirm(body);
               console.log("after records await");
               cb(null, records);
@@ -143,6 +143,11 @@ class integratePromoteWatchHandler{
               return;
             }
 
+      }
+      if(applicationEvent===false){
+        console.log("applicationEvent: "+applicationEvent);
+              cb({ code: 500, message: "Application Event Not Confirmed: " });
+              return;
       }
       
 
