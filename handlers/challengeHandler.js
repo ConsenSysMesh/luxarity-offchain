@@ -167,7 +167,7 @@ class challengeHandler{
 
           try{
 
-              console.log("inside challengeEventConfirm try");
+              console.log("inside  try");
               const records = await this.databaseMgr.challengeEventConfirm(eventLogData);
               console.log("after records await");
               //cb(null, records);
@@ -180,7 +180,7 @@ class challengeHandler{
 
             try{
 
-              console.log("inside challengeProjectEventConfirm try");
+              console.log("inside try");
               const records = await this.databaseMgr.challengeProjectEventConfirm(body);
               console.log("after records await");
               cb(null, records);

@@ -147,7 +147,7 @@ module.exports.integratePromoteWatch = (event, context, callback) => {
    preHandler(integratePromoteWatchHandler, event, context, callback);
 };
 
-//done need to test
+//done 
 //update status = challenge, record_status = not confirmed n projects_det
 //create challenge in challenge table
 module.exports.challenge = (event, context, callback) => {
@@ -159,6 +159,7 @@ module.exports.commitVote = (event, context, callback) => {
    preHandler(commitVoteHandler, event, context, callback);
 };
 
+//done
 module.exports.test1 = (event, context, callback) => {
    preHandler(testHandler, event, context, callback);
 };
