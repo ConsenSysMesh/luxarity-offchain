@@ -33,8 +33,8 @@ class runSleepHandler{
       return;
     }
 
-    if(body.sleepMs > 29000){
-      cb({ code: 400, message: "sleepMs for api gateway cannot be greater than 29000" });
+    if(body.sleepMs > 28500){
+      cb({ code: 400, message: "sleepMs for api gateway cannot be greater than 28500ms" });
       return;
     }
 
