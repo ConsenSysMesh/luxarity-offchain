@@ -1,6 +1,7 @@
 const Ethjs = require('ethjs')
 const EthEvents = require('eth-events')
 const Token = require('../build/contracts/Registry.json')
+const sleep = require ('../util/sleep');
 
 //ImpCoin:           0xe828317ca817b557184b72e094c14f759b602d51
 //PLCRVoting:        0x4a4853a3102869511c263e18b9666437d17132b3
@@ -49,6 +50,11 @@ class confirmTxHandler{
       return;
     }
 
+    if (!body.sleepMs) {
+      cb({ code: 400, message: "report parameter missing - sleepMs" });
+      return;
+    }
+
     
 
 if(body.txStatus === 'Success')
@@ -89,6 +95,9 @@ if(body.txStatus === 'Success')
       var applicationEvent = false;
       // async
       try{
+      console.log("sleeping: "+body.sleepMs+"ms");
+      await sleep(body.sleepMs);
+      console.log("finished sleeping");
       await ethEvents.getLogs(fromBlock, toBlock, eventNames, indexedFilterValues).then(logs => {
         logs.map(log => {
           console.log(log)

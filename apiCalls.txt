@@ -18,7 +18,7 @@ sls invoke local -f promoteProject -d '{"projectId" : "5", "promoterPublicKey" :
 sls invoke local -f promoteProject -d '{"projectId" : "5", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
 
 //returns success
-sls invoke local -f integratePromoteWatch -d '{"projectId" : "2", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
+sls invoke local -f integratePromoteWatch -d '{"projectId" : "2", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd", "sleepMs" : "30000"}'
 
 //bad listingHash returns error
 sls invoke local -f integratePromoteWatch -d '{"projectId" : "3", "listingHash" : "0xbd61837be06d94e1ae9192878e518907b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
