@@ -40,7 +40,7 @@ sls invoke local -f confirmChallenge -d '{"0x89" : "3", "challengeId" : "0x895",
 
 sls invoke local -f watchEvent
 
-sls invoke local -f commitVote -d '{"pollId" : "0x67", "secretHash" : "0x895", "salt" : "some salt", "projectId" : "2", "userId" : "2", "voterPublicKey" : "0x897"}'
+sls invoke local -f commitVote -d '{"pollId" : "1", "secretHash" : "secretehash", "salt" : "salt", "projectId" : "2", "userId" : "2", "voterPublicKey" : "0x897"}'
 
 sls invoke local -f test1 -d '{"projectId" : "3", "userId" : "4", "submissionDate" : "2018-07-29", "listingHash": "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengerPublicKey" : "0xD176f6907Ae1E699b39F78cf4582B019518E2B80"}'
 

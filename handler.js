@@ -42,6 +42,12 @@ const commitVoteHandler = new CommitVoteHandler(databaseMgr);
 const testHandler = new TestHandler(databaseMgr);
 const confirmTxHandler = new ConfirmTxHandler(databaseMgr);
 
+//notes:
+// before tcr need:
+// token.approve(regsistry), 
+// token.approve(plcrVoting),
+//voting.requestVotingRighs
+
 //done
 module.exports.testEndpoint = (event, context, callback) => {
 
@@ -156,7 +162,7 @@ module.exports.challenge = (event, context, callback) => {
    preHandler(challengeHandler, event, context, callback);
 };
 
-//done need to test
+//done need to test from ui
 module.exports.commitVote = (event, context, callback) => {
    preHandler(commitVoteHandler, event, context, callback);
 };
@@ -166,6 +172,8 @@ module.exports.test1 = (event, context, callback) => {
    preHandler(testHandler, event, context, callback);
 };
 
+//done -need to test from ui
+//!!!USING newest contract : 0x3689955d196a543d62570b32ae227f4e239e2f87 for plcr!!!
 module.exports.confirmTx = (event, context, callback) => {
    preHandler(confirmTxHandler, event, context, callback);
 };

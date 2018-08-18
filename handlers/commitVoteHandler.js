@@ -8,6 +8,11 @@ const Token = require('../build/contracts/PLCRVoting.json')
 //Registry:          0x6dbd66c23f636c39380b2ff40ac59569d6a6d63e
 //just sent you 1000 IC to 0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd 
 
+//ImpCoin:          0x2f2aca2d8fee5d6c116abc3376f0dbd688922d1d
+//PLCRVoting:        0x3689955d196a543d62570b32ae227f4e239e2f87
+//Parameterizer:     0x03c5db0ad08bff19c6627c0f2b4608e52a3028ad
+//Registry:          0xdf77596a417f552ab3cb2c768292f89780f7bfaf
+
 class commitVoteHandler{
 
   constructor(databaseMgr){
@@ -92,7 +97,7 @@ class commitVoteHandler{
       // abi/address of the contract to query //ImpCoin
       const contract = {
         abi: Token.abi,
-        address: '0x4a4853a3102869511c263e18b9666437d17132b3',
+        address: '0x3689955d196a543d62570b32ae227f4e239e2f87',
       }
 
       // init eth-events
@@ -108,7 +113,7 @@ class commitVoteHandler{
       // indexed event emission arg values (un-hashed filter topics)
       //!!!don not put comments between { and filtervalues!!!
       const indexedFilterValues = {
-        listingHash: body.listingHash
+        //pollID: body.pollId
         //data: 'Test Project Event'
         //listingHash: '0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37'
         //_to: '0xCAFEDEADBEEF12345678912456789',
@@ -118,15 +123,18 @@ class commitVoteHandler{
       var applicationEvent = false;
       // async
       try{
-      ethEvents.getLogs(fromBlock, toBlock, eventNames, indexedFilterValues).then(logs => {
+      await ethEvents.getLogs(fromBlock, toBlock, eventNames, indexedFilterValues).then(logs => {
         logs.map(log => {
           console.log(log)
           console.log("logListingHash: "+log.logData.listingHash);
-          if(log.logData.listingHash==body.listingHash){
+          //if(log.logData.pollID.toString()==body.pollId){
 
-              console.log("listinghashes equal"); 
+             // console.log("pollId's equal"); 
+              //applicationEvent = true; 
+              //} 
+              console.log("pollId: "+log.logData.pollID.toString())
+              console.log("pollId true?: "+log.logData.pollID===body.pollId)
               applicationEvent = true; 
-              } 
 
           
         })
