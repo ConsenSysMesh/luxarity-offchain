@@ -21,6 +21,7 @@ const IntegratePromoteWatchHandler = require('./handlers/integratePromoteWatchHa
 const CommitVoteHandler = require('./handlers/commitVoteHandler');
 const TestHandler = require('./handlers/testHandler');
 const ConfirmTxHandler = require('./handlers/confirmTxHandler');
+const RunSleepHandler = require('./handlers/runSleepHandler');
 
 const databaseMgr = new DatabaseMgr();
 const bucketMgr = new BucketMgr();
@@ -41,6 +42,8 @@ const integratePromoteWatchHandler = new IntegratePromoteWatchHandler(databaseMg
 const commitVoteHandler = new CommitVoteHandler(databaseMgr);
 const testHandler = new TestHandler(databaseMgr);
 const confirmTxHandler = new ConfirmTxHandler(databaseMgr);
+const runSleepHandler = new RunSleepHandler();
+
 
 //notes:
 // before tcr need:
@@ -176,6 +179,10 @@ module.exports.test1 = (event, context, callback) => {
 //!!!USING newest contract : 0x3689955d196a543d62570b32ae227f4e239e2f87 for plcr!!!
 module.exports.confirmTx = (event, context, callback) => {
    preHandler(confirmTxHandler, event, context, callback);
+};
+
+module.exports.sleep = (event, context, callback) => {
+   preHandler(runSleepHandler, event, context, callback);
 };
 
 

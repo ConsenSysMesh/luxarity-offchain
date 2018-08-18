@@ -189,6 +189,15 @@ functions:
           path: confirmTx
           method: post
           cors: true
+  sleep:
+    handler: handler.sleep
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: sleep
+          method: post
+          cors: true
+    timeout: 30
 
 
 
