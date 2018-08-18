@@ -20,6 +20,7 @@ const WatchEventHandler = require('./handlers/watchEventHandler');
 const IntegratePromoteWatchHandler = require('./handlers/integratePromoteWatchHandler');
 const CommitVoteHandler = require('./handlers/commitVoteHandler');
 const TestHandler = require('./handlers/testHandler');
+const ConfirmTxHandler = require('./handlers/confirmTxHandler');
 
 const databaseMgr = new DatabaseMgr();
 const bucketMgr = new BucketMgr();
@@ -39,6 +40,7 @@ const watchEventHandler = new WatchEventHandler();
 const integratePromoteWatchHandler = new IntegratePromoteWatchHandler(databaseMgr);
 const commitVoteHandler = new CommitVoteHandler(databaseMgr);
 const testHandler = new TestHandler(databaseMgr);
+const confirmTxHandler = new ConfirmTxHandler(databaseMgr);
 
 //done
 module.exports.testEndpoint = (event, context, callback) => {
@@ -162,6 +164,10 @@ module.exports.commitVote = (event, context, callback) => {
 //done
 module.exports.test1 = (event, context, callback) => {
    preHandler(testHandler, event, context, callback);
+};
+
+module.exports.confirmTx = (event, context, callback) => {
+   preHandler(confirmTxHandler, event, context, callback);
 };
 
 

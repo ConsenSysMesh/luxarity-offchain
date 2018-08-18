@@ -180,6 +180,14 @@ functions:
           path: test1
           method: post
           cors: true
+  confirmTx:
+    handler: handler.confirmTx
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: confirmTx
+          method: post
+          cors: true
 
 
 

@@ -8,7 +8,7 @@ const Token = require('../build/contracts/Registry.json')
 //Registry:          0x6dbd66c23f636c39380b2ff40ac59569d6a6d63e
 //just sent you 1000 IC to 0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd 
 
-class integratePromoteWatchHandler{
+class confirmTxHandler{
 
   constructor(databaseMgr){
     this.databaseMgr = databaseMgr;
@@ -16,7 +16,7 @@ class integratePromoteWatchHandler{
 
  async handle(event, context, cb) {
 
-  console.log("inside integratePromoteWatchHandler.handle");
+  console.log("inside confirmTx.handle");
 
     let body;
 
@@ -39,13 +39,8 @@ class integratePromoteWatchHandler{
     //where projectId = ''
     //record_status = not_confirmed
 
-     if (!body.projectId) {
-      cb({ code: 400, message: "report parameter missing - projectId" });
-      return;
-    }
-
-    if (!body.promoterPublicKey) {
-      cb({ code: 400, message: "report parameter missing - projectId" });
+     if (!body.txStatus) {
+      cb({ code: 400, message: "report parameter missing - txStatus" });
       return;
     }
 
@@ -54,22 +49,10 @@ class integratePromoteWatchHandler{
       return;
     }
 
-     
-  
-    try{
+    
 
-      console.log("inside try");
-      const records = await this.databaseMgr.promoteProject(body);
-      console.log("after records await");
-      //cb(null, records);
-
-    }catch(error){
-      console.log("integratePromoteWatch: promoteProject to DB error"+error);
-      cb({ code: 107, message: "integratePromoteWatch: promoteProject to DB error: " + err.message });
-      return;
-    }
-
-
+if(body.txStatus === 'Success')
+    {
     //watch events
       console.log("watching _Application Event");
 
@@ -138,8 +121,8 @@ class integratePromoteWatchHandler{
               cb(null, records);
 
             }catch(error){
-              console.log("integratePromoteWatch error"+error);
-              cb({ code: 500, message: "integratePromoteWatch: " + err.message });
+              console.log("promoteEventConfirm error"+error);
+              cb({ code: 500, message: "promoteEventConfirm: " + err.message });
               return;
             }
 
@@ -150,11 +133,29 @@ class integratePromoteWatchHandler{
               return;
       }
       
+    }
+    if(body.txStatus === 'Failed'){
 
-  }
+      try{
+
+              console.log("inside try for revertProject");
+              const records = await this.databaseMgr.revertPromoteProject(body);
+              console.log("after records await");
+              cb(null, records);
+
+            }catch(error){
+              console.log("revertProject error"+error);
+              cb({ code: 500, message: "revertProject: " + err.message });
+              return;
+            }
+
+
+    }
+
+  }//end handler
 
 
 
-};
+};//end class
 
-module.exports = integratePromoteWatchHandler;
+module.exports = confirmTxHandler;
