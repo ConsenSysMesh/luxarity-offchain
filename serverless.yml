@@ -163,7 +163,7 @@ functions:
       - http:
           path: integratePromoteWatch
           method: post
-          cors: 
+          cors: true
     timeout: 120
   commitVote:
     handler: handler.commitVote
