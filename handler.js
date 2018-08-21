@@ -49,6 +49,7 @@ const projectsUserHandler = new ProjectsUserHandler(databaseMgr);
 const updateUserCredsHandler = new UpdateUserCredsHandler(databaseMgr);
 
 
+
 //notes:
 // before tcr need:
 // token.approve(regsistry), 
@@ -143,6 +144,8 @@ module.exports.challenge = (event, context, callback) => {
    preHandler(challengeHandler, event, context, callback);
 };
 
+
+
 //done
 //update record_status = confirmed in projects_det
 //update challenge in challenge table
@@ -164,15 +167,13 @@ module.exports.integratePromoteWatch = (event, context, callback) => {
    preHandler(integratePromoteWatchHandler, event, context, callback);
 };
 
-//done 
-//update status = challenge, record_status = not confirmed n projects_det
-//create challenge in challenge table
-module.exports.challenge = (event, context, callback) => {
-   preHandler(challengeHandler, event, context, callback);
-};
 
 //done need to test from ui
 module.exports.commitVote = (event, context, callback) => {
+   preHandler(commitVoteHandler, event, context, callback);
+};
+
+module.exports.revealVote = (event, context, callback) => {
    preHandler(commitVoteHandler, event, context, callback);
 };
 
