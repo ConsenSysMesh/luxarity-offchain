@@ -15,7 +15,13 @@ class allProjectDetHandler{
       console.log("inside try");
       const records = await this.databaseMgr.getAllProjectDets();
       console.log("after records await");
-      cb(null, records);
+      if(!records) {
+        throw new Error('no projects found')
+      }
+      else {
+        cb(null, records);
+        return;
+      }
 
     }catch(error){
       console.log("allProjectDetHandler error"+error);
