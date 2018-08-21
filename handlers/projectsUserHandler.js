@@ -36,11 +36,17 @@ class projectsUserHandler{
       console.log("inside try");
       const records = await this.databaseMgr.getProjectsUser(body);
       console.log("after records await");
-      cb(null, records);
+      if(!records) {
+        throw new Error('project for userId not found')
+      }
+      else {
+        cb(null, records);
+        return;
+      }
 
     }catch(error){
       console.log("projectUserHandler error"+error);
-      cb({ code: 500, message: "getTestRecrodsError: " + err.message });
+      cb({ code: 500, message: "getTestRecrodsError: " + error.message });
       return;
     }
 
