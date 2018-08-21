@@ -49,7 +49,7 @@ class userHandler{
 
     }catch(error){
       console.log("userHandler error"+error);
-      cb({ code: 500, message: "userHandler: " + err.message });
+      cb({ code: 500, message: "userHandler: " + error.message });
       return;
     }
 

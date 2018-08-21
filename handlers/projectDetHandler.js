@@ -35,12 +35,17 @@ class projectDetHandler{
 
       console.log("inside try");
       const records = await this.databaseMgr.getProjectDets(body.projectId);
-      console.log("after records await");
-      cb(null, records);
+      if(!records) {
+        throw new Error('project for projectId not found')
+      }
+      else if(records){
+        cb(null, records);
+        return;
+      }
 
     }catch(error){
       console.log("projectDetHandler error"+error);
-      cb({ code: 500, message: "getTestRecrodsError: " + err.message });
+      cb({ code: 500, message: "getTestRecrodsError: " + error.message });
       return;
     }
 

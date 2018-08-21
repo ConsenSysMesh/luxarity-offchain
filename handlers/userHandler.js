@@ -28,8 +28,8 @@ class userHandler{
 
    
 
-    if (!body.userEmail) {
-      cb({ code: 400, message: "report parameter missing - userEmail" });
+    if (!body.userId) {
+      cb({ code: 400, message: "report parameter missing - userId" });
       return;
     }
 

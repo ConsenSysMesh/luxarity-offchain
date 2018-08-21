@@ -1,17 +1,25 @@
 
+sls invoke local -f createAccount -d '{"userId" : "3", "projectCategory" : "test", "projectProblem" : "test",  "projectApproach" : "test", "projectStage" : "test", "projectImpact" : "test", "fundingGoal" : "test", "teamInfo" : "test"}'
+
+///////////////////////////////
+
 sls invoke local -f allProjectDet
 
 sls invoke local -f projectDet -d '{"projectId" : "1"}'
 
 sls invoke local -f projectsUser -d '{"userId" : "2"}'
 
-sls invoke local -f createProject -d '{"title" : "proj14", "location" : "Quebec", "descriptionShort" : "short desc14", "descriptionLong" : "long desc3", "teamNumber" : "3", "teamName" : "Ramparts", "submitterId" : "03", "submissionDate" : "2018-07-29", "status" : "CHALLENGED", "tags" : "Global Warming", "mediaTitle" : "pondImage", "images" : "{"http://wwf-serverless-dev-blobs.s3-website-us-west-1.amazonaws.com/9-1533620206779.png"}", "deliverer_id" : "1"}'
+sls invoke local -f createProject -d '{"title" : "proj14", "location" : "Quebec", "descriptionShort" : "short desc14", "descriptionLong" : "long desc3", "teamNumber" : "3", "teamName" : "Ramparts", "submitterId" : "03", "submissionDate" : "2018-07-29", "status" : "CHALLENGED", "tags" : "Global Warming", "mediaTitle" : "pondImage", "images" : "https://www.google.com/search?q=sample+image&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiIm8W92P7cAhUHLsAKHaNVAxsQ_AUICigB&biw=1133&bih=681#imgrc=CwPbs8S_fuhr5M:", "deliverer_id" : "1"}'
+
+///////////////////////////////
 
 sls invoke local -f createUser -d '{"name" : "Jane Smith", "email" : "jsmith@gmail.com", "password" : "anothergoodpw"}'
 
-sls invoke local -f user -d '{"userEmail" : "jsmith@gmail.com"}'
+sls invoke local -f user -d '{"userId" : "2"}'
 
 sls invoke local -f updateUserCreds -d '{"userId" : "2", "password" : "new password"}'
+
+///////////////////////////////
 
 sls invoke local -f promoteProject -d '{"projectId" : "14", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
 
@@ -19,11 +27,13 @@ sls invoke local -f confirmProject -d '{"listingHash" : "0x7456", "promoterPubli
 
 sls invoke local -f revertPromoteProject -d '{"projectId" : "5"}'
 
-sls invoke local -f createAccount -d '{"userId" : "3", "projectCategory" : "test", "projectProblem" : "test",  "projectApproach" : "test", "projectStage" : "test", "projectImpact" : "test", "fundingGoal" : "test", "teamInfo" : "test"}'
+///////////////////////////////
 
-sls invoke local -f challenge -d '{"projectId" : "3", "userId" : "4", "submissionDate" : "2018-07-29", "listingHash": "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengerPublicKey" : "0xD176f6907Ae1E699b39F78cf4582B019518E2B80"}'
+sls invoke local -f challenge -d '{"projectId" : "88", "userId" : "4", "submissionDate" : "2018-07-29", "listingHash": "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengerPublicKey" : "0xD176f6907Ae1E699b39F78cf4582B019518E2B80"}'
 
 sls invoke local -f confirmChallenge -d '{"0x89" : "3", "challengeId" : "0x895", "data" : "some data", "commitEndDate" : "2018-07-29", "revealEndDate" : "2018-07-29", "challenger" : "0x897"}'
+
+///////////////////////////////
 
 sls invoke local -f commitVote -d '{"pollId" : "1", "secretHash" : "secrethash", "salt" : "salt", "projectId" : "2", "userId" : "2", "voterPublicKey" : "0x897"}'
 

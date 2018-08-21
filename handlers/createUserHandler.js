@@ -54,7 +54,7 @@ class createUserHandler{
 
     }catch(error){
       console.log("createUserHandler error"+error);
-      cb({ code: 500, message: "createUserHandler error: " + err.message });
+      cb({ code: 500, message: "createUserHandler error: " + error.message });
       return;
     }
 

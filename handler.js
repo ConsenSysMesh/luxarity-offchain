@@ -75,7 +75,7 @@ module.exports.testEndpoint = (event, context, callback) => {
 };
 
 
-//serverless methods for Pre-tcr Submission Phase and Promote Project Phase
+
 //done
 module.exports.allProjectDet = (event, context, callback) => {
    preHandler(allProjectDetHandler, event, context, callback);
@@ -216,33 +216,6 @@ const preHandler = (handler, event, context, callback) => {
   }
 };
 
-const preHandlerEvents = (handler, event, context, callback) => {
-  console.log("event: "+event);
-  console.log("inside preHandlerEvents");
-  doHandler(handler, event, context, callback);
-    
-};
-
-const preHandlerSensui = (handler, event, context, callback) => {
-  console.log("in prehandlerSensui");
-  console.log(event);
-  if (!ethereumMgr.isSecretsSet() || !databaseMgr.isSecretsSet()) {
-    const kms = new AWS.KMS();
-    kms
-      .decrypt({
-        CiphertextBlob: Buffer(process.env.SECRETS, "base64")
-      })
-      .promise()
-      .then(data => {
-        const decrypted = String(data.Plaintext);
-        ethereumMgr.setSecrets(JSON.parse(decrypted));
-        //authMgr.setSecrets(JSON.parse(decrypted));
-        doHandler(handler, event, context, callback);
-      });
-  } else {
-    doHandler(handler, event, context, callback);
-  }
-};
 
 const doHandler = (handler, event, context, callback) => {
 

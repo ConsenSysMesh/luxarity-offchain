@@ -86,7 +86,7 @@ class createAccountHandler{
 
     }catch(error){
       console.log("createAccountHandler error"+error);
-      cb({ code: 500, message: "getTestRecrodsError: " + err.message });
+      cb({ code: 500, message: "getTestRecrodsError: " + error.message });
       return;
     }
 
