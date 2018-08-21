@@ -1,21 +1,36 @@
-sls invoke local -f helloWorld
 
 sls invoke local -f allProjectDet
 
 sls invoke local -f projectDet -d '{"projectId" : "1"}'
 
+sls invoke local -f projectsUser -d '{"userId" : "2"}'
+
 sls invoke local -f createProject -d '{"title" : "proj14", "location" : "Quebec", "descriptionShort" : "short desc14", "descriptionLong" : "long desc3", "teamNumber" : "3", "teamName" : "Ramparts", "submitterId" : "03", "submissionDate" : "2018-07-29", "status" : "CHALLENGED", "tags" : "Global Warming", "mediaTitle" : "pondImage", "images" : "{"http://wwf-serverless-dev-blobs.s3-website-us-west-1.amazonaws.com/9-1533620206779.png"}", "deliverer_id" : "1"}'
 
-sls invoke local -f createUser -d '{"userType" : "Curator", "userName" : "Jane Smith", "userEmail" : "jsmith@gmail.com", "userPassword" : "anothergoodpw"}'
+sls invoke local -f createUser -d '{"name" : "Jane Smith", "email" : "jsmith@gmail.com", "password" : "anothergoodpw"}'
 
 sls invoke local -f user -d '{"userEmail" : "jsmith@gmail.com"}'
 
-sls invoke local -f relay -d '{"metaSignedTx" : "f9022380808094da8c6dce9e9a85e6f9df7b09b2354da44cb4833180b90204c3f44c0a000000000000000000000000000000000000000000000000000000000000001b8f350a51bad1e9786436aff379b12576287a343ac927e590ad22bf31d9a3f94738174cdb10457408c8acccc0f1a65db1c1bdcea4e406434c1689a63fb10ec92e00000000000000000000000087ea811785c4bd30fc104c2543cf8ed90f7eeec700000000000000000000000000000000000000000000000000000000000000c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000104701b8826000000000000000000000000f978f6a993d595e67b2662cbe04b140b4b675c2b000000000000000000000000b4238d73e491e97bcabdc10e9787f53ba929f44800000000000000000000000061e0cebf793fa4a0092404e928f80b4b5bb8de72000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000002460fe47b1000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001c8080", "blockchain" : "rinkeby"}'
+sls invoke local -f updateUserCreds -d '{"userId" : "2", "password" : "new password"}'
+
+sls invoke local -f promoteProject -d '{"projectId" : "14", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
+
+sls invoke local -f confirmProject -d '{"listingHash" : "0x7456", "promoterPublickey" : "0x453", "projectId" : "4"}'
+
+sls invoke local -f revertPromoteProject -d '{"projectId" : "5"}'
+
+sls invoke local -f commitVote -d '{"pollId" : "1", "secretHash" : "secretehash", "salt" : "salt", "projectId" : "2", "userId" : "2", "voterPublicKey" : "0x897"}'
+
+sls invoke local -f createAccount -d '{"userId" : "3", "projectCategory" : "test", "projectProblem" : "test",  "projectApproach" : "test", "projectStage" : "test", "projectImpact" : "test", "fundingGoal" : "test", "teamInfo" : "test"}'
+
+sls invoke local -f challenge -d '{"projectId" : "3", "userId" : "4", "submissionDate" : "2018-07-29", "listingHash": "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengerPublicKey" : "0xD176f6907Ae1E699b39F78cf4582B019518E2B80"}'
+
+sls invoke local -f confirmChallenge -d '{"0x89" : "3", "challengeId" : "0x895", "data" : "some data", "commitEndDate" : "2018-07-29", "revealEndDate" : "2018-07-29", "challenger" : "0x897"}'
 
 
-sls invoke local -f promoteProject -d '{"projectId" : "5", "promoterPublicKey" : "x0304"}'
+//////////////////    OLD    //////////////////////////
 
-sls invoke local -f promoteProject -d '{"projectId" : "5", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
+sls invoke local -f helloWorld
 
 //returns success
 sls invoke local -f integratePromoteWatch -d '{"projectId" : "2", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd", "sleepMs" : "30000"}'
@@ -23,24 +38,7 @@ sls invoke local -f integratePromoteWatch -d '{"projectId" : "2", "listingHash" 
 //bad listingHash returns error
 sls invoke local -f integratePromoteWatch -d '{"projectId" : "3", "listingHash" : "0xbd61837be06d94e1ae9192878e518907b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
 
-
-sls invoke local -f confirmProject -d '{"listingHash" : "0x7456", "promoterPublickey" : "0x453", "projectId" : "4"}'
-
-sls invoke local -f revertPromoteProject -d '{"projectId" : "5"}'
-
-
-
-sls invoke local -f createAccount -d '{"userId" : "3", "projectCategory" : "test", "projectProblem" : "test",  "projectApproach" : "test", "projectStage" : "test", "projectImpact" : "test", "fundingGoal" : "test", "teamInfo" : "test"}'
-
-sls invoke local -f challenge -d '{"projectId" : "3", "userId" : "4", "submissionDate" : "2018-07-29", "listingHash": "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengerPublicKey" : "0xD176f6907Ae1E699b39F78cf4582B019518E2B80"}'
-
-[body.listingHash, body.challengeId, body.data, body.commitEndDate,  body.revealEndDate,  body.challenger
-
-sls invoke local -f confirmChallenge -d '{"0x89" : "3", "challengeId" : "0x895", "data" : "some data", "commitEndDate" : "2018-07-29", "revealEndDate" : "2018-07-29", "challenger" : "0x897"}'
-
 sls invoke local -f watchEvent
-
-sls invoke local -f commitVote -d '{"pollId" : "1", "secretHash" : "secretehash", "salt" : "salt", "projectId" : "2", "userId" : "2", "voterPublicKey" : "0x897"}'
 
 sls invoke local -f test1 -d '{"projectId" : "3", "userId" : "4", "submissionDate" : "2018-07-29", "listingHash": "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengerPublicKey" : "0xD176f6907Ae1E699b39F78cf4582B019518E2B80"}'
 
@@ -50,3 +48,5 @@ sls invoke local -f confirmTx -d '{"txStatus" : "Success", "listingHash" : "0xbd
 sls invoke local -f confirmTx -d '{"txStatus" : "Failed", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37"}'
 
 sls invoke local -f sleep -d '{"sleepMs" : "1000"}'
+
+sls invoke local -f relay -d '{"metaSignedTx" : "f9022380808094da8c6dce9e9a85e6f9df7b09b2354da44cb4833180b90204c3f44c0a000000000000000000000000000000000000000000000000000000000000001b8f350a51bad1e9786436aff379b12576287a343ac927e590ad22bf31d9a3f94738174cdb10457408c8acccc0f1a65db1c1bdcea4e406434c1689a63fb10ec92e00000000000000000000000087ea811785c4bd30fc104c2543cf8ed90f7eeec700000000000000000000000000000000000000000000000000000000000000c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000104701b8826000000000000000000000000f978f6a993d595e67b2662cbe04b140b4b675c2b000000000000000000000000b4238d73e491e97bcabdc10e9787f53ba929f44800000000000000000000000061e0cebf793fa4a0092404e928f80b4b5bb8de72000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000002460fe47b1000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001c8080", "blockchain" : "rinkeby"}'

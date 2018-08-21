@@ -1,6 +1,6 @@
 
 
-class createUserHandler{
+class userHandler{
 
   constructor(databaseMgr){
     this.databaseMgr = databaseMgr;
@@ -8,7 +8,7 @@ class createUserHandler{
 
  async handle(event, context, cb) {
 
-  console.log("inside createUserHandler.handle");
+  console.log("inside userHandler.handle");
 
   let body;
 
@@ -28,17 +28,12 @@ class createUserHandler{
 
    
 
-    if (!body.name) {
-      cb({ code: 400, message: "report parameter missing - name" });
+    if (!body.userId) {
+      cb({ code: 400, message: "report parameter missing - userId" });
       return;
     }
 
-     if (!body.email) {
-      cb({ code: 400, message: "report parameter missing - email" });
-      return;
-    }
-
-     if (!body.password) {
+    if (!body.password) {
       cb({ code: 400, message: "report parameter missing - password" });
       return;
     }
@@ -48,13 +43,13 @@ class createUserHandler{
     try{
 
       console.log("inside try");
-      const records = await this.databaseMgr.createUser(body);
+      const records = await this.databaseMgr.updateUserCreds(body);
       console.log("after records await");
       cb(null, records);
 
     }catch(error){
-      console.log("createUserHandler error"+error);
-      cb({ code: 500, message: "createUserHandler error: " + err.message });
+      console.log("userHandler error"+error);
+      cb({ code: 500, message: "userHandler: " + err.message });
       return;
     }
 
@@ -64,4 +59,4 @@ class createUserHandler{
 
 };
 
-module.exports = createUserHandler;
+module.exports = userHandler;

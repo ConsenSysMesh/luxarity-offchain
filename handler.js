@@ -22,6 +22,8 @@ const CommitVoteHandler = require('./handlers/commitVoteHandler');
 const TestHandler = require('./handlers/testHandler');
 const ConfirmTxHandler = require('./handlers/confirmTxHandler');
 const RunSleepHandler = require('./handlers/runSleepHandler');
+const ProjectsUserHandler = require('./handlers/projectsUserHandler');
+const UpdateUserCredsHandler = require('./handlers/updateUserCredsHandler');
 
 const databaseMgr = new DatabaseMgr();
 const bucketMgr = new BucketMgr();
@@ -43,6 +45,8 @@ const commitVoteHandler = new CommitVoteHandler(databaseMgr);
 const testHandler = new TestHandler(databaseMgr);
 const confirmTxHandler = new ConfirmTxHandler(databaseMgr);
 const runSleepHandler = new RunSleepHandler();
+const projectsUserHandler = new ProjectsUserHandler(databaseMgr);
+const updateUserCredsHandler = new UpdateUserCredsHandler(databaseMgr);
 
 
 //notes:
@@ -80,6 +84,10 @@ module.exports.projectDet = (event, context, callback) => {
    preHandler(projectDetHandler, event, context, callback);
 };
 
+module.exports.projectsUser = (event, context, callback) => {
+   preHandler(projectsUserHandler, event, context, callback);
+};
+
 //done
 module.exports.createProject = (event, context, callback) => {
    preHandler(createProjectHandler, event, context, callback);
@@ -88,6 +96,10 @@ module.exports.createProject = (event, context, callback) => {
 //done
 module.exports.createUser = (event, context, callback) => {
    preHandler(createUserHandler, event, context, callback);
+};
+
+module.exports.updateUserCreds = (event, context, callback) => {
+   preHandler(updateUserCredsHandler, event, context, callback);
 };
 
 //done
@@ -145,12 +157,6 @@ module.exports.revertChallenge = (event, context, callback) => {
    //preHandler(revertChallengeHandler, event, context, callback);
 };
 
-//done - not needed
-module.exports.watchEvent = (event, context, callback) => {
-    //watchEventHandler.handle();
-    preHandlerEvents(watchEventHandler, event, context, callback);
-};
-
 
 //done 
 // promoteProject, watch event, confirmProject
@@ -175,11 +181,6 @@ module.exports.test1 = (event, context, callback) => {
    preHandler(testHandler, event, context, callback);
 };
 
-//done -need to test from ui
-//!!!USING newest contract : 0x3689955d196a543d62570b32ae227f4e239e2f87 for plcr!!!
-module.exports.confirmTx = (event, context, callback) => {
-   preHandler(confirmTxHandler, event, context, callback);
-};
 
 module.exports.sleep = (event, context, callback) => {
    preHandler(runSleepHandler, event, context, callback);

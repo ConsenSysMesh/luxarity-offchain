@@ -76,6 +76,14 @@ functions:
           path: projectDet
           method: post
           cors: true
+  projectsUser:
+    handler: handler.projectsUser
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: projectsUser
+          method: post
+          cors: true
   createProject:
     handler: handler.createProject
     # The `events` block defines how to trigger the handler.helloWorld code
@@ -90,6 +98,14 @@ functions:
     events:
       - http:
           path: createUser
+          method: post
+          cors: true
+  updateUserCreds:
+    handler: handler.updateUserCreds
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: updateUserCreds
           method: post
           cors: true
   user:
@@ -148,14 +164,6 @@ functions:
           path: confirmChallenge
           method: post
           cors: true
-  watchEvent:
-    handler: handler.watchEvent
-    # The `events` block defines how to trigger the handler.helloWorld code
-    events:
-      - http:
-          path: watchEvent
-          method: get
-          cors: true
   integratePromoteWatch:
     handler: handler.integratePromoteWatch
     # The `events` block defines how to trigger the handler.helloWorld code
@@ -179,14 +187,6 @@ functions:
     events:
       - http:
           path: test1
-          method: post
-          cors: true
-  confirmTx:
-    handler: handler.confirmTx
-    # The `events` block defines how to trigger the handler.helloWorld code
-    events:
-      - http:
-          path: confirmTx
           method: post
           cors: true
   sleep:
