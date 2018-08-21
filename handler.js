@@ -24,6 +24,7 @@ const ConfirmTxHandler = require('./handlers/confirmTxHandler');
 const RunSleepHandler = require('./handlers/runSleepHandler');
 const ProjectsUserHandler = require('./handlers/projectsUserHandler');
 const UpdateUserCredsHandler = require('./handlers/updateUserCredsHandler');
+const IntegrateChallengeWatchHandler = require('./handlers/integrateChallengeWatchHandler');
 
 const databaseMgr = new DatabaseMgr();
 const bucketMgr = new BucketMgr();
@@ -47,7 +48,7 @@ const confirmTxHandler = new ConfirmTxHandler(databaseMgr);
 const runSleepHandler = new RunSleepHandler();
 const projectsUserHandler = new ProjectsUserHandler(databaseMgr);
 const updateUserCredsHandler = new UpdateUserCredsHandler(databaseMgr);
-
+const integrateChallengeWatchHandler = new IntegrateChallengeWatchHandler(databaseMgr);
 
 
 //notes:
@@ -144,7 +145,9 @@ module.exports.challenge = (event, context, callback) => {
    preHandler(challengeHandler, event, context, callback);
 };
 
-
+module.exports.integrateChallengeWatch = (event, context, callback) => {
+   preHandler(integrateChallengeWatchHandler, event, context, callback);
+};
 
 //done
 //update record_status = confirmed in projects_det

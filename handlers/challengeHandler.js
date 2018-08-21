@@ -61,6 +61,20 @@ class challengeHandler{
       return;
     }
 
+
+    try{
+
+      console.log("inside project Challenge try");
+      const records = await this.databaseMgr.projectChallenge(body);
+      console.log("after records await: "+records);
+      if(!records){throw new Error('projectId not found')}
+      //cb(null, records);
+
+    }catch(error){
+      console.log("projectChallenge db error"+error);
+      cb({ code: 500, message: "projectChallenge db error: " + error.message });
+      return;
+    }
     
   
     try{
@@ -68,135 +82,14 @@ class challengeHandler{
       console.log("inside challenge try");
       const records = await this.databaseMgr.challenge(body);
       console.log("after records await");
-      //cb(null, records);
+      cb(null, records);
 
     }catch(error){
       console.log("challenge db error"+error);
-      cb({ code: 500, message: "challenge db error: " + err.message });
+      cb({ code: 500, message: "challenge db error: " + error.message });
       return;
     }
 
-    try{
-
-      console.log("inside project Challenge try");
-      const records = await this.databaseMgr.projectChallenge(body);
-      console.log("after records await");
-      //cb(null, records);
-
-    }catch(error){
-      console.log("projectChallenge db error"+error);
-      cb({ code: 500, message: "projectChallenge db error: " + err.message });
-      return;
-    }
-
-
-    //watch event
-    console.log("inside createUserHandler.handle");
-
-      // setup ethjs
-      const provider = new Ethjs.HttpProvider('https://rinkeby.infura.io');
-      const ethjs = new Ethjs(provider)
-
-      // abi/address of the contract to query //ImpCoin
-      const contract = {
-        abi: Token.abi,
-        address: '0x6dbd66c23f636c39380b2ff40ac59569d6a6d63e',
-      }
-
-      // init eth-events
-      const ethEvents = new EthEvents(ethjs, contract)
-
-      // block range
-      const fromBlock = '0'
-      const toBlock = 'latest'
-
-      // event name(s)
-      const eventNames = ['_Challenge']
-
-      // indexed event emission arg values (un-hashed filter topics)
-      //!!!don not put comments between { and filtervalues!!!
-      const indexedFilterValues = {
-        listingHash: body.listingHash
-        //data: 'Test Project Event'
-        //listingHash: '0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37'
-        //_to: '0xCAFEDEADBEEF12345678912456789',
-        //_to: '0x6dbd66c23f636c39380b2ff40ac59569d6a6d63e'
-      }
-
-      var applicationEvent = false;
-      let eventLogData;
-      // async
-      try{
-      await ethEvents.getLogs(fromBlock, toBlock, eventNames, indexedFilterValues).then(logs => {
-        logs.map(log => {
-          console.log(log)
-          console.log("logListingHash: "+log.logData.listingHash);
-          if(log.logData.listingHash==body.listingHash){
-
-              console.log("listinghashes equal"); 
-              applicationEvent = true; 
-              eventLogData = log.logData;
-              console.log("log.logData.listingHash: "+log.logData.listingHash);
-              console.log("log.logData.challengeID: "+log.logData.challengeID);
-              console.log("log.logData.data: "+log.logData.data)
-              console.log("log.logData.commitEndDate: "+log.logData.commitEndDate)
-              console.log("log.logData.revealEndDate: "+log.logData.revealEndDate)
-              console.log("log.logData.challenger: "+log.logData.challenger)
-              } 
-
-          
-        })
-
-      })
-      }catch(error){
-          console.log("watchEvent error"+error);
-            cb({ code: 500, message: "wacthEventError: " + err.message });
-            return;
-      }
-
-              console.log("eventLogData.listingHash: "+eventLogData.listingHash);
-              console.log("eventLogData.challengeID: "+eventLogData.challengeID);
-              console.log("eventLogData.data: "+eventLogData.data)
-              console.log("eventLogData.commitEndDate: "+eventLogData.commitEndDate)
-              console.log("eventLogData.revealEndDate: "+eventLogData.revealEndDate)
-              console.log("eventLogData.challenger: "+eventLogData.challenger)
-
-      //if challenge event confirm challenge in db
-      console.log("applicationEvent: "+applicationEvent);
-      if(applicationEvent===true){
-
-          try{
-
-              console.log("inside  try");
-              const records = await this.databaseMgr.challengeEventConfirm(eventLogData);
-              console.log("after records await");
-              //cb(null, records);
-
-            }catch(error){
-              console.log("challengeEventConfirm db error"+error);
-              cb({ code: 500, message: "challengeEventConfirm db error: " + err.message });
-              return;
-            }
-
-            try{
-
-              console.log("inside try");
-              const records = await this.databaseMgr.challengeProjectEventConfirm(body);
-              console.log("after records await");
-              cb(null, records);
-
-            }catch(error){
-              console.log("challengeProjectEventConfirm db error"+error);
-              cb({ code: 500, message: "challengeProjectEventConfirm db error: " + err.message });
-              return;
-            }
-
-      }
-      if(applicationEvent===false){
-        console.log("applicationEvent: "+applicationEvent);
-              cb({ code: 500, message: "Challenge Event Not Confirmed: " });
-              return;
-      }
 
 
   }

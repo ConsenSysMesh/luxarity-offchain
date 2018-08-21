@@ -65,11 +65,24 @@ class confirmChallengeHandler{
       console.log("inside try");
       const records = await this.databaseMgr.confirmChallenge(body);
       console.log("after records await");
-      cb(null, records);
+      //cb(null, records);
 
     }catch(error){
-      console.log("confirmChallengeHandler error"+error);
-      cb({ code: 500, message: "confirmChallengeHandler: " + err.message });
+      console.log("confirmChallenge error"+error);
+      cb({ code: 500, message: "confirmChallenge: " + err.message });
+      return;
+    }
+
+    try{
+
+      console.log("inside try");
+      const records = await this.databaseMgr.confirmProjectChallenge(body);
+      console.log("after records await");
+      //cb(null, records);
+
+    }catch(error){
+      console.log("confirmProjectChallenge error"+error);
+      cb({ code: 500, message: "confirmProjectChallenge: " + err.message });
       return;
     }
 

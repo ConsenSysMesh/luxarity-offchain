@@ -67,6 +67,11 @@ class createProjectHandler{
       return;
     }
 
+    if (!body.submissionDate) {
+      cb({ code: 400, message: "report parameter missing - submissionDate" });
+      return;
+    }
+
     if (!body.status) {
       cb({ code: 400, message: "report parameter missing - status" });
       return;
