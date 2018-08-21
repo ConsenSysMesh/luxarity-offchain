@@ -40,11 +40,17 @@ class userHandler{
       console.log("inside try");
       const records = await this.databaseMgr.getUser(body);
       console.log("after records await");
-      cb(null, records);
+      if(!records) {
+        throw new Error('userId not found')
+      }
+      else {
+        cb(null, records);
+        return;
+      }
 
     }catch(error){
       console.log("userHandler error"+error);
-      cb({ code: 500, message: "userHandler: " + err.message });
+      cb({ code: 500, message: "userHandler: " + error.message });
       return;
     }
 
