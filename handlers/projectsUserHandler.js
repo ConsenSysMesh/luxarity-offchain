@@ -37,7 +37,6 @@ class projectsUserHandler{
       const records = await this.databaseMgr.getProjectsUser(body);
       console.log("after records await: "+records);
       if(!records) {
-        console.log("in !records")
         throw new Error('project for userId not found')
       }
       else if(records){

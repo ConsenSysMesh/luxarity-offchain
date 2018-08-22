@@ -30,8 +30,6 @@ class createProjectHandler{
 
     //note: body.projectId automatically incremented in postgres
 
-
-
     if (!body.title) {
       cb({ code: 400, message: "report parameter missing - title" });
       return;
@@ -72,10 +70,6 @@ class createProjectHandler{
       return;
     }
 
-    if (!body.status) {
-      cb({ code: 400, message: "report parameter missing - status" });
-      return;
-    }
 
     if (!body.tags) {
       cb({ code: 400, message: "report parameter missing - tags" });
@@ -92,10 +86,6 @@ class createProjectHandler{
       return;
     }
 
-    if (!body.deliverer_id) {
-      cb({ code: 400, message: "report parameter missing - deliverer_id" });
-      return;
-    }
 
 
     try{
@@ -103,8 +93,8 @@ class createProjectHandler{
       console.log("inside try");
 
       // upload all images first, replace image data array in project with image URLs array
-      const images = await Promise.all(body.images.map(i => this.bucketMgr.writeImage(body.projectId, i)));
-      body.images = images;
+      //const images = await Promise.all(body.images.map(i => this.bucketMgr.writeImage(body.projectId, i)));
+      //body.images = images;
 
       console.log("after image processing");
 
