@@ -33,15 +33,15 @@ sls invoke local -f challenge -d '{"projectId" : "88", "userId" : "4", "submissi
 
 sls invoke local -f confirmChallenge -d '{"listingHash" : "0x87", "challengeId" : "1", "data" : "some data", "commitEndDate" : "2018-07-29", "revealEndDate" : "2018-07-29", "challenger" : "0x897"}'
 
-challengeConclusion {"challengeOutcome" : "Success", "listingHash" : "0x98", "challengeId" : "1", "rewardPool" : "1000", "totalTokens" : "1100"}
+sls invoke local -f challengeConclusion -d '{"challengeOutcome" : "Success", "listingHash" : "0x98", "challengeId" : "1", "rewardPool" : "1000", "totalTokens" : "1100"}'
 
 ///////////////////////////////
 
 sls invoke local -f commitVote -d '{"pollId" : "1", "secretHash" : "secrethash", "salt" : "salt", "projectId" : "2", "userId" : "2", "voterPublicKey" : "0x897"}'
 
-confirmCommitVote
+confirmCommitVote '{"pollId" : "1", "voterPublicKey" : "0x888"}'
 
-revealVote
+revealVote 
 confirmRevealVote
 
 

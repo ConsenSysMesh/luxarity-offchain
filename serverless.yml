@@ -181,6 +181,14 @@ functions:
           path: commitVote
           method: post
           cors: true
+  confirmCommitVote:
+    handler: handler.confirmCommitVote
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: confirmCommitVote
+          method: post
+          cors: true
   test1:
     handler: handler.test1
     # The `events` block defines how to trigger the handler.helloWorld code
@@ -204,6 +212,24 @@ functions:
     events:
       - http:
           path: challengeConclusion
+          method: post
+          cors: true
+    timeout: 30
+  revealVote:
+    handler: handler.revealVote
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: revealVote
+          method: post
+          cors: true
+    timeout: 30
+  confirmRevealVote:
+    handler: handler.confirmRevealVote
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: confirmRevealVote
           method: post
           cors: true
     timeout: 30

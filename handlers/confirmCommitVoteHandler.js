@@ -1,5 +1,5 @@
 
-class commitVoteHandler{
+class confirmCommitVoteHandler{
 
   constructor(databaseMgr){
     this.databaseMgr = databaseMgr;
@@ -7,7 +7,7 @@ class commitVoteHandler{
 
  async handle(event, context, cb) {
 
-  console.log("inside commitVoteHandler.handle");
+  console.log("inside confirmCommitVoteHandler.handle");
 
   let body;
 
@@ -32,26 +32,6 @@ class commitVoteHandler{
       return;
     }
 
-    if (!body.secretHash) {
-      cb({ code: 400, message: "report parameter missing - secretHash" });
-      return;
-    }
-
-     if (!body.salt) {
-      cb({ code: 400, message: "report parameter missing - voterPublicKey" });
-      return;
-    }
-
-    if (!body.projectId) {
-      cb({ code: 400, message: "report parameter missing - projectId" });
-      return;
-    }
-
-    if (!body.userId) {
-      cb({ code: 400, message: "report parameter missing - userId" });
-      return;
-    }
-
     if (!body.voterPublicKey) {
       cb({ code: 400, message: "report parameter missing - voterPublicKey" });
       return;
@@ -62,13 +42,13 @@ class commitVoteHandler{
     try{
 
       console.log("inside try");
-      const records = await this.databaseMgr.commitVote(body);
+      const records = await this.databaseMgr.confirmCommitVote(body);
       console.log("after records await");
       //cb(null, records);
 
     }catch(error){
-      console.log("challenge db error"+error);
-      cb({ code: 500, message: "challenge db error: " + error.message });
+      console.log("confirmCommitVoteHandler error"+error);
+      cb({ code: 500, message: "confirmCommitVoteHandler error: " + error.message });
       return;
     }
 
@@ -79,4 +59,4 @@ class commitVoteHandler{
 
 };
 
-module.exports = commitVoteHandler;
+module.exports = confirmCommitVoteHandler;

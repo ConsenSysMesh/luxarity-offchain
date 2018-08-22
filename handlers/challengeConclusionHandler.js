@@ -60,38 +60,36 @@ class challengeConclusionHandler{
     try{
 
       if(body.challengeOutcome=='Success'){
-      body.status='ACCEPTED',
-      body.rejection_date='',
-      body.record_status=''
+        console.log("challenge success")
+      body.status='ACCEPTED';
+      body.record_status='';
+      const records = await this.databaseMgr.challengeProjectConclusionSuccess(body);
+
       }else if(body.challengeOutcome=='Failed'){
-        body.status='REJECTED',
-        body.rejection_date='fixThis',
-        body.record_status='final'
+        body.status = 'REJECTED';
+        body.rejection_date = new Date().toISOString().replace(/T.+/,'');
+        body.record_status = 'final';
+        const records = await this.databaseMgr.challengeProjectConclusionFailed(body);
       }else{
         throw new Error('challengeOutcome must be Success or Failed')
       }
 
-      console.log("inside try");
-      const records = await this.databaseMgr.challengeProjectConclusion(body);
-      console.log("after records await");
-      //cb(null, records);
-
     }catch(error){
-      console.log("confirmProjectChallenge error"+error);
-      cb({ code: 500, message: "confirmProjectChallenge: " + error.message });
+      console.log("challengeProjectConclusion error"+error);
+      cb({ code: 500, message: "challengeProjectConclusion: " + error.message });
       return;
     }
 
     try{
 
       console.log("inside try");
-      const records = await this.databaseMgr.challengeConlusion(body);
+      const records = await this.databaseMgr.challengeConclusion(body);
       console.log("after records await");
-      //cb(null, records);
+      cb(null, records);
 
     }catch(error){
-      console.log("confirmChallenge error"+error);
-      cb({ code: 500, message: "confirmChallenge: " + error.message });
+      console.log("challengeConclusion error"+error);
+      cb({ code: 500, message: "challengeConclusion: " + error.message });
       return;
     }
 
@@ -101,4 +99,4 @@ class challengeConclusionHandler{
 
 };
 
-module.exports = confirmChallengeHandler;
+module.exports = challengeConclusionHandler;

@@ -26,6 +26,9 @@ const ProjectsUserHandler = require('./handlers/projectsUserHandler');
 const UpdateUserCredsHandler = require('./handlers/updateUserCredsHandler');
 const IntegrateChallengeWatchHandler = require('./handlers/integrateChallengeWatchHandler');
 const ChallengeConclusionHandler = require('./handlers/challengeConclusionHandler');
+const ConfirmCommitVoteHandler = require('./handlers/confirmCommitVoteHandler');
+const RevealVoteHandler = require('./handlers/revealVoteHandler');
+const ConfirmRevealVoteHandler = require('./handlers/confirmRevealVoteHandler');
 
 const databaseMgr = new DatabaseMgr();
 const bucketMgr = new BucketMgr();
@@ -51,6 +54,9 @@ const projectsUserHandler = new ProjectsUserHandler(databaseMgr);
 const updateUserCredsHandler = new UpdateUserCredsHandler(databaseMgr);
 const integrateChallengeWatchHandler = new IntegrateChallengeWatchHandler(databaseMgr);
 const challengeConclusionHandler = new ChallengeConclusionHandler(databaseMgr);
+const confirmCommitVoteHandler = new ConfirmCommitVoteHandler(databaseMgr);
+const revealVoteHandler = new RevealVoteHandler(databaseMgr);
+const confirmRevealVoteHandler = new ConfirmRevealVoteHandler(databaseMgr);
 
 
 //notes:
@@ -181,8 +187,16 @@ module.exports.commitVote = (event, context, callback) => {
    preHandler(commitVoteHandler, event, context, callback);
 };
 
+module.exports.confirmCommitVote = (event, context, callback) => {
+   preHandler(confirmCommitVoteHandler, event, context, callback);
+};
+
 module.exports.revealVote = (event, context, callback) => {
-   preHandler(commitVoteHandler, event, context, callback);
+   preHandler(revealVoteHandler, event, context, callback);
+};
+
+module.exports.confirmRevealVote = (event, context, callback) => {
+   preHandler(confirmRevealVoteHandler, event, context, callback);
 };
 
 //done
