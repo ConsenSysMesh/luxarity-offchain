@@ -106,7 +106,7 @@ class createProjectHandler{
 
     }catch(error){
       console.log("createProjectHandler error"+error);
-      cb({ code: 500, message: "getTestRecrodsError: " + err.message });
+      cb({ code: 500, message: "getTestRecrodsError: " + error.message });
       return;
     }
 

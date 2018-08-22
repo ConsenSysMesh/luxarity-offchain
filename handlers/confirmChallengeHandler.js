@@ -69,7 +69,7 @@ class confirmChallengeHandler{
 
     }catch(error){
       console.log("confirmChallenge error"+error);
-      cb({ code: 500, message: "confirmChallenge: " + err.message });
+      cb({ code: 500, message: "confirmChallenge: " + error.message });
       return;
     }
 
@@ -82,7 +82,7 @@ class confirmChallengeHandler{
 
     }catch(error){
       console.log("confirmProjectChallenge error"+error);
-      cb({ code: 500, message: "confirmProjectChallenge: " + err.message });
+      cb({ code: 500, message: "confirmProjectChallenge: " + error.message });
       return;
     }
 

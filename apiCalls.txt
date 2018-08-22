@@ -31,11 +31,19 @@ sls invoke local -f revertPromoteProject -d '{"projectId" : "5"}'
 
 sls invoke local -f challenge -d '{"projectId" : "88", "userId" : "4", "submissionDate" : "2018-07-29", "listingHash": "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengerPublicKey" : "0xD176f6907Ae1E699b39F78cf4582B019518E2B80"}'
 
-sls invoke local -f confirmChallenge -d '{"0x89" : "3", "challengeId" : "0x895", "data" : "some data", "commitEndDate" : "2018-07-29", "revealEndDate" : "2018-07-29", "challenger" : "0x897"}'
+sls invoke local -f confirmChallenge -d '{"listingHash" : "0x87", "challengeId" : "1", "data" : "some data", "commitEndDate" : "2018-07-29", "revealEndDate" : "2018-07-29", "challenger" : "0x897"}'
+
+challengeConclusion {"challengeOutcome" : "Success", "listingHash" : "0x98", "challengeId" : "1", "rewardPool" : "1000", "totalTokens" : "1100"}
 
 ///////////////////////////////
 
 sls invoke local -f commitVote -d '{"pollId" : "1", "secretHash" : "secrethash", "salt" : "salt", "projectId" : "2", "userId" : "2", "voterPublicKey" : "0x897"}'
+
+confirmCommitVote
+
+revealVote
+confirmRevealVote
+
 
 
 //////////////////    OLD    //////////////////////////

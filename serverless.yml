@@ -198,6 +198,15 @@ functions:
           method: post
           cors: true
     timeout: 30
+  challengeConclusion:
+    handler: handler.challengeConclusion
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: challengeConclusion
+          method: post
+          cors: true
+    timeout: 30
 
 
 

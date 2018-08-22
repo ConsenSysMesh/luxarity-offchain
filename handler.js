@@ -25,6 +25,7 @@ const RunSleepHandler = require('./handlers/runSleepHandler');
 const ProjectsUserHandler = require('./handlers/projectsUserHandler');
 const UpdateUserCredsHandler = require('./handlers/updateUserCredsHandler');
 const IntegrateChallengeWatchHandler = require('./handlers/integrateChallengeWatchHandler');
+const ChallengeConclusionHandler = require('./handlers/challengeConclusionHandler');
 
 const databaseMgr = new DatabaseMgr();
 const bucketMgr = new BucketMgr();
@@ -49,6 +50,7 @@ const runSleepHandler = new RunSleepHandler();
 const projectsUserHandler = new ProjectsUserHandler(databaseMgr);
 const updateUserCredsHandler = new UpdateUserCredsHandler(databaseMgr);
 const integrateChallengeWatchHandler = new IntegrateChallengeWatchHandler(databaseMgr);
+const challengeConclusionHandler = new ChallengeConclusionHandler(databaseMgr);
 
 
 //notes:
@@ -159,10 +161,13 @@ module.exports.confirmChallenge = (event, context, callback) => {
 //not started
 //update status = PROMOTED, record_status = ''
 
-module.exports.revertChallenge = (event, context, callback) => {
+//module.exports.revertChallenge = (event, context, callback) => {
    //preHandler(revertChallengeHandler, event, context, callback);
-};
+//};
 
+module.exports.challengeConclusion = (event, context, callback) => {
+   preHandler(challengeConclusionHandler, event, context, callback);
+};
 
 //done 
 // promoteProject, watch event, confirmProject
