@@ -71,7 +71,6 @@ revealVote '{"userId" : "2", "pollId" : "2", "voteOption" : "0"}'
 confirmRevealVote '{"voter" : "0x78", "pollId" : "2"}'
 
 
-
 //////////////////    OLD    //////////////////////////
 
 sls invoke local -f helloWorld
