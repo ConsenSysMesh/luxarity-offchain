@@ -92,9 +92,10 @@ class createProjectHandler{
 
       console.log("inside try");
 
-      // upload all images first, replace image data array in project with image URLs array
-      //const images = await Promise.all(body.images.map(i => this.bucketMgr.writeImage(body.projectId, i)));
-      //body.images = images;
+       //upload all images first, replace image data array in project with image URLs array
+       //update ProjectId or return projectId first
+      const images = await Promise.all(body.images.map(i => this.bucketMgr.writeImage(body.title, i)));
+      body.images = images;
 
       console.log("after image processing");
 
