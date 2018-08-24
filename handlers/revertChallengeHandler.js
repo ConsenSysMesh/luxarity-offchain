@@ -52,8 +52,8 @@ class revertChallengeHandler{
       //cb(null, records);
 
     }catch(error){
-      console.log("projectChallenge db error"+error);
-      cb({ code: 500, message: "projectChallenge db error: " + error.message });
+      console.log("revertChallenge db error"+error);
+      cb({ code: 500, message: "revertChallenge db  error: " + error.message });
       return;
     }
     
@@ -66,8 +66,8 @@ class revertChallengeHandler{
       cb(null, records);
 
     }catch(error){
-      console.log("challenge db error"+error);
-      cb({ code: 500, message: "challenge db error: " + error.message });
+      console.log("revertProjectChallengeerror"+error);
+      cb({ code: 500, message: "revertProjectChallenge: " + error.message });
       return;
     }
 
