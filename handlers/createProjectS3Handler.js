@@ -94,7 +94,7 @@ class createProjectS3Handler{
 
        //upload all images first, replace image data array in project with image URLs array
        //update ProjectId or return projectId first
-      const images = await Promise.all(body.images.map(i => this.bucketMgr.writeImage(body.title, i)));
+      const images = await Promise.all(body.images.map(i => this.bucketMgr.writeImage(body.projectId, i)));
       body.images = images;
 
       console.log("after image processing");

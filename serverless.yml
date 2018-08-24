@@ -92,6 +92,14 @@ functions:
           path: createProject
           method: post
           cors: true
+  createProjectS3:
+    handler: handler.createProjectS3
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: createProjectS3
+          method: post
+          cors: true
   createUser:
     handler: handler.createUser
     # The `events` block defines how to trigger the handler.helloWorld code

@@ -30,6 +30,7 @@ const ConfirmCommitVoteHandler = require('./handlers/confirmCommitVoteHandler');
 const RevealVoteHandler = require('./handlers/revealVoteHandler');
 const ConfirmRevealVoteHandler = require('./handlers/confirmRevealVoteHandler');
 const UserLoginHandler = require('./handlers/userLoginHandler');
+const CreateProjectS3Handler = require('./handlers/createProjectS3Handler');
 
 const databaseMgr = new DatabaseMgr();
 const bucketMgr = new BucketMgr();
@@ -59,6 +60,7 @@ const confirmCommitVoteHandler = new ConfirmCommitVoteHandler(databaseMgr);
 const revealVoteHandler = new RevealVoteHandler(databaseMgr);
 const confirmRevealVoteHandler = new ConfirmRevealVoteHandler(databaseMgr);
 const userLoginHandler = new UserLoginHandler(databaseMgr);
+const createProjectS3Handler = new CreateProjectS3Handler(databaseMgr, bucketMgr);
 
 //notes:
 // before tcr need:
@@ -102,6 +104,10 @@ module.exports.projectsUser = (event, context, callback) => {
 //done
 module.exports.createProject = (event, context, callback) => {
    preHandler(createProjectHandler, event, context, callback);
+};
+
+module.exports.createProjectS3 = (event, context, callback) => {
+   preHandler(createProjectS3Handler, event, context, callback);
 };
 
 //done
