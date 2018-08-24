@@ -1,4 +1,31 @@
+endpoints:
+  GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/testEndpoint
+  GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/testEndpoint2
+  GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/allProjectDet
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/projectDet
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/projectsUser
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createProject
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createUser
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/updateUserCreds
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/user
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/userLogin
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/promoteProject
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmProject
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revertPromoteProject
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createAccount
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/challenge
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmChallenge
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/integratePromoteWatch
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/commitVote
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmCommitVote
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/test1
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/sleep
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/challengeConclusion
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revealVote
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmRevealVote
 
+
+  
 //trigger: UI user completes 'start application' process
 sls invoke local -f createAccount -d '{"userId" : "3", "projectCategory" : "test", "projectProblem" : "test",  "projectApproach" : "test", "projectStage" : "test", "projectImpact" : "test", "fundingGoal" : "test", "teamInfo" : "test"}'
 
