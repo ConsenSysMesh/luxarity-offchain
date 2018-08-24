@@ -22,10 +22,13 @@ sls invoke local -f createProject -d '{"title" : "proj14", "location" : "Quebec"
 sls invoke local -f createUser -d '{"name" : "Jane Smith", "email" : "jsmith@gmail.com", "password" : "anothergoodpw"}'
 
 //trigger: UI needs to get specific user
-sls invoke local -f user -d '{"userId" : "2"}'
+sls invoke local -f user -d '{"userId" : "1"}'
 
 //trigger: UI updating user credentials
-sls invoke local -f updateUserCreds -d '{"userId" : "2", "password" : "new password"}'
+sls invoke local -f updateUserCreds -d '{"userId" : "10", "password" : "new password"}'
+
+//trigger: UI login 
+sls invoke local -f userLogin -d '{"email" : "jdoe@gmail.com", "password" : "goodpassword" }'
 
 ///////////////////////////////
 

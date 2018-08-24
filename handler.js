@@ -29,6 +29,7 @@ const ChallengeConclusionHandler = require('./handlers/challengeConclusionHandle
 const ConfirmCommitVoteHandler = require('./handlers/confirmCommitVoteHandler');
 const RevealVoteHandler = require('./handlers/revealVoteHandler');
 const ConfirmRevealVoteHandler = require('./handlers/confirmRevealVoteHandler');
+const UserLoginHandler = require('./handlers/userLoginHandler');
 
 const databaseMgr = new DatabaseMgr();
 const bucketMgr = new BucketMgr();
@@ -57,7 +58,7 @@ const challengeConclusionHandler = new ChallengeConclusionHandler(databaseMgr);
 const confirmCommitVoteHandler = new ConfirmCommitVoteHandler(databaseMgr);
 const revealVoteHandler = new RevealVoteHandler(databaseMgr);
 const confirmRevealVoteHandler = new ConfirmRevealVoteHandler(databaseMgr);
-
+const userLoginHandler = new UserLoginHandler(databaseMgr);
 
 //notes:
 // before tcr need:
@@ -116,6 +117,11 @@ module.exports.updateUserCreds = (event, context, callback) => {
 module.exports.user = (event, context, callback) => {
    preHandler(userHandler, event, context, callback);
 };
+
+module.exports.userLogin = (event, context, callback) => {
+   preHandler(userLoginHandler, event, context, callback);
+};
+
 
 //done
 //module.exports.relay = (event, context, callback) => {

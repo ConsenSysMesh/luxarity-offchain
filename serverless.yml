@@ -116,6 +116,14 @@ functions:
           path: user
           method: post
           cors: true
+  userLogin:
+    handler: handler.userLogin
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: userLogin
+          method: post
+          cors: true
   promoteProject:
     handler: handler.promoteProject
     # The `events` block defines how to trigger the handler.helloWorld code
