@@ -31,6 +31,7 @@ const RevealVoteHandler = require('./handlers/revealVoteHandler');
 const ConfirmRevealVoteHandler = require('./handlers/confirmRevealVoteHandler');
 const UserLoginHandler = require('./handlers/userLoginHandler');
 const CreateProjectS3Handler = require('./handlers/createProjectS3Handler');
+const RevertChallengeHandler = require('./handlers/revertChallengeHandler');
 
 const databaseMgr = new DatabaseMgr();
 const bucketMgr = new BucketMgr();
@@ -61,6 +62,7 @@ const revealVoteHandler = new RevealVoteHandler(databaseMgr);
 const confirmRevealVoteHandler = new ConfirmRevealVoteHandler(databaseMgr);
 const userLoginHandler = new UserLoginHandler(databaseMgr);
 const createProjectS3Handler = new CreateProjectS3Handler(databaseMgr, bucketMgr);
+const revertChallengeHandler = new RevertChallengeHandler(databaseMgr);
 
 //notes:
 // before tcr need:
@@ -165,9 +167,10 @@ module.exports.challenge = (event, context, callback) => {
    preHandler(challengeHandler, event, context, callback);
 };
 
-module.exports.integrateChallengeWatch = (event, context, callback) => {
-   preHandler(integrateChallengeWatchHandler, event, context, callback);
+module.exports.revertChallenge = (event, context, callback) => {
+   preHandler(revertChallengeHandler, event, context, callback);
 };
+
 
 //done
 //update record_status = confirmed in projects_det
@@ -185,12 +188,6 @@ module.exports.confirmChallenge = (event, context, callback) => {
 
 module.exports.challengeConclusion = (event, context, callback) => {
    preHandler(challengeConclusionHandler, event, context, callback);
-};
-
-//done 
-// promoteProject, watch event, confirmProject
-module.exports.integratePromoteWatch = (event, context, callback) => {
-   preHandler(integratePromoteWatchHandler, event, context, callback);
 };
 
 

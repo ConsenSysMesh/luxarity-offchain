@@ -5,6 +5,7 @@ endpoints:
   POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/projectDet
   POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/projectsUser
   POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createProject
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createProjectS3
   POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createUser
   POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/updateUserCreds
   POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/user
@@ -14,8 +15,8 @@ endpoints:
   POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revertPromoteProject
   POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createAccount
   POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/challenge
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revertChallenge
   POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmChallenge
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/integratePromoteWatch
   POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/commitVote
   POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmCommitVote
   POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/test1
@@ -73,6 +74,10 @@ sls invoke local -f revertPromoteProject -d '{"projectId" : "15"}'
 
 //trigger: UI - user clicks challenge button and sends mnetamask tx
 sls invoke local -f challenge -d '{"projectId" : "16", "userId" : "4", "submissionDate" : "2018-07-29", "listingHash": "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengerPublicKey" : "0xD176f6907Ae1E699b39F78cf4582B019518E2B80"}'
+
+//trigger: UI - registry.challenge tx fails
+sls invoke local -f revertChallenge -d '{"projectId" : "16", "userId" : "4", "submissionDate" : "2017-09-22", "listingHash": "0x56"}'
+
 
 //trigger: TCR EVENT registry._Challenge
 sls invoke local -f confirmChallenge -d '{"listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengeId" : "3", "data" : "some data", "commitEndDate" : "2018-07-29", "revealEndDate" : "2018-07-29", "challenger" : "0x897"}'
