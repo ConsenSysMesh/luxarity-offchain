@@ -1,6 +1,6 @@
 
 
-class createProjectHandler{
+class createProjectS3Handler{
 
   constructor(databaseMgr, bucketMgr){
     this.databaseMgr = databaseMgr;
@@ -9,7 +9,7 @@ class createProjectHandler{
 
  async handle(event, context, cb) {
 
-  console.log("inside createProjectHandler.handle");
+  console.log("inside createProjectS3Handler.handle");
 
   let body;
 
@@ -81,7 +81,7 @@ class createProjectHandler{
       return;
     }
 
-    if (!body.images) {
+    if (!body.images || !body.images.length) {
       cb({ code: 400, message: "report parameter missing - images" });
       return;
     }
@@ -92,14 +92,22 @@ class createProjectHandler{
 
       console.log("inside try");
 
+       //upload all images first, replace image data array in project with image URLs array
+       //update ProjectId or return projectId first
+      const images = await Promise.all(body.images.map(i => this.bucketMgr.writeImage(body.title, i)));
+      body.images = images;
+
+      console.log("after image processing");
+
+      // now, save the project record itself
       const records = await this.databaseMgr.createProject(body);
 
       console.log("after records await");
       cb(null, records);
 
     }catch(error){
-      console.log("createProjectHandler error"+error);
-      cb({ code: 500, message: "getTestRecrodsError: " + error.message });
+      console.log("createProjectS3Handler error"+error);
+      cb({ code: 500, message: "createProjectS3Handler: " + error.message });
       return;
     }
 
@@ -109,4 +117,4 @@ class createProjectHandler{
 
 };
 
-module.exports = createProjectHandler;
+module.exports = createProjectS3Handler;
