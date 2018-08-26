@@ -13,8 +13,10 @@ sls invoke local -f projectDet -d '{"projectId" : "1"}'
 //trigger: UI needs to get all projects for userId
 sls invoke local -f projectsUser -d '{"userId" : "2"}'
 
+body.title, body.location, body.descriptionShort, body.descriptionLong, body.submitterId, body.submission_date, 'APPLIED', body.tags, body.mediaTitle, body.images, body.category, body.problem, body.stage, body.impact, body.fundingGoal, body.teamInfo]
+
 //trigger: UI user completes 'project application' process
-sls invoke local -f createProject -d '{"title" : "proj14", "location" : "Quebec", "descriptionShort" : "short desc14", "descriptionLong" : "long desc3", "teamNumber" : "3", "teamName" : "Ramparts", "submitterId" : "03", "submissionDate" : "2018-07-29", "tags" : "Global Warming", "mediaTitle" : "pondImage", "images" : "https://www.google.com/search?q=sample+image&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiIm8W92P7cAhUHLsAKHaNVAxsQ_AUICigB&biw=1133&bih=681#imgrc=CwPbs8S_fuhr5M:"}'
+sls invoke local -f createProject -d '{"title" : "proj14", "location" : "Quebec", "descriptionShort" : "short desc14", "descriptionLong" : "long desc3", "submitterId" : "03", "mediaTitle" : "pondImage", "images" : "https://www.google.com/search?q=sample+image&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiIm8W92P7cAhUHLsAKHaNVAxsQ_AUICigB&biw=1133&bih=681#imgrc=CwPbs8S_fuhr5M:", "category" : "testCategory", "problem" : "testProblem", "stage" : "testStage", "impact" : "testImpact", "fundingGoal" : "testFundingGoal", "teamInfo" : "testTeamInfo"}'
 
 ///////////////////////////////
 

@@ -24,6 +24,10 @@ provider:
       Action:
       - s3:*
       Resource: 'arn:aws:s3:::*'
+    - Effect: Allow
+      Action:
+      - "lambda:InvokeFunction"
+      Resource: "*"
 
   environment:
       SECRETS: ${self:custom.kmsSecrets.secrets.SECRETS}
@@ -90,6 +94,14 @@ functions:
     events:
       - http:
           path: createProject
+          method: post
+          cors: true
+  createProjectS3:
+    handler: handler.createProjectS3
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: createProjectS3
           method: post
           cors: true
   createUser:
@@ -233,6 +245,13 @@ functions:
           method: post
           cors: true
     timeout: 30
+  recursiveLambda:
+    handler: handler.recursiveLambda
+    events:
+      - http:
+          path: recursiveExample
+          method: post
+          cors: true
 
 
 

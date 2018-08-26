@@ -29,6 +29,7 @@ const ChallengeConclusionHandler = require('./handlers/challengeConclusionHandle
 const ConfirmCommitVoteHandler = require('./handlers/confirmCommitVoteHandler');
 const RevealVoteHandler = require('./handlers/revealVoteHandler');
 const ConfirmRevealVoteHandler = require('./handlers/confirmRevealVoteHandler');
+const CreateProjectS3Handler = require('./handlers/createProjectS3Handler');
 
 const databaseMgr = new DatabaseMgr();
 const bucketMgr = new BucketMgr();
@@ -57,7 +58,7 @@ const challengeConclusionHandler = new ChallengeConclusionHandler(databaseMgr);
 const confirmCommitVoteHandler = new ConfirmCommitVoteHandler(databaseMgr);
 const revealVoteHandler = new RevealVoteHandler(databaseMgr);
 const confirmRevealVoteHandler = new ConfirmRevealVoteHandler(databaseMgr);
-
+const createProjectS3Handler = new CreateProjectS3Handler(databaseMgr);
 
 //notes:
 // before tcr need:
@@ -82,6 +83,86 @@ module.exports.testEndpoint = (event, context, callback) => {
    callback(null, response);
 };
 
+/*module.exports.recursiveLambda = (event, context, callback) => {
+  const lambda = new AWS.Lambda();
+  console.log('received4: ', event);
+  //if numberOfCalls still has value, continue recursive operation 
+  //context.callbackWaitsForEmtpyEventLoop = false;
+  if (event.numberOfCalls > 0) {
+    console.log('recursive call');
+    // decrement numberOfCalls so we don't infinitely loop 
+    event.numberOfCalls = event.numberOfCalls - 1;
+    const params = {
+      FunctionName: context.functionName,
+      InvocationType: 'Event',
+      Payload: JSON.stringify(event),
+      Qualifier: context.functionVersion
+
+    };
+    console.log("params: "+JSON.stringify(params));
+
+    lambda.invoke(params, function(err, data) {
+      if(err){
+        console.log("in invoke if"+event.numberOfCalls)
+        context.fail(err)
+      }else{
+        console.log("in invoke else"+event.numberOfCalls)
+        //context.succeed("success: "+data.Payload)
+      }
+    });
+  } else {
+    console.log('recursive call finished4');
+    callback(null, "succeeded bitch");
+    return 234;
+    //context.succeed(null, "success from else: "+event.numberOfCalls)
+
+  }
+};*/
+
+module.exports.recursiveLambda = (event, context, callback) => {
+  const lambda = new AWS.Lambda();
+  console.log('received6: ', event);
+  // if numberOfCalls still has value, continue recursive operation 
+  context.callbackWaitsForEmtpyEventLoop = false;
+  if (event.numberOfCalls > 0) {
+    console.log('RequestResponse');
+    // decrement numberOfCalls so we don't infinitely loop 
+    event.numberOfCalls = event.numberOfCalls - 1;
+    const params = {
+      FunctionName: context.functionName,
+      Payload: JSON.stringify(event),
+
+    };
+    lambda.invoke(params, (err, data) =>{
+      if(err){
+        console.log('invoke if: '+event.numberOfCalls)
+
+      }else{
+        console.log('invoke else: '+event.numberOfCalls)
+        callback(null, data.payload)
+      }
+
+    });
+  } else {
+    console.log('recursive call finished6');
+    let response = {
+              statusCode: 200,
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Credentials": true,
+                "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT"
+              },
+              body: JSON.stringify({
+                status: "success"
+              })
+             };
+    console.log("recursive call finsished response: "+JSON.stringify(response));
+    //callback(null,response)
+    callback(null, "success bitch");
+
+  }
+};
+
 
 
 //done
@@ -101,6 +182,10 @@ module.exports.projectsUser = (event, context, callback) => {
 //done
 module.exports.createProject = (event, context, callback) => {
    preHandler(createProjectHandler, event, context, callback);
+};
+
+module.exports.createProjectS3 = (event, context, callback) => {
+   preHandler(createProjectS3Handler, event, context, callback);
 };
 
 //done

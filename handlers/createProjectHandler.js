@@ -50,31 +50,11 @@ class createProjectHandler{
       return;
     }
 
-    if (!body.teamNumber) {
-      cb({ code: 400, message: "report parameter missing - teamNumber" });
-      return;
-    }
-
-     if (!body.teamName) {
-      cb({ code: 400, message: "report parameter missing - teamName" });
-      return;
-    }
-
     if (!body.submitterId) {
       cb({ code: 400, message: "report parameter missing - submitterId" });
       return;
     }
 
-    if (!body.submissionDate) {
-      cb({ code: 400, message: "report parameter missing - submissionDate" });
-      return;
-    }
-
-
-    if (!body.tags) {
-      cb({ code: 400, message: "report parameter missing - tags" });
-      return;
-    }
 
     if (!body.mediaTitle) {
       cb({ code: 400, message: "report parameter missing - mediaTitle" });
@@ -85,6 +65,35 @@ class createProjectHandler{
       cb({ code: 400, message: "report parameter missing - images" });
       return;
     }
+
+     if (!body.category) {
+      cb({ code: 400, message: "report parameter missing - category" });
+      return;
+    }
+     if (!body.problem) {
+      cb({ code: 400, message: "report parameter missing - problem" });
+      return;
+    }
+     if (!body.stage) {
+      cb({ code: 400, message: "report parameter missing - stage" });
+      return;
+    }
+     if (!body.impact) {
+      cb({ code: 400, message: "report parameter missing - impact" });
+      return;
+    }
+     if (!body.fundingGoal) {
+      cb({ code: 400, message: "report parameter missing - fundingGoal" });
+      return;
+    }
+     if (!body.teamInfo) {
+      cb({ code: 400, message: "report parameter missing - teamInfo" });
+      return;
+    }
+
+    body.submissionDate = new Date().toISOString().replace(/T.+/,'');
+
+
 
 
 
