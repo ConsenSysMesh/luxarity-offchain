@@ -30,6 +30,10 @@ const ConfirmCommitVoteHandler = require('./handlers/confirmCommitVoteHandler');
 const RevealVoteHandler = require('./handlers/revealVoteHandler');
 const ConfirmRevealVoteHandler = require('./handlers/confirmRevealVoteHandler');
 const CreateProjectS3Handler = require('./handlers/createProjectS3Handler');
+const UserLoginHandler = require('./handlers/userLoginHandler');
+const CreateProjectS3Handler = require('./handlers/createProjectS3Handler');
+const RevertChallengeHandler = require('./handlers/revertChallengeHandler');
+
 
 const databaseMgr = new DatabaseMgr();
 const bucketMgr = new BucketMgr();
@@ -59,6 +63,10 @@ const confirmCommitVoteHandler = new ConfirmCommitVoteHandler(databaseMgr);
 const revealVoteHandler = new RevealVoteHandler(databaseMgr);
 const confirmRevealVoteHandler = new ConfirmRevealVoteHandler(databaseMgr);
 const createProjectS3Handler = new CreateProjectS3Handler(databaseMgr);
+const userLoginHandler = new UserLoginHandler(databaseMgr);
+const createProjectS3Handler = new CreateProjectS3Handler(databaseMgr, bucketMgr);
+const revertChallengeHandler = new RevertChallengeHandler(databaseMgr);
+
 
 //notes:
 // before tcr need:
@@ -202,6 +210,11 @@ module.exports.user = (event, context, callback) => {
    preHandler(userHandler, event, context, callback);
 };
 
+module.exports.userLogin = (event, context, callback) => {
+   preHandler(userLoginHandler, event, context, callback);
+};
+
+
 //done
 //module.exports.relay = (event, context, callback) => {
   // preHandlerSensui(relayHandler, event, context, callback);
@@ -234,13 +247,15 @@ module.exports.createAccount = (event, context, callback) => {
 //create challenge in challenge table
 //watch challenge event
 //confirm challenge event
+
 module.exports.challenge = (event, context, callback) => {
    preHandler(challengeHandler, event, context, callback);
 };
 
-module.exports.integrateChallengeWatch = (event, context, callback) => {
-   preHandler(integrateChallengeWatchHandler, event, context, callback);
+module.exports.revertChallenge = (event, context, callback) => {
+   preHandler(revertChallengeHandler, event, context, callback);
 };
+
 
 //done
 //update record_status = confirmed in projects_det
@@ -258,12 +273,6 @@ module.exports.confirmChallenge = (event, context, callback) => {
 
 module.exports.challengeConclusion = (event, context, callback) => {
    preHandler(challengeConclusionHandler, event, context, callback);
-};
-
-//done 
-// promoteProject, watch event, confirmProject
-module.exports.integratePromoteWatch = (event, context, callback) => {
-   preHandler(integratePromoteWatchHandler, event, context, callback);
 };
 
 

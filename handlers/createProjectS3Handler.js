@@ -1,6 +1,6 @@
 
 
-class createProjectHandler{
+class createProjectS3Handler{
 
   constructor(databaseMgr, bucketMgr){
     this.databaseMgr = databaseMgr;
@@ -9,7 +9,7 @@ class createProjectHandler{
 
  async handle(event, context, cb) {
 
-  console.log("inside createProjectHandler.handle");
+  console.log("inside createProjectS3Handler.handle");
 
   let body;
 
@@ -50,11 +50,31 @@ class createProjectHandler{
       return;
     }
 
+    if (!body.teamNumber) {
+      cb({ code: 400, message: "report parameter missing - teamNumber" });
+      return;
+    }
+
+     if (!body.teamName) {
+      cb({ code: 400, message: "report parameter missing - teamName" });
+      return;
+    }
+
     if (!body.submitterId) {
       cb({ code: 400, message: "report parameter missing - submitterId" });
       return;
     }
 
+    if (!body.submissionDate) {
+      cb({ code: 400, message: "report parameter missing - submissionDate" });
+      return;
+    }
+
+
+    if (!body.tags) {
+      cb({ code: 400, message: "report parameter missing - tags" });
+      return;
+    }
 
     if (!body.mediaTitle) {
       cb({ code: 400, message: "report parameter missing - mediaTitle" });
@@ -66,50 +86,28 @@ class createProjectHandler{
       return;
     }
 
-     if (!body.category) {
-      cb({ code: 400, message: "report parameter missing - category" });
-      return;
-    }
-     if (!body.problem) {
-      cb({ code: 400, message: "report parameter missing - problem" });
-      return;
-    }
-     if (!body.stage) {
-      cb({ code: 400, message: "report parameter missing - stage" });
-      return;
-    }
-
-     if (!body.impact) {
-      cb({ code: 400, message: "report parameter missing - impact" });
-      return;
-    }
-     if (!body.fundingGoal) {
-      cb({ code: 400, message: "report parameter missing - fundingGoal" });
-      return;
-    }
-     if (!body.teamInfo) {
-      cb({ code: 400, message: "report parameter missing - teamInfo" });
-      return;
-    }
-
-    body.submissionDate = new Date().toISOString().replace(/T.+/,'');
-
-
-
 
 
     try{
 
       console.log("inside try");
 
+       //upload all images first, replace image data array in project with image URLs array
+       //update ProjectId or return projectId first
+      const images = await Promise.all(body.images.map(i => this.bucketMgr.writeImage(body.projectId, i)));
+      body.images = images;
+
+      console.log("after image processing");
+
+      // now, save the project record itself
       const records = await this.databaseMgr.createProject(body);
 
       console.log("after records await");
       cb(null, records);
 
     }catch(error){
-      console.log("createProjectHandler error"+error);
-      cb({ code: 500, message: "getTestRecrodsError: " + error.message });
+      console.log("createProjectS3Handler error"+error);
+      cb({ code: 500, message: "createProjectS3Handler: " + error.message });
       return;
     }
 
@@ -119,4 +117,4 @@ class createProjectHandler{
 
 };
 
-module.exports = createProjectHandler;
+module.exports = createProjectS3Handler;

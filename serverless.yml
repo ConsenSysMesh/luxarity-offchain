@@ -128,6 +128,14 @@ functions:
           path: user
           method: post
           cors: true
+  userLogin:
+    handler: handler.userLogin
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: userLogin
+          method: post
+          cors: true
   promoteProject:
     handler: handler.promoteProject
     # The `events` block defines how to trigger the handler.helloWorld code
@@ -168,6 +176,14 @@ functions:
           path: challenge
           method: post
           cors: true
+  revertChallenge:
+    handler: handler.revertChallenge
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: revertChallenge
+          method: post
+          cors: true
   confirmChallenge:
     handler: handler.confirmChallenge
     # The `events` block defines how to trigger the handler.helloWorld code
@@ -176,15 +192,6 @@ functions:
           path: confirmChallenge
           method: post
           cors: true
-  integratePromoteWatch:
-    handler: handler.integratePromoteWatch
-    # The `events` block defines how to trigger the handler.helloWorld code
-    events:
-      - http:
-          path: integratePromoteWatch
-          method: post
-          cors: true
-    timeout: 120
   commitVote:
     handler: handler.commitVote
     # The `events` block defines how to trigger the handler.helloWorld code

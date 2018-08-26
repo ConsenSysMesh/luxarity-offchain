@@ -1,3 +1,31 @@
+endpoints:
+  GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/testEndpoint
+  GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/testEndpoint2
+  GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/allProjectDet
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/projectDet
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/projectsUser
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createProject
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createProjectS3
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createUser
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/updateUserCreds
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/user
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/userLogin
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/promoteProject
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmProject
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revertPromoteProject
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createAccount
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/challenge
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revertChallenge
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmChallenge
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/commitVote
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmCommitVote
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/test1
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/sleep
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/challengeConclusion
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revealVote
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmRevealVote
+
+
 
 //trigger: UI user completes 'start application' process
 sls invoke local -f createAccount -d '{"userId" : "3", "projectCategory" : "test", "projectProblem" : "test",  "projectApproach" : "test", "projectStage" : "test", "projectImpact" : "test", "fundingGoal" : "test", "teamInfo" : "test"}'
@@ -8,7 +36,7 @@ sls invoke local -f createAccount -d '{"userId" : "3", "projectCategory" : "test
 sls invoke local -f allProjectDet
 
 //trigger: UI needs to get project by projectId
-sls invoke local -f projectDet -d '{"projectId" : "1"}'
+sls invoke local -f projectDet -d '{"projectId" : "15"}'
 
 //trigger: UI needs to get all projects for userId
 sls invoke local -f projectsUser -d '{"userId" : "2"}'
@@ -16,7 +44,10 @@ sls invoke local -f projectsUser -d '{"userId" : "2"}'
 body.title, body.location, body.descriptionShort, body.descriptionLong, body.submitterId, body.submission_date, 'APPLIED', body.tags, body.mediaTitle, body.images, body.category, body.problem, body.stage, body.impact, body.fundingGoal, body.teamInfo]
 
 //trigger: UI user completes 'project application' process
+
 sls invoke local -f createProject -d '{"title" : "proj14", "location" : "Quebec", "descriptionShort" : "short desc14", "descriptionLong" : "long desc3", "submitterId" : "03", "mediaTitle" : "pondImage", "images" : "https://www.google.com/search?q=sample+image&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiIm8W92P7cAhUHLsAKHaNVAxsQ_AUICigB&biw=1133&bih=681#imgrc=CwPbs8S_fuhr5M:", "category" : "testCategory", "problem" : "testProblem", "stage" : "testStage", "impact" : "testImpact", "fundingGoal" : "testFundingGoal", "teamInfo" : "testTeamInfo"}'
+
+//!SEE createProjectS3 at bottom for S3 implementation
 
 ///////////////////////////////
 
@@ -24,10 +55,13 @@ sls invoke local -f createProject -d '{"title" : "proj14", "location" : "Quebec"
 sls invoke local -f createUser -d '{"name" : "Jane Smith", "email" : "jsmith@gmail.com", "password" : "anothergoodpw"}'
 
 //trigger: UI needs to get specific user
-sls invoke local -f user -d '{"userId" : "2"}'
+sls invoke local -f user -d '{"userId" : "1"}'
 
 //trigger: UI updating user credentials
-sls invoke local -f updateUserCreds -d '{"userId" : "2", "password" : "new password"}'
+sls invoke local -f updateUserCreds -d '{"userId" : "10", "password" : "new password"}'
+
+//trigger: UI login 
+sls invoke local -f userLogin -d '{"email" : "jdoe@gmail.com", "password" : "goodpassword" }'
 
 ///////////////////////////////
 
@@ -35,15 +69,19 @@ sls invoke local -f updateUserCreds -d '{"userId" : "2", "password" : "new passw
 sls invoke local -f promoteProject -d '{"projectId" : "14", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
 
 //trigger: TCR EVENT registry._Application
-sls invoke local -f confirmProject -d '{"listingHash" : "0x7456", "promoterPublickey" : "0x453", "projectId" : "4"}'
+sls invoke local -f confirmProject -d '{"listingHash" : "0x7456", "promoterPublickey" : "0x453", "projectId" : "14"}'
 
 //no event
-sls invoke local -f revertPromoteProject -d '{"projectId" : "5"}'
+sls invoke local -f revertPromoteProject -d '{"projectId" : "15"}'
 
 ///////////////////////////////
 
 //trigger: UI - user clicks challenge button and sends mnetamask tx
-sls invoke local -f challenge -d '{"projectId" : "88", "userId" : "4", "submissionDate" : "2018-07-29", "listingHash": "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengerPublicKey" : "0xD176f6907Ae1E699b39F78cf4582B019518E2B80"}'
+sls invoke local -f challenge -d '{"projectId" : "16", "userId" : "4", "submissionDate" : "2018-07-29", "listingHash": "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengerPublicKey" : "0xD176f6907Ae1E699b39F78cf4582B019518E2B80"}'
+
+//trigger: UI - registry.challenge tx fails
+sls invoke local -f revertChallenge -d '{"projectId" : "16", "userId" : "4", "submissionDate" : "2017-09-22", "listingHash": "0x56"}'
+
 
 //trigger: TCR EVENT registry._Challenge
 sls invoke local -f confirmChallenge -d '{"listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengeId" : "3", "data" : "some data", "commitEndDate" : "2018-07-29", "revealEndDate" : "2018-07-29", "challenger" : "0x897"}'
@@ -61,7 +99,7 @@ sls invoke local -f challengeConclusion -d '{"challengeOutcome" : "badOutcomeVar
 ///////////////////////////////
 
 //trigger: UI - user clicks vote button
-sls invoke local -f commitVote -d '{"pollId" : "1", "secretHash" : "secrethash", "salt" : "salt", "projectId" : "2", "userId" : "2", "voterPublicKey" : "0x897"}'
+sls invoke local -f commitVote -d '{"pollId" : "1", "secretHash" : "secrethash", "salt" : "salt", "projectId" : "14", "userId" : "2", "voterPublicKey" : "0x897"}'
 
 //trigger: TCR EVENT plcrVoting._VoteCommitted
 confirmCommitVote '{"pollId" : "1", "voterPublicKey" : "0x888"}'
@@ -78,7 +116,7 @@ confirmRevealVote '{"voter" : "0x78", "pollId" : "2"}'
 sls invoke local -f helloWorld
 
 //returns success
-sls invoke local -f integratePromoteWatch -d '{"projectId" : "2", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd", "sleepMs" : "30000"}'
+sls invoke local -f integratePromoteWatch -d '{"projectId" : "14", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd", "sleepMs" : "30000"}'
 
 //bad listingHash returns error
 sls invoke local -f integratePromoteWatch -d '{"projectId" : "3", "listingHash" : "0xbd61837be06d94e1ae9192878e518907b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
@@ -98,8 +136,8 @@ sls invoke local -f relay -d '{"metaSignedTx" : "f9022380808094da8c6dce9e9a85e6f
 
 sls invoke local -f createProject -d '{"title" : "proj14", "location" : "Quebec", "descriptionShort" : "short desc14", "descriptionLong" : "long desc3", "teamNumber" : "3", "teamName" : "Ramparts", "submitterId" : "03", "submissionDate" : "2018-07-29", "tags" : "Global Warming", "mediaTitle" : "pondImage", "images" : "https://www.google.com/search?q=sample+image&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiIm8W92P7cAhUHLsAKHaNVAxsQ_AUICigB&biw=1133&bih=681#imgrc=CwPbs8S_fuhr5M:"}'
 
-sls invoke local -f createProject -d '{
-  "title": "Billy Dengus",
+sls invoke local -f createProjectS3 -d '{
+  "title": "Billy Dengus2",
   "location": "somewhere",
   "descriptionShort": "testing",
   "descriptionLong": "testinggg",
