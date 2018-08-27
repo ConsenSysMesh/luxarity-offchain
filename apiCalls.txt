@@ -26,10 +26,6 @@ endpoints:
   POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmRevealVote
 
 
-
-//trigger: UI user completes 'start application' process
-sls invoke local -f createAccount -d '{"userId" : "3", "projectCategory" : "test", "projectProblem" : "test",  "projectApproach" : "test", "projectStage" : "test", "projectImpact" : "test", "fundingGoal" : "test", "teamInfo" : "test"}'
-
 ///////////////////////////////
 
 //trigger: UI needs to get all projects
@@ -41,7 +37,6 @@ sls invoke local -f projectDet -d '{"projectId" : "15"}'
 //trigger: UI needs to get all projects for userId
 sls invoke local -f projectsUser -d '{"userId" : "2"}'
 
-body.title, body.location, body.descriptionShort, body.descriptionLong, body.submitterId, body.submission_date, 'APPLIED', body.tags, body.mediaTitle, body.images, body.category, body.problem, body.stage, body.impact, body.fundingGoal, body.teamInfo]
 
 //trigger: UI user completes 'project application' process
 
@@ -114,6 +109,9 @@ confirmRevealVote '{"voter" : "0x78", "pollId" : "2"}'
 //////////////////    OLD    //////////////////////////
 
 sls invoke local -f helloWorld
+
+//trigger: UI user completes 'start application' process
+sls invoke local -f createAccount -d '{"userId" : "3", "projectCategory" : "test", "projectProblem" : "test",  "projectApproach" : "test", "projectStage" : "test", "projectImpact" : "test", "fundingGoal" : "test", "teamInfo" : "test"}'
 
 //returns success
 sls invoke local -f integratePromoteWatch -d '{"projectId" : "14", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd", "sleepMs" : "30000"}'
