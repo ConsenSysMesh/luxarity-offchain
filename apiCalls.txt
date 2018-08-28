@@ -1,29 +1,29 @@
-endpoints:
-  GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/testEndpoint
-  GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/testEndpoint2
-  GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/allProjectDet
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/projectDet
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/projectsUser
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createProject
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createProjectS3
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createUser
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/updateUserCreds
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/user
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/userLogin
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/promoteProject
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmProject
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revertPromoteProject
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createAccount
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/challenge
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revertChallenge
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmChallenge
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/commitVote
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmCommitVote
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/test1
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/sleep
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/challengeConclusion
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revealVote
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmRevealVote
+endpoints for stg (use for testing):
+  GET - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/testEndpoint2
+  GET - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/allProjectDet
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/projectDet
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/projectsUser
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/createProject
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/createProjectS3
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/createUser
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/updateUserCreds
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/user
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/userLogin
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/promoteProject
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/confirmProject
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/revertPromoteProject
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/createAccount
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/challenge
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/revertChallenge
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/confirmChallenge
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/commitVote
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/confirmCommitVote
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/test1
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/challengeConclusion
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/revealVote
+  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/confirmRevealVote
+
+
 
 
 ///////////////////////////////
@@ -106,7 +106,38 @@ revealVote '{"userId" : "2", "pollId" : "2", "voteOption" : "0"}'
 confirmRevealVote '{"voter" : "0x78", "pollId" : "2"}'
 
 
+DO NOT USE BELOW !!!
+DO NOT USE BELOW !!!
+DO NOT USE BELOW !!!
+endpoints for develop (currently in use):
+  GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/testEndpoint
+  GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/testEndpoint2
+  GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/allProjectDet
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/projectDet
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/projectsUser
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createProject
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createProjectS3
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createUser
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/updateUserCreds
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/user
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/userLogin
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/promoteProject
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmProject
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revertPromoteProject
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createAccount
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/challenge
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revertChallenge
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmChallenge
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/commitVote
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmCommitVote
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/test1
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/sleep
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/challengeConclusion
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revealVote
+  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmRevealVote
+
 //////////////////    OLD    //////////////////////////
+
 
 sls invoke local -f helloWorld
 
