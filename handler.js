@@ -21,7 +21,7 @@ const IntegratePromoteWatchHandler = require('./handlers/integratePromoteWatchHa
 const CommitVoteHandler = require('./handlers/commitVoteHandler');
 const TestHandler = require('./handlers/testHandler');
 const ConfirmTxHandler = require('./handlers/confirmTxHandler');
-const RunSleepHandler = require('./handlers/runSleepHandler');
+//const RunSleepHandler = require('./handlers/runSleepHandler');
 const ProjectsUserHandler = require('./handlers/projectsUserHandler');
 const UpdateUserCredsHandler = require('./handlers/updateUserCredsHandler');
 const IntegrateChallengeWatchHandler = require('./handlers/integrateChallengeWatchHandler');
@@ -32,6 +32,7 @@ const ConfirmRevealVoteHandler = require('./handlers/confirmRevealVoteHandler');
 const UserLoginHandler = require('./handlers/userLoginHandler');
 const CreateProjectS3Handler = require('./handlers/createProjectS3Handler');
 const RevertChallengeHandler = require('./handlers/revertChallengeHandler');
+const RevertCommitVoteHandler = require('./handlers/revertCommitVoteHandler');
 
 
 const databaseMgr = new DatabaseMgr();
@@ -53,7 +54,7 @@ const integratePromoteWatchHandler = new IntegratePromoteWatchHandler(databaseMg
 const commitVoteHandler = new CommitVoteHandler(databaseMgr);
 const testHandler = new TestHandler(databaseMgr);
 const confirmTxHandler = new ConfirmTxHandler(databaseMgr);
-const runSleepHandler = new RunSleepHandler();
+//const runSleepHandler = new RunSleepHandler();
 const projectsUserHandler = new ProjectsUserHandler(databaseMgr);
 const updateUserCredsHandler = new UpdateUserCredsHandler(databaseMgr);
 const integrateChallengeWatchHandler = new IntegrateChallengeWatchHandler(databaseMgr);
@@ -64,7 +65,7 @@ const confirmRevealVoteHandler = new ConfirmRevealVoteHandler(databaseMgr);
 const userLoginHandler = new UserLoginHandler(databaseMgr);
 const createProjectS3Handler = new CreateProjectS3Handler(databaseMgr, bucketMgr);
 const revertChallengeHandler = new RevertChallengeHandler(databaseMgr);
-
+const revertCommitVoteHandler = new RevertCommitVoteHandler(databaseMgr);
 
 //notes:
 // before tcr need:
@@ -89,85 +90,7 @@ module.exports.testEndpoint = (event, context, callback) => {
    callback(null, response);
 };
 
-/*module.exports.recursiveLambda = (event, context, callback) => {
-  const lambda = new AWS.Lambda();
-  console.log('received4: ', event);
-  //if numberOfCalls still has value, continue recursive operation 
-  //context.callbackWaitsForEmtpyEventLoop = false;
-  if (event.numberOfCalls > 0) {
-    console.log('recursive call');
-    // decrement numberOfCalls so we don't infinitely loop 
-    event.numberOfCalls = event.numberOfCalls - 1;
-    const params = {
-      FunctionName: context.functionName,
-      InvocationType: 'Event',
-      Payload: JSON.stringify(event),
-      Qualifier: context.functionVersion
 
-    };
-    console.log("params: "+JSON.stringify(params));
-
-    lambda.invoke(params, function(err, data) {
-      if(err){
-        console.log("in invoke if"+event.numberOfCalls)
-        context.fail(err)
-      }else{
-        console.log("in invoke else"+event.numberOfCalls)
-        //context.succeed("success: "+data.Payload)
-      }
-    });
-  } else {
-    console.log('recursive call finished4');
-    callback(null, "succeeded bitch");
-    return 234;
-    //context.succeed(null, "success from else: "+event.numberOfCalls)
-
-  }
-};*/
-
-module.exports.recursiveLambda = (event, context, callback) => {
-  const lambda = new AWS.Lambda();
-  console.log('received6: ', event);
-  // if numberOfCalls still has value, continue recursive operation 
-  context.callbackWaitsForEmtpyEventLoop = false;
-  if (event.numberOfCalls > 0) {
-    console.log('RequestResponse');
-    // decrement numberOfCalls so we don't infinitely loop 
-    event.numberOfCalls = event.numberOfCalls - 1;
-    const params = {
-      FunctionName: context.functionName,
-      Payload: JSON.stringify(event),
-
-    };
-    lambda.invoke(params, (err, data) =>{
-      if(err){
-        console.log('invoke if: '+event.numberOfCalls)
-
-      }else{
-        console.log('invoke else: '+event.numberOfCalls)
-        callback(null, data.payload)
-      }
-
-    });
-  } else {
-    console.log('recursive call finished6');
-    let response = {
-              statusCode: 200,
-              headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Credentials": true,
-                "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT"
-              },
-              body: JSON.stringify({
-                status: "success"
-              })
-             };
-    console.log("recursive call finsished response: "+JSON.stringify(response));
-    //callback(null,response)
-    callback(null, "success bitch");
-
-  }
-};
 
 
 
@@ -279,6 +202,10 @@ module.exports.commitVote = (event, context, callback) => {
    preHandler(commitVoteHandler, event, context, callback);
 };
 
+module.exports.revertCommitVote = (event, context, callback) => {
+   preHandler(revertCommitVoteHandler, event, context, callback);
+};
+
 module.exports.confirmCommitVote = (event, context, callback) => {
    preHandler(confirmCommitVoteHandler, event, context, callback);
 };
@@ -297,9 +224,6 @@ module.exports.test1 = (event, context, callback) => {
 };
 
 
-module.exports.sleep = (event, context, callback) => {
-   preHandler(runSleepHandler, event, context, callback);
-};
 
 
 const preHandler = (handler, event, context, callback) => {

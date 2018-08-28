@@ -3,13 +3,16 @@ FROM information_schema.columns
 WHERE table_schema = 'public'
   AND table_name   = 'projects_det'
 
+ALTER TABLE projects_det ADD CONSTRAINT titleUnique UNIQUE (title);
+
+
 CREATE TABLE PROJECTS_DET (
     project_Id SERIAL PRIMARY KEY,
     title VARCHAR (255),
-    location VARCHAR(255), 
-    description_short VARCHAR (300),
-    description_long VARCHAR,
-    team_number VARCHAR (255),
+    location VARCHAR(1000), 
+    description_short VARCHAR (1000),
+    description_long VARCHAR (1000),
+    team_number VARCHAR (100),
     team_name VARCHAR (255),
     submitter_id VARCHAR (255),
     submission_date  DATE,
@@ -18,8 +21,17 @@ CREATE TABLE PROJECTS_DET (
     tags VARCHAR (255),
     video VARCHAR (255),
     media_title VARCHAR (255),
-    images VARCHAR (255),
-    attachments VARCHAR (255)  
+    images VARCHAR (1000),
+    attachments VARCHAR (255),
+    promoter_publickey VARCHAR (255),
+    listinghash VARCHAR (255),
+    record_status VARCHAR (255),
+    category VARCHAR (1000),
+    problem VARCHAR (1000),
+    stage VARCHAR (1000),
+    impact VARCHAR (1000),
+    funding_goal VARCHAR (1000),
+    team_info VARCHAR (1000) 
 );
 
 SELECT * FROM PROJECTS_DET

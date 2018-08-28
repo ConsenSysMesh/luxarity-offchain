@@ -182,6 +182,14 @@ functions:
           path: commitVote
           method: post
           cors: true
+  revertCommitVote:
+    handler: handler.revertCommitVote
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: revertCommitVote
+          method: post
+          cors: true
   confirmCommitVote:
     handler: handler.confirmCommitVote
     # The `events` block defines how to trigger the handler.helloWorld code
