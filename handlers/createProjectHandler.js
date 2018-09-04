@@ -40,59 +40,95 @@ class createProjectHandler{
       return;
     }
 
-    if (!body.descriptionShort) {
-      cb({ code: 400, message: "report parameter missing - descriptionShort" });
+    if (!body.url) {
+      cb({ code: 400, message: "report parameter missing - url" });
       return;
     }
 
-    if (!body.descriptionLong) {
-      cb({ code: 400, message: "report parameter missing - descriptionLong" });
+    if (!body.problemSummary) {
+      cb({ code: 400, message: "report parameter missing - problem_summary" });
       return;
     }
 
-    if (!body.submitterId) {
-      cb({ code: 400, message: "report parameter missing - submitterId" });
+    if (!body.problemEvidence) {
+      cb({ code: 400, message: "report parameter missing - problem_evidence" });
       return;
     }
 
 
-    if (!body.mediaTitle) {
-      cb({ code: 400, message: "report parameter missing - mediaTitle" });
+    if (!body.solution) {
+      cb({ code: 400, message: "report parameter missing - solution" });
       return;
     }
 
-    if (!body.images || !body.images.length) {
-      cb({ code: 400, message: "report parameter missing - images" });
-      return;
-    }
-
-     if (!body.category) {
-      cb({ code: 400, message: "report parameter missing - category" });
-      return;
-    }
-     if (!body.problem) {
-      cb({ code: 400, message: "report parameter missing - problem" });
-      return;
-    }
      if (!body.stage) {
       cb({ code: 400, message: "report parameter missing - stage" });
       return;
     }
-
      if (!body.impact) {
       cb({ code: 400, message: "report parameter missing - impact" });
       return;
     }
-     if (!body.fundingGoal) {
-      cb({ code: 400, message: "report parameter missing - fundingGoal" });
-      return;
-    }
-     if (!body.teamInfo) {
-      cb({ code: 400, message: "report parameter missing - teamInfo" });
+     if (!body.funding) {
+      cb({ code: 400, message: "report parameter missing - funding" });
       return;
     }
 
-    body.submissionDate = new Date().toISOString().replace(/T.+/,'');
+     if (!body.team) {
+      cb({ code: 400, message: "report parameter missing - team" });
+      return;
+    }
+     if (!body.ready) {
+      cb({ code: 400, message: "boolean report parameter missing - ready" });
+      return;
+    }
+     if (!body.workplan) {
+      cb({ code: 400, message: "report parameter missing - workplan" });
+      return;
+    }
+
+    if (!body.risks) {
+      cb({ code: 400, message: "report parameter missing - risks" });
+      return;
+    }
+    if (!body.outcome1) {
+      cb({ code: 400, message: "report parameter missing - outcome1" });
+      return;
+    }
+    if (!body.outcome2) {
+      cb({ code: 400, message: "report parameter missing - outcome2" });
+      return;
+    }
+    if (!body.outcome3) {
+      cb({ code: 400, message: "report parameter missing - outcome3" });
+      return;
+    }
+    if (!body.budgetUrl) {
+      cb({ code: 400, message: "report parameter missing - budgetUrl" });
+      return;
+    }
+    if (!body.financialSustainability) {
+      cb({ code: 400, message: "report parameter missing - financialSustainability" });
+      return;
+    }
+    if (!body.imageUrl) {
+      cb({ code: 400, message: "report parameter missing - imageUrl" });
+      return;
+    }
+   
+    if (!body.submitterId) {
+      cb({ code: 400, message: "report parameter missing - submitterId" });
+      return;
+    }
+    if (!body.submissionDate) {
+      cb({ code: 400, message: "report parameter missing - submissionDate" });
+      return;
+    }
+
+
+
+
+    //body.submissionDate = new Date().toISOString().replace(/T.+/,'');
 
 
 
@@ -109,7 +145,7 @@ class createProjectHandler{
 
     }catch(error){
       console.log("createProjectHandler error"+error);
-      cb({ code: 500, message: "getTestRecrodsError: " + error.message });
+      cb({ code: 500, message: "createProject DB error: " + error.message });
       return;
     }
 

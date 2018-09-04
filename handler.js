@@ -3,28 +3,28 @@ const AWS = require("aws-sdk");
 
 const DatabaseMgr = require('./lib/DatabaseMgr');
 const BucketMgr = require('./lib/BucketMgr');
-const GetRecordsHandler = require('./handlers/getRecordsHandler');
+//const GetRecordsHandler = require('./handlers/getRecordsHandler');
 const AllProjectDetHandler = require('./handlers/allProjectDetHandler');
 const ProjectDetHandler = require('./handlers/projectDetHandler');
 const CreateProjectHandler = require('./handlers/createProjectHandler');
 const CreateUserHandler = require('./handlers/createUserHandler');
 const UserHandler = require('./handlers/userHandler');
-const RelayHandler = require('./handlers/relayHandler');
+//const RelayHandler = require('./handlers/relayHandler');
 const PromoteProjectHandler = require('./handlers/promoteProjectHandler');
 const CreateAccountHandler = require('./handlers/createAccountHandler');
 const ConfirmProjectHandler = require('./handlers/confirmProjectHandler');
 const RevertPromoteProjectHandler = require('./handlers/revertPromoteProjectHandler');
 const ChallengeHandler = require('./handlers/challengeHandler');
 const ConfirmChallengeHandler = require('./handlers/confirmChallengeHandler');
-const WatchEventHandler = require('./handlers/watchEventHandler');
-const IntegratePromoteWatchHandler = require('./handlers/integratePromoteWatchHandler');
+//const WatchEventHandler = require('./handlers/watchEventHandler');
+//const IntegratePromoteWatchHandler = require('./handlers/integratePromoteWatchHandler');
 const CommitVoteHandler = require('./handlers/commitVoteHandler');
-const TestHandler = require('./handlers/testHandler');
+//const TestHandler = require('./handlers/testHandler');
 const ConfirmTxHandler = require('./handlers/confirmTxHandler');
 //const RunSleepHandler = require('./handlers/runSleepHandler');
 const ProjectsUserHandler = require('./handlers/projectsUserHandler');
 const UpdateUserCredsHandler = require('./handlers/updateUserCredsHandler');
-const IntegrateChallengeWatchHandler = require('./handlers/integrateChallengeWatchHandler');
+//const IntegrateChallengeWatchHandler = require('./handlers/integrateChallengeWatchHandler');
 const ChallengeConclusionHandler = require('./handlers/challengeConclusionHandler');
 const ConfirmCommitVoteHandler = require('./handlers/confirmCommitVoteHandler');
 const RevealVoteHandler = require('./handlers/revealVoteHandler');
@@ -37,7 +37,7 @@ const RevertCommitVoteHandler = require('./handlers/revertCommitVoteHandler');
 
 const databaseMgr = new DatabaseMgr();
 const bucketMgr = new BucketMgr();
-const getRecordsHandler = new GetRecordsHandler(databaseMgr);
+//const getRecordsHandler = new GetRecordsHandler(databaseMgr);
 const allProjectDetHandler = new AllProjectDetHandler(databaseMgr);
 const projectDetHandler = new ProjectDetHandler(databaseMgr);
 const createProjectHandler = new CreateProjectHandler(databaseMgr, bucketMgr);
@@ -49,15 +49,15 @@ const confirmProjectHandler = new ConfirmProjectHandler(databaseMgr);
 const revertPromoteProjectHandler = new RevertPromoteProjectHandler(databaseMgr);
 const challengeHandler = new ChallengeHandler(databaseMgr);
 const confirmChallengeHandler = new ConfirmChallengeHandler(databaseMgr);
-const watchEventHandler = new WatchEventHandler();
-const integratePromoteWatchHandler = new IntegratePromoteWatchHandler(databaseMgr);
+//const watchEventHandler = new WatchEventHandler();
+//const integratePromoteWatchHandler = new IntegratePromoteWatchHandler(databaseMgr);
 const commitVoteHandler = new CommitVoteHandler(databaseMgr);
-const testHandler = new TestHandler(databaseMgr);
+//const testHandler = new TestHandler(databaseMgr);
 const confirmTxHandler = new ConfirmTxHandler(databaseMgr);
 //const runSleepHandler = new RunSleepHandler();
 const projectsUserHandler = new ProjectsUserHandler(databaseMgr);
 const updateUserCredsHandler = new UpdateUserCredsHandler(databaseMgr);
-const integrateChallengeWatchHandler = new IntegrateChallengeWatchHandler(databaseMgr);
+//const integrateChallengeWatchHandler = new IntegrateChallengeWatchHandler(databaseMgr);
 const challengeConclusionHandler = new ChallengeConclusionHandler(databaseMgr);
 const confirmCommitVoteHandler = new ConfirmCommitVoteHandler(databaseMgr);
 const revealVoteHandler = new RevealVoteHandler(databaseMgr);
@@ -218,10 +218,7 @@ module.exports.confirmRevealVote = (event, context, callback) => {
    preHandler(confirmRevealVoteHandler, event, context, callback);
 };
 
-//done
-module.exports.test1 = (event, context, callback) => {
-   preHandler(testHandler, event, context, callback);
-};
+
 
 
 

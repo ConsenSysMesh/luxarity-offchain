@@ -40,7 +40,7 @@ sls invoke local -f projectsUser -d '{"userId" : "2"}'
 
 //trigger: UI user completes 'project application' process
 
-sls invoke local -f createProject -d '{"title" : "sundayTitle1", "location" : "Quebec", "descriptionShort" : "short desc14", "descriptionLong" : "long desc3", "submitterId" : "03", "mediaTitle" : "pondImage", "images" : "https://www.google.com/search?q=sample+image&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiIm8W92P7cAhUHLsAKHaNVAxsQ_AUICigB&biw=1133&bih=681#imgrc=CwPbs8S_fuhr5M:", "category" : "testCategory", "problem" : "testProblem", "stage" : "testStage", "impact" : "testImpact", "fundingGoal" : "testFundingGoal", "teamInfo" : "testTeamInfo"}'
+sls invoke local -f createProject -d '{"title" : "sundayTitle1", "location" : "Quebec", "url" : "url", "problemSummary" : "problem_summary", "problemEvidence" : "problemEvidence", "solution" : "solution", "stage" : "stage", "impact" : "impact", "funding" : "funding", "team" : "team", "ready" : "true", "workplan" : "workplan", "risks" : "risks", "outcome1":"outcome", "outcome2":"outcome", "outcome3":"putcome", "budgetUrl":"budg url","financialSustainability":"fin stab", "imageUrl":"url","submitterId":"23", "submissionDate":"2018-07-29"}'
 
 //!SEE createProjectS3 at bottom for S3 implementation
 

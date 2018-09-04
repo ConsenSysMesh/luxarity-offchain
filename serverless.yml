@@ -6,7 +6,7 @@ service: wwf-lambda-sensui
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: ${opt:stage, 'stg'}
+  stage: ${opt:stage, 'develop'}
   region: us-west-1 
   iamRoleStatements:
     - Effect: Allow
@@ -38,14 +38,6 @@ custom:
   #webpackIncludeModules: true
 
 functions:
-  testEndpoint2:
-    handler: handler.testEndpoint
-    # The `events` block defines how to trigger the handler.helloWorld code
-    events:
-      - http:
-          path: testEndpoint2
-          method: get
-          cors: true
   allProjectDet:
     handler: handler.allProjectDet
     # The `events` block defines how to trigger the handler.helloWorld code
@@ -196,14 +188,6 @@ functions:
     events:
       - http:
           path: confirmCommitVote
-          method: post
-          cors: true
-  test1:
-    handler: handler.test1
-    # The `events` block defines how to trigger the handler.helloWorld code
-    events:
-      - http:
-          path: test1
           method: post
           cors: true
   challengeConclusion:
