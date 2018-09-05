@@ -45,10 +45,10 @@ class createProjectHandler{
       return;
     }
 
-    //if (!body.categories || body.categories.length <= 0) {
-      //cb({ code: 400, message: "report parameter missing - categories array[]" });
-      //return;
-    //}
+    if (!body.categories) {
+      cb({ code: 400, message: "report parameter missing - categories" });
+      return;
+    }
 
     if (!body.startDate) {
       cb({ code: 400, message: "report parameter missing - startDate" });
@@ -166,7 +166,8 @@ class createProjectHandler{
 
 
 
-
+   if(!body.videoUrl){
+    console.log("inside no video")
     try{
 
       console.log("inside try");
@@ -181,6 +182,23 @@ class createProjectHandler{
       cb({ code: 500, message: "createProject DB error: " + error.message });
       return;
     }
+  }else{
+    try{
+
+      console.log("inside try");
+
+      const records = await this.databaseMgr.createProjectVideo(body);
+
+      console.log("after records await");
+      cb(null, records);
+
+    }catch(error){
+      console.log("createProjectHandler error"+error);
+      cb({ code: 500, message: "createProjectVideo DB error: " + error.message });
+      return;
+    }
+
+  }
 
   }
 
