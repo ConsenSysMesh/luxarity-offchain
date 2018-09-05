@@ -45,6 +45,21 @@ class createProjectHandler{
       return;
     }
 
+    //if (!body.categories || body.categories.length <= 0) {
+      //cb({ code: 400, message: "report parameter missing - categories array[]" });
+      //return;
+    //}
+
+    if (!body.startDate) {
+      cb({ code: 400, message: "report parameter missing - startDate" });
+      return;
+    }
+
+    if (!body.endDate) {
+      cb({ code: 400, message: "report parameter missing - endDate" });
+      return;
+    }
+
     if (!body.problemSummary) {
       cb({ code: 400, message: "report parameter missing - problem_summary" });
       return;
@@ -91,6 +106,12 @@ class createProjectHandler{
       cb({ code: 400, message: "report parameter missing - risks" });
       return;
     }
+
+    if (!body.outcomes) {
+      cb({ code: 400, message: "report parameter missing - outcomes" });
+      return;
+    }
+
     if (!body.outcome1) {
       cb({ code: 400, message: "report parameter missing - outcome1" });
       return;
@@ -103,6 +124,22 @@ class createProjectHandler{
       cb({ code: 400, message: "report parameter missing - outcome3" });
       return;
     }
+    
+    if (!body.longTermImpact) {
+      cb({ code: 400, message: "report parameter missing - longTermImpact" });
+      return;
+    }
+
+    if (!body.learnings) {
+      cb({ code: 400, message: "report parameter missing - learnings" });
+      return;
+    }
+
+    if (!body.benefits) {
+      cb({ code: 400, message: "report parameter missing - benefits" });
+      return;
+    }
+
     if (!body.budgetUrl) {
       cb({ code: 400, message: "report parameter missing - budgetUrl" });
       return;
@@ -120,16 +157,12 @@ class createProjectHandler{
       cb({ code: 400, message: "report parameter missing - submitterId" });
       return;
     }
-    if (!body.submissionDate) {
-      cb({ code: 400, message: "report parameter missing - submissionDate" });
-      return;
-    }
 
 
+    //add videoUrl logic
 
-
-    //body.submissionDate = new Date().toISOString().replace(/T.+/,'');
-
+    body.submissionDate = new Date().toISOString().replace(/T.+/,'');
+    //body.categories = "array" + body.categories;
 
 
 
