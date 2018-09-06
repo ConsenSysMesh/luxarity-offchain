@@ -61,12 +61,12 @@ class createProjectHandler{
     }
 
     if (!body.problemSummary) {
-      cb({ code: 400, message: "report parameter missing - problem_summary" });
+      cb({ code: 400, message: "report parameter missing - problemSummary" });
       return;
     }
 
     if (!body.problemEvidence) {
-      cb({ code: 400, message: "report parameter missing - problem_evidence" });
+      cb({ code: 400, message: "report parameter missing - problemEvidence" });
       return;
     }
 
