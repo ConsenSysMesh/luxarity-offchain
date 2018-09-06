@@ -27,7 +27,7 @@ class projectsUserHandler{
     }
 
     if (!body.userId) {
-      cb({ code: 400, message: "report parameter missing" });
+      cb({ code: 400, message: "report parameter missing- userId" });
       return;
     }
   
@@ -47,7 +47,7 @@ class projectsUserHandler{
 
     }catch(error){
       console.log("projectUserHandler error"+error);
-      cb({ code: 500, message: "getTestRecrodsError: " + error.message });
+      cb({ code: 500, message: "projectUserHandler: " + error.message });
       return;
     }
 
