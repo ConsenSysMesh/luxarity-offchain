@@ -67,6 +67,12 @@ const createProjectS3Handler = new CreateProjectS3Handler(databaseMgr, bucketMgr
 const revertChallengeHandler = new RevertChallengeHandler(databaseMgr);
 const revertCommitVoteHandler = new RevertCommitVoteHandler(databaseMgr);
 
+//const SqsHandler = require('./handlers/sqsHandler');
+//const sqsHandler = new SqsHandler(databaseMgr);
+
+const GetLogsApplicationHandler = require('./handlers/getLogsApplicationHandler');
+const getLogsApplicationHandler = new GetLogsApplicationHandler(databaseMgr);
+
 //notes:
 // before tcr need:
 // token.approve(regsistry), 
@@ -90,8 +96,138 @@ module.exports.testEndpoint = (event, context, callback) => {
    callback(null, response);
 };
 
+/*module.exports.receiver  = (event, context, callback) => {
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: 'Go Serverless v1.0! Your function executed successfully!',
+      input: event,
+    }),
+  };
+
+  console.log('event: ',JSON.stringify(event));
+
+  var body = event.Records[0].body;
+  console.log("text: ",JSON.parse(body).text);
+
+  callback(null, response);
+};
+
+module.exports.receiver2  = (event, context, callback) => {
+var body1 = event.Records[0].body;
+console.log('reciever 2 event: ',JSON.stringify(event));
+if(!body1 || JSON.parse(body1).text != 'test'){
+console.log("bad json input");
+const badresponse = {
+    statusCode: 500,
+    body: JSON.stringify({
+      message: 'bad json request',
+      input: event,
+    }),
+  };
+  callback(null, badresponse)
+
+}else{
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: 'Go Serverless v1.0! Your function executed successfully!',
+      input: event,
+    }),
+  };
+
+  
+
+  var body = event.Records[0].body;
+  console.log("text: ",JSON.parse(body).text);
+
+  callback(null, response);
+}
+
+};
+
+module.exports.receiver3  = (event, context, callback) => {
+var body1 = event.Records[0].body;
+console.log('reciever 3 event: ',JSON.stringify(event));
+if(!body1) {
+console.log("no json input");
+const badjson = {
+    statusCode: 500,
+    body: JSON.stringify({
+      message: 'bad json request',
+      input: event,
+    }),
+  };
+  callback({ code: 500, message: "report parameter missing - no json" });
+  return;
+  //callback(null, badjson)
+
+}
+
+if(!JSON.parse(body1).listingHash){
+console.log("no listingHash");
+const nohash = {
+    statusCode: 500,
+    body: JSON.stringify({
+      message: 'bad json request - no listingHash',
+      input: event,
+    }),
+  };
+  //callback(null, nohash)
+  callback({ code: 500, message: "report parameter missing - listingHash" });
+  return;
+}
+
+if(!JSON.parse(body1).userId){
+console.log("no userId");
+const nouser = {
+    statusCode: 500,
+    body: JSON.stringify({
+      message: 'bad json request - no userId',
+      input: event,
+    }),
+  };
+
+  callback({ code: 500, message: "report parameter missing - userId" });
+  return;
+  //callback(null, nouser)
+}
 
 
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: 'Go Serverless v1.0! Your function executed successfully!',
+      input: event,
+    }),
+  };
+
+  
+
+  //var body = event.Records[0].body;
+  console.log("Success listingHash: ",JSON.parse(body1).listingHash);
+  console.log("Success userId: ",JSON.parse(body1).userId);
+
+  callback(null, response);
+
+};*/
+
+
+
+//module.exports.sqs = (event, context, callback) => {
+  
+  // console.log("event['records'][0].body: "+event['Records'][0].body);
+   //let body = event['Records'][0].body;
+   //console.log("json: "+JSON.parse(body).sport)
+   // {"sport" : "hockey"}
+   
+
+   //preHandler(sqsHandler, event, context, callback);
+//};
+
+module.exports.getLogsApplication = (event, context, callback) => {
+   preHandler(getLogsApplicationHandler, event, context, callback);
+};
 
 
 //done
@@ -254,9 +390,10 @@ const doHandler = (handler, event, context, callback) => {
     //console.log("in doHandler with PG.HOST"+databaseMgr.PG_HOST);
     handler.handle(event, context, (err, resp) => {
       let response;
-      console.log("response: "+response);
+      console.log("doHandler resp: "+resp);
 
        if (err == null) {
+         console.log("err is null and response is defined")
             response = {
               statusCode: 200,
               headers: {
@@ -269,15 +406,17 @@ const doHandler = (handler, event, context, callback) => {
                 data: resp
               })
             };
+            callback(null, response);
         } else {
+          console.log("err or response is undefined")
           console.log(err);
             let code = 500;
-            if (err.code) code = err.code;
+           // if (err.code) code = err.code;
             let message = err;
             if (err.message) message = err.message;
 
             response = {
-              statusCode: code,
+              code: code,
               headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": true,
@@ -288,9 +427,11 @@ const doHandler = (handler, event, context, callback) => {
                 message: message
               })
              };
+             callback({ code: 500, message: "no logs callback" });
           }
 
-        callback(null, response);
+        console.log("doHanlder response: "+JSON.stringify(response));
+        //callback(null, response);
     });
   }
 
