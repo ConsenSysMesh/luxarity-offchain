@@ -67,13 +67,30 @@ resources:
         RedrivePolicy:
           deadLetterTargetArn:
             "Fn::GetAtt":
-              - ReceiverDeadLetterQueue
+              - ApplicationDeadLetterQueue
               - Arn
           maxReceiveCount: 2
-    ReceiverDeadLetterQueue:
+    ApplicationDeadLetterQueue:
       Type: "AWS::SQS::Queue"
       Properties:
         QueueName: "newstgApplicationDLQ"
+        MessageRetentionPeriod: 1209600 # 14 days in seconds
+    newstgChallengeQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgChallengeQueue"
+        VisibilityTimeout: 30 # 30 sec.
+        MessageRetentionPeriod: 60 # 60 sec.
+        RedrivePolicy:
+          deadLetterTargetArn:
+            "Fn::GetAtt":
+              - ChallengeDeadLetterQueue
+              - Arn
+          maxReceiveCount: 2
+    ChallengeDeadLetterQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgChallengeDLQ"
         MessageRetentionPeriod: 1209600 # 14 days in seconds
   
 
@@ -99,6 +116,14 @@ functions:
           arn:
             Fn::GetAtt:
               - newstgApplicationQueue
+              - Arn
+  getLogsChallenge:
+    handler: handler.getLogsChallenge
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - newstgChallengeQueue
               - Arn
   allProjectDet:
     handler: handler.allProjectDet

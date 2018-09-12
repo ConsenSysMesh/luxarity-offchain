@@ -72,6 +72,8 @@ const revertCommitVoteHandler = new RevertCommitVoteHandler(databaseMgr);
 
 const GetLogsApplicationHandler = require('./handlers/getLogsApplicationHandler');
 const getLogsApplicationHandler = new GetLogsApplicationHandler(databaseMgr);
+const GetLogsChallengeHandler = require('./handlers/getLogsChallengeHandler');
+const getLogsChallengeHandler = new GetLogsChallengeHandler(databaseMgr);
 
 //notes:
 // before tcr need:
@@ -227,6 +229,10 @@ const nouser = {
 
 module.exports.getLogsApplication = (event, context, callback) => {
    preHandler(getLogsApplicationHandler, event, context, callback);
+};
+
+module.exports.getLogsChallenge = (event, context, callback) => {
+   preHandler(getLogsChallengeHandler, event, context, callback);
 };
 
 
