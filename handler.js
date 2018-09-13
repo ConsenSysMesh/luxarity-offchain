@@ -34,6 +34,7 @@ const CreateProjectS3Handler = require('./handlers/createProjectS3Handler');
 const RevertChallengeHandler = require('./handlers/revertChallengeHandler');
 const RevertCommitVoteHandler = require('./handlers/revertCommitVoteHandler');
 const ChallengesProjectIdHandler = require('./handlers/challengesProjectIdHandler');
+const VotesProjIdChallIdHandler = require('./handlers/votesProjIdChallIdHandler');
 
 
 const databaseMgr = new DatabaseMgr();
@@ -68,6 +69,7 @@ const createProjectS3Handler = new CreateProjectS3Handler(databaseMgr, bucketMgr
 const revertChallengeHandler = new RevertChallengeHandler(databaseMgr);
 const revertCommitVoteHandler = new RevertCommitVoteHandler(databaseMgr);
 const challengesProjectIdHandler = new ChallengesProjectIdHandler(databaseMgr);
+const votesProjIdChallIdHandler = new VotesProjIdChallIdHandler(databaseMgr);
 //notes:
 // before tcr need:
 // token.approve(regsistry), 
@@ -202,6 +204,9 @@ module.exports.challengeConclusion = (event, context, callback) => {
    preHandler(challengeConclusionHandler, event, context, callback);
 };
 
+module.exports.getVotes = (event, context, callback) => {
+   preHandler(votesProjIdChallIdHandler, event, context, callback);
+};
 
 //done need to test from ui
 module.exports.commitVote = (event, context, callback) => {
