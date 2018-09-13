@@ -1,6 +1,6 @@
 
 
-class getLogsApplicationHandler{
+class getLogsChallengeHandler{
 
   constructor(databaseMgr){
     this.databaseMgr = databaseMgr;
@@ -8,7 +8,7 @@ class getLogsApplicationHandler{
 
  async handle(event, context, cb) {
 
-  console.log("inside getLogsApplicationHandler.handle");
+  console.log("inside getLogsChallengeHandler.handle");
 
   let body = event.Records[0].body;
   try {
@@ -24,41 +24,69 @@ class getLogsApplicationHandler{
       return;
     }
 
+    if (!body.challengeId) {
+      cb({ code: 500, message: "report parameter missing - challengeId" });
+      return;
+    }
+
     
 
     try{
-
-      const logrecords = await this.getSimpleLogs(body.listingHash);
+      //[body.listingHash, body.challengeId, body.data, 
+      //body.commitEndDate,  body.revealEndDate,  body.challenger,
+      const logrecords = await this.getSimpleLogs(body);
       console.log("logrecords: "+logrecords)
+      //console.log("res: "+logrecords[0].logData.commitEndDate.toString())
+      //var commitEndDate = new Date(logrecords[0].logData.commitEndDate.toString() * 1000).toISOString().replace(/T.+/,'');
+      //console.log("commitEndDate: "+commitEndDate)
+      body.challengeId = logrecords[0].logData.challengeID.toString();
+      body.data = logrecords[0].logData.data.toString();
+      body.commitEndDate = new Date(logrecords[0].logData.commitEndDate.toString() * 1000).toISOString().replace(/T.+/,'');
+      body.revealEndDate = new Date(logrecords[0].logData.revealEndDate.toString() * 1000).toISOString().replace(/T.+/,'');
+      body.challenger = logrecords[0].logData.challenger.toString();
       //cb(null, logrecords);
       //return;
     }catch(error){
-      console.log("getLogsApplicationHandler error: "+error);
-      cb({ code: 500, message: "getLogsApplicationHandler: " + error.message });
+      console.log("getLogsChallengeHandler error: "+error);
+      cb({ code: 500, message: "getLogsChallengeHandler: " + error.message });
       return;
     }
 
     try{
 
       console.log("inside try");
-      const records = await this.databaseMgr.confirmProject(body);
+      const records = await this.databaseMgr.confirmChallenge(body);
+      console.log("after records await");
+      //cb(null, records);
+      //return;
+
+    }catch(error){
+      console.log("getLogsChallengeHandler.confirmChallenge DB  error"+error);
+      cb({ code: 500, message: "getLogsChallengeHandler.confirmChallenge DB error: " + error.message });
+      return;
+    }
+
+    try{
+
+      console.log("inside try");
+      const records = await this.databaseMgr.confirmProjectChallenge(body);
       console.log("after records await");
       cb(null, records);
       return;
 
     }catch(error){
-      console.log("getLogsApplication DB  error"+error);
-      cb({ code: 500, message: "getLogsApplication DB error: " + error.message });
+      console.log("getLogsChallengeHandler.confirmProjectChallenge DB  error"+error);
+      cb({ code: 500, message: "getLogsChallengeHandler.confirmProjectChallenge DB error: " + error.message });
       return;
     }
 
 
   }
 
-  async getSimpleLogs(listhash){
+  async getSimpleLogs(body){
       console.log("in getsimpleLogs")
       try{
-      const res = await this.simpleLogs(listhash)
+      const res = await this.simpleLogs(body)
       console.log("res: "+res)
       return res;
     }catch(error){
@@ -67,7 +95,7 @@ class getLogsApplicationHandler{
     }
     }
 
-    async simpleLogs(listhash){
+    async simpleLogs(body){
 
       const Ethjs = require('ethjs')
       const EthEvents = require('eth-events')
@@ -94,28 +122,17 @@ class getLogsApplicationHandler{
 
       // event name(s)
       //const eventNames = ['_PollCreated']
-      const eventNames = ['_Application']
+      const eventNames = ['_Challenge']
 
       // indexed event emission arg values (un-hashed filter topics)
       const indexedFilterValues = {
-        listingHash: listhash
+        listingHash: body.listingHash,
+        challengeID: body.challengeId
         //listingHash: '0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f2b'
         //bad listingHash:'0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f6h'
         //good listingHash:'0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f2b'
         //_to: '0xCAFEDEADBEEF12345678912456789',
       }
-
-      /*console.log("doing first getLogs")
-      await ethEvents.getLogs(fromBlock, toBlock, eventNames, indexedFilterValues, true).then(logs => {
-        logs.map(log => {
-          console.log("first getLogs log should be below")
-          console.log(log)
-          console.log(log.logData.applicant.toString())
-
-        })
-      }).catch( e => {
-        console.log("error: " + e);
-      })*/
 
       let logs;
       let logresult;
@@ -138,12 +155,12 @@ class getLogsApplicationHandler{
             console.log("in logs.map try");
             const output = await logs.map( log =>{
                       console.log("in logs.map");
-                      console.log(log.logData.applicant.toString())
+                      console.log(log)
                       //return log.logData.applicant.toString();
-                      logresult = log.logData.applicant.toString();
+                      return log;
                     })
-            console.log("logresult: "+logresult)
-            return logresult;
+            //console.log("logresult: "+logresult)
+            return output;
           }catch(error){
             console.log("logs.map error");
             //return "logs.map error"
@@ -157,4 +174,4 @@ class getLogsApplicationHandler{
 
 };
 
-module.exports = getLogsApplicationHandler;
+module.exports = getLogsChallengeHandler;

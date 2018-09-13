@@ -6,7 +6,7 @@ service: wwf-lambda-sensui
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: ${opt:stage, 'develop'}
+  stage: ${opt:stage, 'stg'}
   region: us-west-1 
   iamRoleStatements:
     - Effect: Allow
@@ -21,6 +21,19 @@ provider:
       Action:
       - "lambda:InvokeFunction"
       Resource: "*"
+    - Effect: Allow
+      Action:
+      - "sqs:ChangeMessageVisibility"
+      - "sqs:DeleteMessage"
+      - "sqs:GetQueueAttributes"
+      - "sqs:ReceiveMessage"
+      - "sqs:SendMessage"
+      - "sqs:GetQueueUrl"
+      - "sqs:listQueues"
+      - "lambda:CreateEventSourceMapping"
+      - "lambda:ListEventSourceMappings"
+      - "lambda:ListFunction"
+      Resource: "*"
 
   environment:
       SECRETS: ${self:custom.kmsSecrets.secrets.SECRETS}
@@ -29,6 +42,90 @@ provider:
 plugins:
   - serverless-kms-secrets
   #- serverless-webpack
+
+  #stgQueue:
+   #   Type: "AWS::SQS::Queue"
+    #  Properties:
+     #   QueueName: "stgQueue"
+      #  VisibilityTimeout: 30 # 30 sec.
+       # MessageRetentionPeriod: 60 # 60 sec.
+        #RedrivePolicy:
+         # deadLetterTargetArn:
+          #  "Fn::GetAtt":
+           #   - ReceiverDeadLetterQueue
+            #  - Arn
+          #maxReceiveCount: 5
+
+resources:
+  Resources:
+    newstgApplicationQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgApplicationQueue"
+        VisibilityTimeout: 30 # 30 sec.
+        MessageRetentionPeriod: 60 # 60 sec.
+        RedrivePolicy:
+          deadLetterTargetArn:
+            "Fn::GetAtt":
+              - ApplicationDeadLetterQueue
+              - Arn
+          maxReceiveCount: 2
+    ApplicationDeadLetterQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgApplicationDLQ"
+        MessageRetentionPeriod: 1209600 # 14 days in seconds
+    newstgChallengeQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgChallengeQueue"
+        VisibilityTimeout: 30 # 30 sec.
+        MessageRetentionPeriod: 60 # 60 sec.
+        RedrivePolicy:
+          deadLetterTargetArn:
+            "Fn::GetAtt":
+              - ChallengeDeadLetterQueue
+              - Arn
+          maxReceiveCount: 2
+    ChallengeDeadLetterQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgChallengeDLQ"
+        MessageRetentionPeriod: 1209600 # 14 days in seconds
+    newstgCommitVoteQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgCommitVoteQueue"
+        VisibilityTimeout: 30 # 30 sec.
+        MessageRetentionPeriod: 60 # 60 sec.
+        RedrivePolicy:
+          deadLetterTargetArn:
+            "Fn::GetAtt":
+              - CommitVoteDeadLetterQueue
+              - Arn
+          maxReceiveCount: 2
+    CommitVoteDeadLetterQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgCommitVoteDLQ"
+        MessageRetentionPeriod: 1209600 # 14 days in seconds
+    newstgRevealVoteQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgRevealVoteQueue"
+        VisibilityTimeout: 30 # 30 sec.
+        MessageRetentionPeriod: 60 # 60 sec.
+        RedrivePolicy:
+          deadLetterTargetArn:
+            "Fn::GetAtt":
+              - RevealVoteDeadLetterQueue
+              - Arn
+          maxReceiveCount: 2
+    RevealVoteDeadLetterQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgRevealVoteDLQ"
+        MessageRetentionPeriod: 1209600 # 14 days in seconds
   
 
 custom:
@@ -38,6 +135,46 @@ custom:
   #webpackIncludeModules: true
 
 functions:
+  #receiver:
+   # handler: handler.receiver3
+    #events:
+     # - sqs:
+      #    arn:
+       #     Fn::GetAtt:
+        #      - stgQueue
+         #     - Arn
+  getLogsApplication:
+    handler: handler.getLogsApplication
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - newstgApplicationQueue
+              - Arn
+  getLogsChallenge:
+    handler: handler.getLogsChallenge
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - newstgChallengeQueue
+              - Arn
+  getLogsCommitVote:
+    handler: handler.getLogsCommitVote
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - newstgCommitVoteQueue
+              - Arn
+  getLogsRevealVote:
+    handler: handler.getLogsRevealVote
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - newstgRevealVoteQueue
+              - Arn
   allProjectDet:
     handler: handler.allProjectDet
     # The `events` block defines how to trigger the handler.helloWorld code
