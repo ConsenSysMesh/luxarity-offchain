@@ -126,6 +126,23 @@ resources:
       Properties:
         QueueName: "newstgRevealVoteDLQ"
         MessageRetentionPeriod: 1209600 # 14 days in seconds
+    newstgChallSuccessQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgChallSuccessQueue"
+        VisibilityTimeout: 30 # 30 sec.
+        MessageRetentionPeriod: 60 # 60 sec.
+        RedrivePolicy:
+          deadLetterTargetArn:
+            "Fn::GetAtt":
+              - ChallSuccessDeadLetterQueue
+              - Arn
+          maxReceiveCount: 2
+    ChallSuccessDeadLetterQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgChallSuccessDLQ"
+        MessageRetentionPeriod: 1209600 # 14 days in seconds
   
 
 custom:
@@ -174,6 +191,14 @@ functions:
           arn:
             Fn::GetAtt:
               - newstgRevealVoteQueue
+              - Arn
+  getLogsChallSuccess:
+    handler: handler.getLogsChallSuccess
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - newstgChallSuccessQueue
               - Arn
   allProjectDet:
     handler: handler.allProjectDet

@@ -29,3 +29,10 @@ aws sqs get-queue-url --queue-name newstgRevealVoteQueue
 > "QueueUrl": "https://us-west-1.queue.amazonaws.com/711302153787/newstgRevealVoteQueue"
 
 aws sqs send-message --queue-url "https://us-west-1.queue.amazonaws.com/711302153787/newstgRevealVoteQueue" --message-body "{ \"listingHash\" : \"test\" , \"voterPublicKey\" : \"0x5e9ea12752833f6a60318e467fab877ca6f8e752\" , \"pollId\" : \"3\"}"
+
+##########################################
+
+aws sqs get-queue-url --queue-name newstgChallSuccessQueue
+
+aws sqs send-message --queue-url "https://us-west-1.queue.amazonaws.com/711302153787/newstgChallSuccessQueue" --message-body "{ \"listingHash\" : \"0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f2b\" , \"challengeId\" : \"3\" }"
+

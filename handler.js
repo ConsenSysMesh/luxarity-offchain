@@ -67,7 +67,7 @@ const confirmRevealVoteHandler = new ConfirmRevealVoteHandler(databaseMgr);
 const userLoginHandler = new UserLoginHandler(databaseMgr);
 const createProjectS3Handler = new CreateProjectS3Handler(databaseMgr, bucketMgr);
 const revertChallengeHandler = new RevertChallengeHandler(databaseMgr);
-HEADconst revertCommitVoteHandler = new RevertCommitVoteHandler(databaseMgr);
+const revertCommitVoteHandler = new RevertCommitVoteHandler(databaseMgr);
 
 const challengesProjectIdHandler = new ChallengesProjectIdHandler(databaseMgr);
 const votesProjIdChallIdHandler = new VotesProjIdChallIdHandler(databaseMgr);
@@ -84,6 +84,8 @@ const GetLogsCommitVoteHandler = require('./handlers/getLogsCommitVoteHandler');
 const getLogsCommitVoteHandler = new GetLogsCommitVoteHandler(databaseMgr);
 const GetLogsRevealVoteHandler = require('./handlers/getLogsRevealVoteHandler');
 const getLogsRevealVoteHandler = new GetLogsRevealVoteHandler(databaseMgr);
+const GetLogsChallSuccessHandler = require('./handlers/getLogsChallSuccessHandler');
+const getLogsChallSuccessHandler = new GetLogsChallSuccessHandler(databaseMgr);
 
 
 //notes:
@@ -109,134 +111,7 @@ module.exports.testEndpoint = (event, context, callback) => {
    callback(null, response);
 };
 
-/*module.exports.receiver  = (event, context, callback) => {
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: event,
-    }),
-  };
 
-  console.log('event: ',JSON.stringify(event));
-
-  var body = event.Records[0].body;
-  console.log("text: ",JSON.parse(body).text);
-
-  callback(null, response);
-};
-
-module.exports.receiver2  = (event, context, callback) => {
-var body1 = event.Records[0].body;
-console.log('reciever 2 event: ',JSON.stringify(event));
-if(!body1 || JSON.parse(body1).text != 'test'){
-console.log("bad json input");
-const badresponse = {
-    statusCode: 500,
-    body: JSON.stringify({
-      message: 'bad json request',
-      input: event,
-    }),
-  };
-  callback(null, badresponse)
-
-}else{
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: event,
-    }),
-  };
-
-  
-
-  var body = event.Records[0].body;
-  console.log("text: ",JSON.parse(body).text);
-
-  callback(null, response);
-}
-
-};
-
-module.exports.receiver3  = (event, context, callback) => {
-var body1 = event.Records[0].body;
-console.log('reciever 3 event: ',JSON.stringify(event));
-if(!body1) {
-console.log("no json input");
-const badjson = {
-    statusCode: 500,
-    body: JSON.stringify({
-      message: 'bad json request',
-      input: event,
-    }),
-  };
-  callback({ code: 500, message: "report parameter missing - no json" });
-  return;
-  //callback(null, badjson)
-
-}
-
-if(!JSON.parse(body1).listingHash){
-console.log("no listingHash");
-const nohash = {
-    statusCode: 500,
-    body: JSON.stringify({
-      message: 'bad json request - no listingHash',
-      input: event,
-    }),
-  };
-  //callback(null, nohash)
-  callback({ code: 500, message: "report parameter missing - listingHash" });
-  return;
-}
-
-if(!JSON.parse(body1).userId){
-console.log("no userId");
-const nouser = {
-    statusCode: 500,
-    body: JSON.stringify({
-      message: 'bad json request - no userId',
-      input: event,
-    }),
-  };
-
-  callback({ code: 500, message: "report parameter missing - userId" });
-  return;
-  //callback(null, nouser)
-}
-
-
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: event,
-    }),
-  };
-
-  
-
-  //var body = event.Records[0].body;
-  console.log("Success listingHash: ",JSON.parse(body1).listingHash);
-  console.log("Success userId: ",JSON.parse(body1).userId);
-
-  callback(null, response);
-
-};*/
-
-
-
-//module.exports.sqs = (event, context, callback) => {
-  
-  // console.log("event['records'][0].body: "+event['Records'][0].body);
-   //let body = event['Records'][0].body;
-   //console.log("json: "+JSON.parse(body).sport)
-   // {"sport" : "hockey"}
-   
-
-   //preHandler(sqsHandler, event, context, callback);
-//};
 
 module.exports.getLogsApplication = (event, context, callback) => {
    preHandler(getLogsApplicationHandler, event, context, callback);
@@ -252,6 +127,10 @@ module.exports.getLogsCommitVote = (event, context, callback) => {
 
 module.exports.getLogsRevealVote = (event, context, callback) => {
    preHandler(getLogsRevealVoteHandler, event, context, callback);
+};
+
+module.exports.getLogsChallSuccess = (event, context, callback) => {
+   preHandler(getLogsChallSuccessHandler, event, context, callback);
 };
 
 
