@@ -1,6 +1,6 @@
 
 
-class getLogsApplicationHandler{
+class getLogsCommitVoteHandler{
 
   constructor(databaseMgr){
     this.databaseMgr = databaseMgr;
@@ -8,7 +8,7 @@ class getLogsApplicationHandler{
 
  async handle(event, context, cb) {
 
-  console.log("inside getLogsApplicationHandler.handle");
+  console.log("inside getLogsCommitVoteHandler.handle");
 
   let body = event.Records[0].body;
   try {
@@ -24,41 +24,52 @@ class getLogsApplicationHandler{
       return;
     }
 
+    if (!body.voterPublicKey) {
+      cb({ code: 500, message: "report parameter missing - voter" });
+      return;
+    }
+
+    if (!body.pollId) {
+      cb({ code: 500, message: "report parameter missing - pollId" });
+      return;
+    }
+
     
 
     try{
 
-      const logrecords = await this.getSimpleLogs(body.listingHash);
+      const logrecords = await this.getSimpleLogs(body);
       console.log("logrecords: "+logrecords)
+
       //cb(null, logrecords);
       //return;
     }catch(error){
-      console.log("getLogsApplicationHandler error: "+error);
-      cb({ code: 500, message: "getLogsApplicationHandler: " + error.message });
+      console.log("getLogsCommitVoteHandler error: "+error);
+      cb({ code: 500, message: "getLogsCommitVoteHandler: " + error.message });
       return;
     }
 
     try{
 
       console.log("inside try");
-      const records = await this.databaseMgr.confirmProject(body);
+      const records = await this.databaseMgr.confirmCommitVote(body);
       console.log("after records await");
       cb(null, records);
       return;
 
     }catch(error){
-      console.log("getLogsApplication DB  error"+error);
-      cb({ code: 500, message: "getLogsApplication DB error: " + error.message });
+      console.log("getLogsCommitVoteHandler DB  error"+error);
+      cb({ code: 500, message: "getLogsCommitVoteHandler DB error: " + error.message });
       return;
     }
 
 
   }
 
-  async getSimpleLogs(listhash){
+  async getSimpleLogs(body){
       console.log("in getsimpleLogs")
       try{
-      const res = await this.simpleLogs(listhash)
+      const res = await this.simpleLogs(body)
       console.log("res: "+res)
       return res;
     }catch(error){
@@ -67,11 +78,11 @@ class getLogsApplicationHandler{
     }
     }
 
-    async simpleLogs(listhash){
+    async simpleLogs(body){
 
       const Ethjs = require('ethjs')
       const EthEvents = require('eth-events')
-      const Token = require('../build/contracts/Registry.json')
+      const Token = require('../build/contracts/PLCRVoting.json')
       const map = require('lodash/fp/map')
 
       const HttpProvider = require('ethjs-provider-http');
@@ -81,7 +92,7 @@ class getLogsApplicationHandler{
     
       const contract = {
         abi: Token.abi,
-        address: '0x2739345dedf4985a64269f1661bc46924374aa85',
+        address: '0xe9a17d98db27566a9856ede397dd2e44e8461ba0',
       }
 
     
@@ -94,11 +105,12 @@ class getLogsApplicationHandler{
 
       // event name(s)
       //const eventNames = ['_PollCreated']
-      const eventNames = ['_Application']
+      const eventNames = ['_VoteRevealed']
 
       // indexed event emission arg values (un-hashed filter topics)
       const indexedFilterValues = {
-        listingHash: listhash
+        voter: body.voterPublicKey,
+        pollID: '0x'+body.pollId
         //listingHash: '0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f2b'
         //bad listingHash:'0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f6h'
         //good listingHash:'0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f2b'
@@ -138,12 +150,12 @@ class getLogsApplicationHandler{
             console.log("in logs.map try");
             const output = await logs.map( log =>{
                       console.log("in logs.map");
-                      console.log(log.logData.applicant.toString())
+                      //console.log(log.logData.applicant.toString())
                       //return log.logData.applicant.toString();
-                      logresult = log.logData.applicant.toString();
+                      return log[0]
                     })
-            console.log("logresult: "+logresult)
-            return logresult;
+            //console.log("logresult: "+logresult)
+            return output;
           }catch(error){
             console.log("logs.map error");
             //return "logs.map error"
@@ -157,4 +169,4 @@ class getLogsApplicationHandler{
 
 };
 
-module.exports = getLogsApplicationHandler;
+module.exports = getLogsCommitVoteHandler;

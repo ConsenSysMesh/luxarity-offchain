@@ -32,6 +32,7 @@ class commitVoteHandler{
       return;
     }
 
+    //voteOption is always 1 FOR the applicant, 0 AGAINST the applicant
     if (!body.secretHash) {
       cb({ code: 400, message: "report parameter missing - secretHash" });
       return;

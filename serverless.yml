@@ -92,6 +92,40 @@ resources:
       Properties:
         QueueName: "newstgChallengeDLQ"
         MessageRetentionPeriod: 1209600 # 14 days in seconds
+    newstgCommitVoteQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgCommitVoteQueue"
+        VisibilityTimeout: 30 # 30 sec.
+        MessageRetentionPeriod: 60 # 60 sec.
+        RedrivePolicy:
+          deadLetterTargetArn:
+            "Fn::GetAtt":
+              - CommitVoteDeadLetterQueue
+              - Arn
+          maxReceiveCount: 2
+    CommitVoteDeadLetterQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgCommitVoteDLQ"
+        MessageRetentionPeriod: 1209600 # 14 days in seconds
+    newstgRevealVoteQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgRevealVoteQueue"
+        VisibilityTimeout: 30 # 30 sec.
+        MessageRetentionPeriod: 60 # 60 sec.
+        RedrivePolicy:
+          deadLetterTargetArn:
+            "Fn::GetAtt":
+              - RevealVoteDeadLetterQueue
+              - Arn
+          maxReceiveCount: 2
+    RevealVoteDeadLetterQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgRevealVoteDLQ"
+        MessageRetentionPeriod: 1209600 # 14 days in seconds
   
 
 custom:
@@ -124,6 +158,22 @@ functions:
           arn:
             Fn::GetAtt:
               - newstgChallengeQueue
+              - Arn
+  getLogsCommitVote:
+    handler: handler.getLogsCommitVote
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - newstgCommitVoteQueue
+              - Arn
+  getLogsRevealVote:
+    handler: handler.getLogsRevealVote
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - newstgRevealVoteQueue
               - Arn
   allProjectDet:
     handler: handler.allProjectDet

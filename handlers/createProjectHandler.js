@@ -41,112 +41,89 @@ class createProjectHandler{
     }
 
     if (!body.url) {
-      cb({ code: 400, message: "report parameter missing - url" });
-      return;
+      body.url = '';
     }
 
     if (!body.categories) {
-      cb({ code: 400, message: "report parameter missing - categories" });
-      return;
+      body.categories = '';
     }
 
     if (!body.startDate) {
-      cb({ code: 400, message: "report parameter missing - startDate" });
-      return;
+       body.startDate = null;
     }
 
     if (!body.endDate) {
-      cb({ code: 400, message: "report parameter missing - endDate" });
-      return;
+       body.endDate = null;
     }
 
     if (!body.problemSummary) {
-      cb({ code: 400, message: "report parameter missing - problemSummary" });
-      return;
+      body.problemSummary = '';
     }
 
     if (!body.problemEvidence) {
-      cb({ code: 400, message: "report parameter missing - problemEvidence" });
-      return;
+      body.problemEvidence = '';
     }
 
 
     if (!body.solution) {
-      cb({ code: 400, message: "report parameter missing - solution" });
-      return;
+      body.solution = '';
     }
 
      if (!body.stage) {
-      cb({ code: 400, message: "report parameter missing - stage" });
-      return;
+      body.stage = '';
     }
      if (!body.impact) {
-      cb({ code: 400, message: "report parameter missing - impact" });
-      return;
+      body.impact = '';
     }
      if (!body.funding) {
-      cb({ code: 400, message: "report parameter missing - funding" });
-      return;
+      body.funding = '';
     }
 
      if (!body.team) {
-      cb({ code: 400, message: "report parameter missing - team" });
-      return;
+      body.team = '';
     }
      if (!body.ready) {
-      cb({ code: 400, message: "boolean report parameter missing - ready" });
-      return;
+      body.ready = null;
     }
      if (!body.workplan) {
-      cb({ code: 400, message: "report parameter missing - workplan" });
-      return;
+      body.workplan = '';
     }
 
     if (!body.risks) {
-      cb({ code: 400, message: "report parameter missing - risks" });
-      return;
+     body.risks = '';
     }
 
     if (!body.outcomes) {
-      cb({ code: 400, message: "report parameter missing - outcomes" });
-      return;
+      body.outcomes = '';
     }
 
     if (!body.outcome1) {
-      cb({ code: 400, message: "report parameter missing - outcome1" });
-      return;
+      body.outcome1 = '';
     }
     if (!body.outcome2) {
-      cb({ code: 400, message: "report parameter missing - outcome2" });
-      return;
+      body.outcome2 = '';
     }
     if (!body.outcome3) {
-      cb({ code: 400, message: "report parameter missing - outcome3" });
-      return;
+      body.outcome3 = '';
     }
     
     if (!body.longTermImpact) {
-      cb({ code: 400, message: "report parameter missing - longTermImpact" });
-      return;
+      body.longTermImpact = '';
     }
 
     if (!body.learnings) {
-      cb({ code: 400, message: "report parameter missing - learnings" });
-      return;
+     body.learnings = '';
     }
 
     if (!body.benefits) {
-      cb({ code: 400, message: "report parameter missing - benefits" });
-      return;
+      body.benefits = '';
     }
 
     if (!body.budgetUrl) {
-      cb({ code: 400, message: "report parameter missing - budgetUrl" });
-      return;
+      body.budgetUrl = '';
     }
     if (!body.financialSustainability) {
-      cb({ code: 400, message: "report parameter missing - financialSustainability" });
-      return;
+      body.financialSustainability = '';
     }
     if (!body.imageUrl) {
       cb({ code: 400, message: "report parameter missing - imageUrl" });
@@ -162,6 +139,7 @@ class createProjectHandler{
     //add videoUrl logic
 
     body.submissionDate = new Date().toISOString().replace(/T.+/,'');
+ 
     //body.categories = "array" + body.categories;
 
 

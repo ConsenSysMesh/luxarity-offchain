@@ -20,7 +20,12 @@ class getLogsChallengeHandler{
 
    
     if (!body.listingHash) {
-      cb({ code: 500, message: "report parameter missing - name" });
+      cb({ code: 500, message: "report parameter missing - listingHash" });
+      return;
+    }
+
+    if (!body.challengeId) {
+      cb({ code: 500, message: "report parameter missing - challengeId" });
       return;
     }
 
@@ -29,7 +34,7 @@ class getLogsChallengeHandler{
     try{
       //[body.listingHash, body.challengeId, body.data, 
       //body.commitEndDate,  body.revealEndDate,  body.challenger,
-      const logrecords = await this.getSimpleLogs(body.listingHash);
+      const logrecords = await this.getSimpleLogs(body);
       console.log("logrecords: "+logrecords)
       //console.log("res: "+logrecords[0].logData.commitEndDate.toString())
       //var commitEndDate = new Date(logrecords[0].logData.commitEndDate.toString() * 1000).toISOString().replace(/T.+/,'');
@@ -78,10 +83,10 @@ class getLogsChallengeHandler{
 
   }
 
-  async getSimpleLogs(listhash){
+  async getSimpleLogs(body){
       console.log("in getsimpleLogs")
       try{
-      const res = await this.simpleLogs(listhash)
+      const res = await this.simpleLogs(body)
       console.log("res: "+res)
       return res;
     }catch(error){
@@ -90,7 +95,7 @@ class getLogsChallengeHandler{
     }
     }
 
-    async simpleLogs(listhash){
+    async simpleLogs(body){
 
       const Ethjs = require('ethjs')
       const EthEvents = require('eth-events')
@@ -121,7 +126,8 @@ class getLogsChallengeHandler{
 
       // indexed event emission arg values (un-hashed filter topics)
       const indexedFilterValues = {
-        listingHash: listhash
+        listingHash: body.listingHash,
+        challengeID: body.challengeId
         //listingHash: '0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f2b'
         //bad listingHash:'0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f6h'
         //good listingHash:'0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f2b'

@@ -74,6 +74,10 @@ const GetLogsApplicationHandler = require('./handlers/getLogsApplicationHandler'
 const getLogsApplicationHandler = new GetLogsApplicationHandler(databaseMgr);
 const GetLogsChallengeHandler = require('./handlers/getLogsChallengeHandler');
 const getLogsChallengeHandler = new GetLogsChallengeHandler(databaseMgr);
+const GetLogsCommitVoteHandler = require('./handlers/getLogsCommitVoteHandler');
+const getLogsCommitVoteHandler = new GetLogsCommitVoteHandler(databaseMgr);
+const GetLogsRevealVoteHandler = require('./handlers/getLogsRevealVoteHandler');
+const getLogsRevealVoteHandler = new GetLogsRevealVoteHandler(databaseMgr);
 
 //notes:
 // before tcr need:
@@ -234,6 +238,15 @@ module.exports.getLogsApplication = (event, context, callback) => {
 module.exports.getLogsChallenge = (event, context, callback) => {
    preHandler(getLogsChallengeHandler, event, context, callback);
 };
+
+module.exports.getLogsCommitVote = (event, context, callback) => {
+   preHandler(getLogsCommitVoteHandler, event, context, callback);
+};
+
+module.exports.getLogsRevealVote = (event, context, callback) => {
+   preHandler(getLogsRevealVoteHandler, event, context, callback);
+};
+
 
 
 //done
