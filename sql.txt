@@ -41,7 +41,7 @@ CREATE TABLE PROJECTS_DET (
     title VARCHAR (255),
     location VARCHAR (500), 
     url VARCHAR (500),
-    categories TEXT [],
+    categories VARCHAR (1000),
     start_date DATE,
     end_date DATE,
     problem_summary VARCHAR (1000),

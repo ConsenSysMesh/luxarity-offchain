@@ -33,6 +33,7 @@ const UserLoginHandler = require('./handlers/userLoginHandler');
 const CreateProjectS3Handler = require('./handlers/createProjectS3Handler');
 const RevertChallengeHandler = require('./handlers/revertChallengeHandler');
 const RevertCommitVoteHandler = require('./handlers/revertCommitVoteHandler');
+const ChallengesProjectIdHandler = require('./handlers/challengesProjectIdHandler');
 
 
 const databaseMgr = new DatabaseMgr();
@@ -66,7 +67,7 @@ const userLoginHandler = new UserLoginHandler(databaseMgr);
 const createProjectS3Handler = new CreateProjectS3Handler(databaseMgr, bucketMgr);
 const revertChallengeHandler = new RevertChallengeHandler(databaseMgr);
 const revertCommitVoteHandler = new RevertCommitVoteHandler(databaseMgr);
-
+const challengesProjectIdHandler = new ChallengesProjectIdHandler(databaseMgr);
 //notes:
 // before tcr need:
 // token.approve(regsistry), 
@@ -168,6 +169,11 @@ module.exports.createAccount = (event, context, callback) => {
 //create challenge in challenge table
 //watch challenge event
 //confirm challenge event
+
+module.exports.getChallenges = (event, context, callback) => {
+   preHandler(challengesProjectIdHandler, event, context, callback);
+};
+
 
 module.exports.challenge = (event, context, callback) => {
    preHandler(challengeHandler, event, context, callback);
