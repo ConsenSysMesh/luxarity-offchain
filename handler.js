@@ -11,7 +11,7 @@ const CreateUserHandler = require('./handlers/createUserHandler');
 const UserHandler = require('./handlers/userHandler');
 //const RelayHandler = require('./handlers/relayHandler');
 const PromoteProjectHandler = require('./handlers/promoteProjectHandler');
-const CreateAccountHandler = require('./handlers/createAccountHandler');
+//const CreateAccountHandler = require('./handlers/createAccountHandler');
 const ConfirmProjectHandler = require('./handlers/confirmProjectHandler');
 const RevertPromoteProjectHandler = require('./handlers/revertPromoteProjectHandler');
 const ChallengeHandler = require('./handlers/challengeHandler');
@@ -30,7 +30,7 @@ const ConfirmCommitVoteHandler = require('./handlers/confirmCommitVoteHandler');
 const RevealVoteHandler = require('./handlers/revealVoteHandler');
 const ConfirmRevealVoteHandler = require('./handlers/confirmRevealVoteHandler');
 const UserLoginHandler = require('./handlers/userLoginHandler');
-const CreateProjectS3Handler = require('./handlers/createProjectS3Handler');
+//const CreateProjectS3Handler = require('./handlers/createProjectS3Handler');
 const RevertChallengeHandler = require('./handlers/revertChallengeHandler');
 const RevertCommitVoteHandler = require('./handlers/revertCommitVoteHandler');
 const ChallengesProjectIdHandler = require('./handlers/challengesProjectIdHandler');
@@ -46,7 +46,7 @@ const createProjectHandler = new CreateProjectHandler(databaseMgr, bucketMgr);
 const createUserHandler = new CreateUserHandler(databaseMgr);
 const userHandler = new UserHandler(databaseMgr);
 const promoteProjectHandler = new PromoteProjectHandler(databaseMgr);
-const createAccountHandler = new CreateAccountHandler(databaseMgr);
+//const createAccountHandler = new CreateAccountHandler(databaseMgr);
 const confirmProjectHandler = new ConfirmProjectHandler(databaseMgr);
 const revertPromoteProjectHandler = new RevertPromoteProjectHandler(databaseMgr);
 const challengeHandler = new ChallengeHandler(databaseMgr);
@@ -65,7 +65,7 @@ const confirmCommitVoteHandler = new ConfirmCommitVoteHandler(databaseMgr);
 const revealVoteHandler = new RevealVoteHandler(databaseMgr);
 const confirmRevealVoteHandler = new ConfirmRevealVoteHandler(databaseMgr);
 const userLoginHandler = new UserLoginHandler(databaseMgr);
-const createProjectS3Handler = new CreateProjectS3Handler(databaseMgr, bucketMgr);
+//const createProjectS3Handler = new CreateProjectS3Handler(databaseMgr, bucketMgr);
 const revertChallengeHandler = new RevertChallengeHandler(databaseMgr);
 const revertCommitVoteHandler = new RevertCommitVoteHandler(databaseMgr);
 
@@ -84,8 +84,15 @@ const GetLogsCommitVoteHandler = require('./handlers/getLogsCommitVoteHandler');
 const getLogsCommitVoteHandler = new GetLogsCommitVoteHandler(databaseMgr);
 const GetLogsRevealVoteHandler = require('./handlers/getLogsRevealVoteHandler');
 const getLogsRevealVoteHandler = new GetLogsRevealVoteHandler(databaseMgr);
+
 const GetLogsChallSuccessHandler = require('./handlers/getLogsChallSuccessHandler');
 const getLogsChallSuccessHandler = new GetLogsChallSuccessHandler(databaseMgr);
+
+const GetLogsChallFailHandler = require('./handlers/getLogsChallFailHandler');
+const getLogsChallFailHandler = new GetLogsChallFailHandler(databaseMgr);
+
+const GetMaxChallengeIdHandler = require('./handlers/getMaxChallengeIdHandler');
+const getMaxChallengeIdHandler = new GetMaxChallengeIdHandler(databaseMgr);
 
 
 //notes:
@@ -112,6 +119,9 @@ module.exports.testEndpoint = (event, context, callback) => {
 };
 
 
+module.exports.getMaxChallengeId = (event, context, callback) => {
+   preHandler(getMaxChallengeIdHandler, event, context, callback);
+};
 
 module.exports.getLogsApplication = (event, context, callback) => {
    preHandler(getLogsApplicationHandler, event, context, callback);
@@ -131,6 +141,10 @@ module.exports.getLogsRevealVote = (event, context, callback) => {
 
 module.exports.getLogsChallSuccess = (event, context, callback) => {
    preHandler(getLogsChallSuccessHandler, event, context, callback);
+};
+
+module.exports.getLogsChallFail = (event, context, callback) => {
+   preHandler(getLogsChallFailHandler, event, context, callback);
 };
 
 
@@ -154,9 +168,9 @@ module.exports.createProject = (event, context, callback) => {
    preHandler(createProjectHandler, event, context, callback);
 };
 
-module.exports.createProjectS3 = (event, context, callback) => {
-   preHandler(createProjectS3Handler, event, context, callback);
-};
+//module.exports.createProjectS3 = (event, context, callback) => {
+  // preHandler(createProjectS3Handler, event, context, callback);
+//};
 
 //done
 module.exports.createUser = (event, context, callback) => {
@@ -177,10 +191,6 @@ module.exports.userLogin = (event, context, callback) => {
 };
 
 
-//done
-//module.exports.relay = (event, context, callback) => {
-  // preHandlerSensui(relayHandler, event, context, callback);
-//};
 
 //done not needed
 module.exports.promoteProject = (event, context, callback) => {
@@ -198,9 +208,9 @@ module.exports.revertPromoteProject = (event, context, callback) => {
 };
 
 //done
-module.exports.createAccount = (event, context, callback) => {
-   preHandler(createAccountHandler, event, context, callback);
-};
+//module.exports.createAccount = (event, context, callback) => {
+  // preHandler(createAccountHandler, event, context, callback);
+//};
 
 //serverless methods for Challenge Phase
 

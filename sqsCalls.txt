@@ -1,8 +1,9 @@
-
+"QueueUrl": "https://us-west-1.queue.amazonaws.com/711302153787/newstgApplicationQueue"
 
 
 ##########################################
-aws sqs send-message --queue-url "https://us-west-1.queue.amazonaws.com/711302153787/newstgChallengeQueue" --message-body "{ \"listingHash\" : \"0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f2b\"}"
+aws sqs send-message --queue-url "https://us-west-1.queue.amazonaws.com/711302153787/newstgChallengeQueue" --message-body "{ \"listingHash\" : \"0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f2b\", \"challengeId\" : \"3\"}"
+
 
 aws sqs get-queue-url --queue-name MyQueue
 

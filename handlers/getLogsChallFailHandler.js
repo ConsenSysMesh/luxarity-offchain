@@ -1,6 +1,6 @@
 
 
-class getLogsApplicationHandler{
+class getLogsChallFailHandler{
 
   constructor(databaseMgr){
     this.databaseMgr = databaseMgr;
@@ -8,7 +8,7 @@ class getLogsApplicationHandler{
 
  async handle(event, context, cb) {
 
-  console.log("inside getLogsApplicationHandler.handle");
+  console.log("inside getLogsChallFailHandler.handle");
 
   let body = event.Records[0].body;
   try {
@@ -24,50 +24,72 @@ class getLogsApplicationHandler{
       return;
     }
 
-    
+    if (!body.challengeId) {
+      cb({ code: 500, message: "report parameter missing - challengeId" });
+      return;
+    }
+
+    //body.rewardPool, body.totalTokens,  body.challengeOutcome
 
     try{
-
-      const logrecords = await this.getSimpleLogs(body.listingHash);
+      //[body.listingHash, body.challengeId, body.data, 
+      //body.commitEndDate,  body.revealEndDate,  body.challenger,
+      const logrecords = await this.getSimpleLogs(body);
       console.log("logrecords: "+logrecords)
-      //cb(null, logrecords);
-      //return;
+      body.rewardPool = logrecords[0].logData.rewardPool.toString();
+      body.totalTokens = logrecords[0].logData.totalTokens.toString();
+      body.challengeOutcome = 'CHALLENGE_FAILED';
+      
     }catch(error){
-      console.log("getLogsApplicationHandler error: "+error);
-      cb({ code: 500, message: "getLogsApplicationHandler: " + error.message });
+      console.log("getLogsChallFailHandler error: "+error);
+      cb({ code: 500, message: "getLogsChallFailHandler: " + error.message });
       return;
     }
 
     try{
 
       console.log("inside try");
-      const records = await this.databaseMgr.confirmProject(body);
+      const records = await this.databaseMgr.challengeProjectConclusionSuccess(body);
+      console.log("after records await");
+      //cb(null, records);
+      //return;
+
+    }catch(error){
+      console.log("getLogsChallFailHandler.challengeProjectConclusionSuccess DB  error"+error);
+      cb({ code: 500, message: "getLogsChallFailHandler.challengeProjectConclusionSuccess DB error: " + error.message });
+      return;
+    }
+
+    try{
+
+      console.log("inside try");
+      const records = await this.databaseMgr.challengeConclusion(body);
       console.log("after records await");
       cb(null, records);
       return;
 
     }catch(error){
-      console.log("getLogsApplication DB  error"+error);
-      cb({ code: 500, message: "getLogsApplication DB error: " + error.message });
+      console.log("getLogsChallFailHandler.challengeConclusion DB  error"+error);
+      cb({ code: 500, message: "getLogsChallFailHandler.challengeConclusion DB error: " + error.message });
       return;
     }
 
 
   }//end handle
-  
-  async getSimpleLogs(listhash){
+
+  async getSimpleLogs(body){
       console.log("in getsimpleLogs")
       try{
-      const res = await this.simpleLogs(listhash)
+      const res = await this.simpleLogs(body)
       console.log("res: "+res)
       return res;
     }catch(error){
       //return "simpleLogs() error: "+error
       throw error
     }
-    }
+    }//end getSimpleLogs
 
-    async simpleLogs(listhash){
+    async simpleLogs(body){
 
       const Ethjs = require('ethjs')
       const EthEvents = require('eth-events')
@@ -94,28 +116,17 @@ class getLogsApplicationHandler{
 
       // event name(s)
       //const eventNames = ['_PollCreated']
-      const eventNames = ['_Application']
+      const eventNames = ['_ChallengeFailed']
 
       // indexed event emission arg values (un-hashed filter topics)
       const indexedFilterValues = {
-        listingHash: listhash
+        listingHash: body.listingHash,
+        challengeID: '0x'+body.challengeId
         //listingHash: '0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f2b'
         //bad listingHash:'0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f6h'
         //good listingHash:'0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f2b'
         //_to: '0xCAFEDEADBEEF12345678912456789',
       }
-
-      /*console.log("doing first getLogs")
-      await ethEvents.getLogs(fromBlock, toBlock, eventNames, indexedFilterValues, true).then(logs => {
-        logs.map(log => {
-          console.log("first getLogs log should be below")
-          console.log(log)
-          console.log(log.logData.applicant.toString())
-
-        })
-      }).catch( e => {
-        console.log("error: " + e);
-      })*/
 
       let logs;
       let logresult;
@@ -138,23 +149,20 @@ class getLogsApplicationHandler{
             console.log("in logs.map try");
             const output = await logs.map( log =>{
                       console.log("in logs.map");
-                      console.log(log.logData.applicant.toString())
+                      console.log(log)
                       //return log.logData.applicant.toString();
-                      logresult = log.logData.applicant.toString();
+                      return log;
                     })
-            console.log("logresult: "+logresult)
-            return logresult;
+            //console.log("logresult: "+logresult)
+            return output;
           }catch(error){
             console.log("logs.map error");
             //return "logs.map error"
             throw error
             }
 
-      }
-
-
-
+      }//end simpleLogs
 
 };
 
-module.exports = getLogsApplicationHandler;
+module.exports = getLogsChallFailHandler;

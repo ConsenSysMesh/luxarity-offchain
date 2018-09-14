@@ -43,18 +43,6 @@ plugins:
   - serverless-kms-secrets
   #- serverless-webpack
 
-  #stgQueue:
-   #   Type: "AWS::SQS::Queue"
-    #  Properties:
-     #   QueueName: "stgQueue"
-      #  VisibilityTimeout: 30 # 30 sec.
-       # MessageRetentionPeriod: 60 # 60 sec.
-        #RedrivePolicy:
-         # deadLetterTargetArn:
-          #  "Fn::GetAtt":
-           #   - ReceiverDeadLetterQueue
-            #  - Arn
-          #maxReceiveCount: 5
 
 resources:
   Resources:
@@ -143,6 +131,18 @@ resources:
       Properties:
         QueueName: "newstgChallSuccessDLQ"
         MessageRetentionPeriod: 1209600 # 14 days in seconds
+        RedrivePolicy:
+          deadLetterTargetArn:
+            "Fn::GetAtt":
+              - ChallFailDeadLetterQueue
+              - Arn
+          maxReceiveCount: 2
+    ChallFailDeadLetterQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: "newstgChallFailDLQ"
+        MessageRetentionPeriod: 1209600 # 14 days in seconds
+        
   
 
 custom:
@@ -152,14 +152,6 @@ custom:
   #webpackIncludeModules: true
 
 functions:
-  #receiver:
-   # handler: handler.receiver3
-    #events:
-     # - sqs:
-      #    arn:
-       #     Fn::GetAtt:
-        #      - stgQueue
-         #     - Arn
   getLogsApplication:
     handler: handler.getLogsApplication
     events:
@@ -200,6 +192,14 @@ functions:
             Fn::GetAtt:
               - newstgChallSuccessQueue
               - Arn
+  getLogsChallFail:
+    handler: handler.getLogsChallFail
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - ChallSuccessDeadLetterQueue
+              - Arn
   allProjectDet:
     handler: handler.allProjectDet
     # The `events` block defines how to trigger the handler.helloWorld code
@@ -230,14 +230,6 @@ functions:
     events:
       - http:
           path: createProject
-          method: post
-          cors: true
-  createProjectS3:
-    handler: handler.createProjectS3
-    # The `events` block defines how to trigger the handler.helloWorld code
-    events:
-      - http:
-          path: createProjectS3
           method: post
           cors: true
   createUser:
@@ -296,14 +288,6 @@ functions:
           path: revertPromoteProject
           method: post
           cors: true
-  createAccount:
-    handler: handler.createAccount
-    # The `events` block defines how to trigger the handler.helloWorld code
-    events:
-      - http:
-          path: createAccount
-          method: post
-          cors: true
   getChallenges:
     handler: handler.getChallenges
     # The `events` block defines how to trigger the handler.helloWorld code
@@ -311,6 +295,14 @@ functions:
       - http:
           path: getChallenges
           method: post
+          cors: true
+  getMaxChallengeId:
+    handler: handler.getMaxChallengeId
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: getMaxChallengeId
+          method: get
           cors: true
   challenge:
     handler: handler.challenge

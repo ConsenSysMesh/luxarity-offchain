@@ -38,7 +38,8 @@ class getLogsChallSuccessHandler{
       console.log("logrecords: "+logrecords)
       body.rewardPool = logrecords[0].logData.rewardPool.toString();
       body.totalTokens = logrecords[0].logData.totalTokens.toString();
-      body.challengeOutcome = 'SUCCESS'
+      body.challengeOutcome = 'CHALLENGE_SUCCESS'
+      body.rejectionDate = new Date().toISOString().replace(/T.+/,'');
       
     }catch(error){
       console.log("getLogsChallSuccessHandler error: "+error);
@@ -49,14 +50,14 @@ class getLogsChallSuccessHandler{
     try{
 
       console.log("inside try");
-      const records = await this.databaseMgr.challengeProjectConclusionSuccess(body);
+      const records = await this.databaseMgr.challengeProjectConclusionFailed(body);
       console.log("after records await");
       //cb(null, records);
       //return;
 
     }catch(error){
-      console.log("getLogsChallSuccessHandler.challengeProjectConclusionSuccess DB  error"+error);
-      cb({ code: 500, message: "getLogsChallSuccessHandler.challengeProjectConclusionSuccess DB error: " + error.message });
+      console.log("getLogsChallSuccessHandler.challengeProjectConclusionFailed DB  error"+error);
+      cb({ code: 500, message: "getLogsChallSuccessHandler.challengeProjectConclusionFailed DB error: " + error.message });
       return;
     }
 

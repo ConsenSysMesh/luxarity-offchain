@@ -81,6 +81,7 @@ class getLogsChallengeHandler{
     }
 
 
+
   }
 
   async getSimpleLogs(body){
