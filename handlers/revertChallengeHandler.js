@@ -32,15 +32,12 @@ class revertChallengeHandler{
       return;
     }
 
-    if (!body.submissionDate) {
-      cb({ code: 400, message: "report parameter missing - submissionDate" });
-      return;
-    }
-
     if (!body.listingHash) {
       cb({ code: 400, message: "report parameter missing - submissionDate" });
       return;
     }
+
+    body.submissionDate = new Date().toISOString().replace(/T.+/,'');
 
 
     try{

@@ -82,7 +82,7 @@ sls invoke local -f getChallenges -d '{"projectId" : "3"}'
 sls invoke local -f challenge -d '{"projectId" : "16", "userId" : "4", "submissionDate" : "2018-07-29", "listingHash": "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengerPublicKey" : "0xD176f6907Ae1E699b39F78cf4582B019518E2B80"}'
 
 //trigger: UI - registry.challenge tx fails
-sls invoke local -f revertChallenge -d '{"projectId" : "16", "userId" : "4", "submissionDate" : "2017-09-22", "listingHash": "0x56"}'
+sls invoke local -f revertChallenge -d '{"projectId" : "16", "submissionDate" : "2017-09-22", "listingHash": "0x56"}'
 
 
 //trigger: TCR EVENT registry._Challenge
