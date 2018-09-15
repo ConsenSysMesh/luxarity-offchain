@@ -40,17 +40,7 @@ class challengeHandler{
       cb({ code: 400, message: "report parameter missing - projectId" });
       return;
     }
-
-    if (!body.userId) {
-      cb({ code: 400, message: "report parameter missing - userId" });
-      return;
-    }
-
-    if (!body.submissionDate) {
-      cb({ code: 400, message: "report parameter missing - submissionDate" });
-      return;
-    }
-
+  
     if (!body.listingHash) {
       cb({ code: 400, message: "report parameter missing - submissionDate" });
       return;
@@ -60,6 +50,8 @@ class challengeHandler{
       cb({ code: 400, message: "report parameter missing - submissionDate" });
       return;
     }
+
+    body.submissionDate = new Date().toISOString().replace(/T.+/,'');
 
 
     try{
