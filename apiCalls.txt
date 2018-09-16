@@ -39,10 +39,11 @@ sls invoke local -f projectsUser -d '{"userId" : "2"}'
 
 
 //trigger: UI user completes 'project application' process
+////minimum fields required
+sls invoke local -f createProject -d '{ "title" : "Sundaytest", "location" : "s", "imageUrl" : "sdf",  "submitterId" : "2" }'
+
 ////without video
 sls invoke local -f createProject -d '{"title" : "rrsrr", "location" : "sdf", "url" : "sdf", "categories" : "ds", "startDate" : "2018-07-29", "endDate" : "2018-07-29", "problemSummary" : "dsf", "problemEvidence" : "dfs", "solution" : "sdf", "stage" : "sdf", "impact" : "sdf", "funding" : "sdf", "team" : "sdf", "ready" : "true", "workplan" : "sdf", "risks" : "sdf", "outcomes" : "sdf", "outcome1" : "sdf", "outcome2" : "sdf", "outcome3" : "sdf", "longTermImpact" : "sdf", "learnings" : "sdf", "benefits" : "sdf", "budgetUrl" : "sdf", "financialSustainability" : "sdf", "imageUrl" : "sdf",  "submitterId" : "2" }'
-
-sls invoke local -f createProject -d '{ "title" : "rrsrr", "location" : "s", "imageUrl" : "sdf",  "submitterId" : "2" }'
 
 ////with video
 sls invoke local -f createProject -d '{"title" : "rrdsfrr", "location" : "sdf", "url" : "sdf", "categories" : "ds", "startDate" : "2018-07-29", "endDate" : "2018-07-29", "problemSummary" : "dsf", "problemEvidence" : "dfs", "solution" : "sdf", "stage" : "sdf", "impact" : "sdf", "funding" : "sdf", "team" : "sdf", "ready" : "true", "workplan" : "sdf", "risks" : "sdf", "outcomes" : "sdf", "outcome1" : "sdf", "outcome2" : "sdf", "outcome3" : "sdf", "longTermImpact" : "sdf", "learnings" : "sdf", "benefits" : "sdf", "budgetUrl" : "sdf", "financialSustainability" : "sdf", "imageUrl" : "sdf", "videoUrl": "sdf", "submitterId" : "2" }'
@@ -115,6 +116,8 @@ revealVote '{"userId" : "2", "pollId" : "2", "voteOption" : "0"}'
 
 //trigger: TCR EVENT plcrVoting.VoteRevealed
 confirmRevealVote '{"voter" : "0x78", "pollId" : "2"}'
+
+sls invoke local -f revertRevealVote -d '{"pollId" : "99", "projectId" : "99", "userId" : "0x99"}'
 
 
 DO NOT USE BELOW !!!

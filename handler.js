@@ -1,81 +1,104 @@
 'use strict';
 const AWS = require("aws-sdk");
 
+//lib handlers
 const DatabaseMgr = require('./lib/DatabaseMgr');
 const BucketMgr = require('./lib/BucketMgr');
-//const GetRecordsHandler = require('./handlers/getRecordsHandler');
+
+//project handlers
 const AllProjectDetHandler = require('./handlers/allProjectDetHandler');
 const ProjectDetHandler = require('./handlers/projectDetHandler');
 const CreateProjectHandler = require('./handlers/createProjectHandler');
+const ProjectsUserHandler = require('./handlers/projectsUserHandler');
+
+//user handlers
 const CreateUserHandler = require('./handlers/createUserHandler');
 const UserHandler = require('./handlers/userHandler');
-//const RelayHandler = require('./handlers/relayHandler');
+const UpdateUserCredsHandler = require('./handlers/updateUserCredsHandler');
+const UserLoginHandler = require('./handlers/userLoginHandler');
+
+//promote handlers
 const PromoteProjectHandler = require('./handlers/promoteProjectHandler');
-//const CreateAccountHandler = require('./handlers/createAccountHandler');
 const ConfirmProjectHandler = require('./handlers/confirmProjectHandler');
 const RevertPromoteProjectHandler = require('./handlers/revertPromoteProjectHandler');
+
+//challenge handlers
+const GetMaxChallengeIdHandler = require('./handlers/getMaxChallengeIdHandler');
+const ChallengesProjectIdHandler = require('./handlers/challengesProjectIdHandler');
 const ChallengeHandler = require('./handlers/challengeHandler');
 const ConfirmChallengeHandler = require('./handlers/confirmChallengeHandler');
-//const WatchEventHandler = require('./handlers/watchEventHandler');
-//const IntegratePromoteWatchHandler = require('./handlers/integratePromoteWatchHandler');
-const CommitVoteHandler = require('./handlers/commitVoteHandler');
-//const TestHandler = require('./handlers/testHandler');
-const ConfirmTxHandler = require('./handlers/confirmTxHandler');
-//const RunSleepHandler = require('./handlers/runSleepHandler');
-const ProjectsUserHandler = require('./handlers/projectsUserHandler');
-const UpdateUserCredsHandler = require('./handlers/updateUserCredsHandler');
-//const IntegrateChallengeWatchHandler = require('./handlers/integrateChallengeWatchHandler');
-const ChallengeConclusionHandler = require('./handlers/challengeConclusionHandler');
-const ConfirmCommitVoteHandler = require('./handlers/confirmCommitVoteHandler');
-const RevealVoteHandler = require('./handlers/revealVoteHandler');
-const ConfirmRevealVoteHandler = require('./handlers/confirmRevealVoteHandler');
-const UserLoginHandler = require('./handlers/userLoginHandler');
-//const CreateProjectS3Handler = require('./handlers/createProjectS3Handler');
 const RevertChallengeHandler = require('./handlers/revertChallengeHandler');
-const RevertCommitVoteHandler = require('./handlers/revertCommitVoteHandler');
-const ChallengesProjectIdHandler = require('./handlers/challengesProjectIdHandler');
+
+//vote handlers
 const VotesProjIdChallIdHandler = require('./handlers/votesProjIdChallIdHandler');
 
+const CommitVoteHandler = require('./handlers/commitVoteHandler');
+const ConfirmCommitVoteHandler = require('./handlers/confirmCommitVoteHandler');
+const RevertCommitVoteHandler = require('./handlers/revertCommitVoteHandler');
+
+const RevealVoteHandler = require('./handlers/revealVoteHandler');
+const ConfirmRevealVoteHandler = require('./handlers/confirmRevealVoteHandler');
+const RevertRevealVoteHandler = require('./handlers/revertRevealVoteHandler');
+
+
+//const ChallengeConclusionHandler = require('./handlers/challengeConclusionHandler');
+//const ConfirmTxHandler = require('./handlers/confirmTxHandler');
+//const GetRecordsHandler = require('./handlers/getRecordsHandler');
+//const CreateProjectS3Handler = require('./handlers/createProjectS3Handler');
+//const IntegrateChallengeWatchHandler = require('./handlers/integrateChallengeWatchHandler');
+//const RunSleepHandler = require('./handlers/runSleepHandler');
+//const TestHandler = require('./handlers/testHandler');
+//const WatchEventHandler = require('./handlers/watchEventHandler');
+//const IntegratePromoteWatchHandler = require('./handlers/integratePromoteWatchHandler');
+//const CreateAccountHandler = require('./handlers/createAccountHandler');
+//const RelayHandler = require('./handlers/relayHandler');
 
 const databaseMgr = new DatabaseMgr();
 const bucketMgr = new BucketMgr();
-//const getRecordsHandler = new GetRecordsHandler(databaseMgr);
+
 const allProjectDetHandler = new AllProjectDetHandler(databaseMgr);
 const projectDetHandler = new ProjectDetHandler(databaseMgr);
 const createProjectHandler = new CreateProjectHandler(databaseMgr, bucketMgr);
+const projectsUserHandler = new ProjectsUserHandler(databaseMgr);
+
 const createUserHandler = new CreateUserHandler(databaseMgr);
 const userHandler = new UserHandler(databaseMgr);
+const updateUserCredsHandler = new UpdateUserCredsHandler(databaseMgr);
+const userLoginHandler = new UserLoginHandler(databaseMgr);
+
 const promoteProjectHandler = new PromoteProjectHandler(databaseMgr);
-//const createAccountHandler = new CreateAccountHandler(databaseMgr);
 const confirmProjectHandler = new ConfirmProjectHandler(databaseMgr);
 const revertPromoteProjectHandler = new RevertPromoteProjectHandler(databaseMgr);
+
+const getMaxChallengeIdHandler = new GetMaxChallengeIdHandler(databaseMgr);
+const challengesProjectIdHandler = new ChallengesProjectIdHandler(databaseMgr);
 const challengeHandler = new ChallengeHandler(databaseMgr);
 const confirmChallengeHandler = new ConfirmChallengeHandler(databaseMgr);
-//const watchEventHandler = new WatchEventHandler();
-//const integratePromoteWatchHandler = new IntegratePromoteWatchHandler(databaseMgr);
-const commitVoteHandler = new CommitVoteHandler(databaseMgr);
-//const testHandler = new TestHandler(databaseMgr);
-const confirmTxHandler = new ConfirmTxHandler(databaseMgr);
-//const runSleepHandler = new RunSleepHandler();
-const projectsUserHandler = new ProjectsUserHandler(databaseMgr);
-const updateUserCredsHandler = new UpdateUserCredsHandler(databaseMgr);
-//const integrateChallengeWatchHandler = new IntegrateChallengeWatchHandler(databaseMgr);
-const challengeConclusionHandler = new ChallengeConclusionHandler(databaseMgr);
-const confirmCommitVoteHandler = new ConfirmCommitVoteHandler(databaseMgr);
-const revealVoteHandler = new RevealVoteHandler(databaseMgr);
-const confirmRevealVoteHandler = new ConfirmRevealVoteHandler(databaseMgr);
-const userLoginHandler = new UserLoginHandler(databaseMgr);
-//const createProjectS3Handler = new CreateProjectS3Handler(databaseMgr, bucketMgr);
 const revertChallengeHandler = new RevertChallengeHandler(databaseMgr);
-const revertCommitVoteHandler = new RevertCommitVoteHandler(databaseMgr);
 
-const challengesProjectIdHandler = new ChallengesProjectIdHandler(databaseMgr);
+
 const votesProjIdChallIdHandler = new VotesProjIdChallIdHandler(databaseMgr);
 
+const commitVoteHandler = new CommitVoteHandler(databaseMgr);
+const confirmCommitVoteHandler = new ConfirmCommitVoteHandler(databaseMgr);
+const revertCommitVoteHandler = new RevertCommitVoteHandler(databaseMgr);
 
-//const SqsHandler = require('./handlers/sqsHandler');
-//const sqsHandler = new SqsHandler(databaseMgr);
+const revealVoteHandler = new RevealVoteHandler(databaseMgr);
+const confirmRevealVoteHandler = new ConfirmRevealVoteHandler(databaseMgr);
+const revertRevealVoteHandler = new RevertRevealVoteHandler(databaseMgr);
 
+//const challengeConclusionHandler = new ChallengeConclusionHandler(databaseMgr);
+//const confirmTxHandler = new ConfirmTxHandler(databaseMgr);
+//const getRecordsHandler = new GetRecordsHandler(databaseMgr);
+//const createAccountHandler = new CreateAccountHandler(databaseMgr);
+//const watchEventHandler = new WatchEventHandler();
+//const integratePromoteWatchHandler = new IntegratePromoteWatchHandler(databaseMgr);
+//const testHandler = new TestHandler(databaseMgr);
+//const runSleepHandler = new RunSleepHandler();
+//const integrateChallengeWatchHandler = new IntegrateChallengeWatchHandler(databaseMgr);
+//const createProjectS3Handler = new CreateProjectS3Handler(databaseMgr, bucketMgr);
+
+//get log handlers
 const GetLogsApplicationHandler = require('./handlers/getLogsApplicationHandler');
 const getLogsApplicationHandler = new GetLogsApplicationHandler(databaseMgr);
 const GetLogsChallengeHandler = require('./handlers/getLogsChallengeHandler');
@@ -84,15 +107,13 @@ const GetLogsCommitVoteHandler = require('./handlers/getLogsCommitVoteHandler');
 const getLogsCommitVoteHandler = new GetLogsCommitVoteHandler(databaseMgr);
 const GetLogsRevealVoteHandler = require('./handlers/getLogsRevealVoteHandler');
 const getLogsRevealVoteHandler = new GetLogsRevealVoteHandler(databaseMgr);
-
 const GetLogsChallSuccessHandler = require('./handlers/getLogsChallSuccessHandler');
 const getLogsChallSuccessHandler = new GetLogsChallSuccessHandler(databaseMgr);
-
 const GetLogsChallFailHandler = require('./handlers/getLogsChallFailHandler');
 const getLogsChallFailHandler = new GetLogsChallFailHandler(databaseMgr);
 
-const GetMaxChallengeIdHandler = require('./handlers/getMaxChallengeIdHandler');
-const getMaxChallengeIdHandler = new GetMaxChallengeIdHandler(databaseMgr);
+
+
 
 
 //notes:
@@ -101,7 +122,7 @@ const getMaxChallengeIdHandler = new GetMaxChallengeIdHandler(databaseMgr);
 // token.approve(plcrVoting),
 //voting.requestVotingRighs
 
-//done
+/*
 module.exports.testEndpoint = (event, context, callback) => {
 
   let response = {
@@ -116,12 +137,10 @@ module.exports.testEndpoint = (event, context, callback) => {
               })
             };
    callback(null, response);
-};
+};*/
 
 
-module.exports.getMaxChallengeId = (event, context, callback) => {
-   preHandler(getMaxChallengeIdHandler, event, context, callback);
-};
+
 
 module.exports.getLogsApplication = (event, context, callback) => {
    preHandler(getLogsApplicationHandler, event, context, callback);
@@ -207,18 +226,10 @@ module.exports.revertPromoteProject = (event, context, callback) => {
    preHandler(revertPromoteProjectHandler, event, context, callback);
 };
 
-//done
-//module.exports.createAccount = (event, context, callback) => {
-  // preHandler(createAccountHandler, event, context, callback);
-//};
 
-//serverless methods for Challenge Phase
-
-//done
-//update status = challenge, record_status = not confirmed n projects_det
-//create challenge in challenge table
-//watch challenge event
-//confirm challenge event
+module.exports.getMaxChallengeId = (event, context, callback) => {
+   preHandler(getMaxChallengeIdHandler, event, context, callback);
+};
 
 module.exports.getChallenges = (event, context, callback) => {
    preHandler(challengesProjectIdHandler, event, context, callback);
@@ -241,22 +252,11 @@ module.exports.confirmChallenge = (event, context, callback) => {
    preHandler(confirmChallengeHandler, event, context, callback);
 };
 
-//not started
-//update status = PROMOTED, record_status = ''
-
-//module.exports.revertChallenge = (event, context, callback) => {
-   //preHandler(revertChallengeHandler, event, context, callback);
-//};
-
-module.exports.challengeConclusion = (event, context, callback) => {
-   preHandler(challengeConclusionHandler, event, context, callback);
-};
 
 module.exports.getVotes = (event, context, callback) => {
    preHandler(votesProjIdChallIdHandler, event, context, callback);
 };
 
-//done need to test from ui
 module.exports.commitVote = (event, context, callback) => {
    preHandler(commitVoteHandler, event, context, callback);
 };
@@ -277,8 +277,9 @@ module.exports.confirmRevealVote = (event, context, callback) => {
    preHandler(confirmRevealVoteHandler, event, context, callback);
 };
 
-
-
+module.exports.revertRevealVote = (event, context, callback) => {
+   preHandler(revertRevealVoteHandler, event, context, callback);
+};
 
 
 
@@ -334,7 +335,7 @@ const doHandler = (handler, event, context, callback) => {
           console.log("err or response is undefined")
           console.log(err);
             let code = 500;
-           // if (err.code) code = err.code;
+            if (err.code) code = err.code;
             let message = err;
             if (err.message) message = err.message;
 
