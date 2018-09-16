@@ -298,7 +298,7 @@ const preHandler = (handler, event, context, callback) => {
         //ethereumMgr.setSecrets(decrypted);
         databaseMgr.setSecrets(decrypted);
         bucketMgr.setSecrets(decrypted);
-        console.log("secrets:", decrypted);
+        //console.log("secrets:", decrypted);
         doHandler(handler, event, context, callback);
       });
   } else {
