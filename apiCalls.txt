@@ -79,7 +79,7 @@ sls invoke local -f revertPromoteProject -d '{"projectId" : "15"}'
 sls invoke local -f getChallenges -d '{"projectId" : "3"}'
 
 //trigger: UI - user clicks challenge button and sends mnetamask tx
-sls invoke local -f challenge -d '{"projectId" : "16", "listingHash": "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengerPublicKey" : "0xD176f6907Ae1E699b39F78cf4582B019518E2B80"}'
+sls invoke local -f challenge -d '{"projectId" : "1", "listingHash": "0xc89efdaa54c0f20c7adf612882df0950f5a951637e0307cdcb4c672f298b8bc6", "challengerPublicKey" : "0x765240498af58315108030984a2169aa80E12451"}'
 
 //trigger: UI - registry.challenge tx fails
 sls invoke local -f revertChallenge -d '{"projectId" : "16", "listingHash": "0x56"}'
