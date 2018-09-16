@@ -49,11 +49,11 @@ class revealVoteHandler{
       console.log("inside try");
       const records = await this.databaseMgr.revealVote(body);
       console.log("after records await");
-      //cb(null, records);
+      cb(null, records);
 
     }catch(error){
       console.log("revealVoteHandler error"+error);
-      cb({ code: 500, message: "revealVoteHandler error: " + error.message });
+      cb({ code: 107, message: "revealVoteHandler error: " + error.message });
       return;
     }
 

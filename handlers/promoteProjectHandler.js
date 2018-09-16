@@ -57,7 +57,7 @@ class promoteProjectHandler{
 
     }catch(error){
       console.log("promoteProjectHandler error"+error);
-      cb({ code: 500, message: "promoteProjectHandler: " + err.message });
+      cb({ code: 107, message: "promoteProjectHandler: " + error.message });
       return;
     }
 

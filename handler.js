@@ -333,7 +333,7 @@ const doHandler = (handler, event, context, callback) => {
             callback(null, response);
         } else {
           console.log("err or response is undefined")
-          console.log(err);
+          //console.log(err);
             let code = 500;
             if (err.code) code = err.code;
             let message = err;
@@ -351,7 +351,8 @@ const doHandler = (handler, event, context, callback) => {
                 message: message
               })
              };
-             callback({ code: 500, message: "no logs callback" });
+             //callback({ code: 500, message: "no logs callback" });
+             callback(response)
           }
 
         console.log("doHanlder response: "+JSON.stringify(response));

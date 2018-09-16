@@ -64,7 +64,7 @@ class challengeHandler{
 
     }catch(error){
       console.log("projectChallenge db error"+error);
-      cb({ code: 500, message: "projectChallenge db error: " + error.message });
+      cb({ code: 107, message: "projectChallenge db error: " + error.message });
       return;
     }
     
@@ -78,7 +78,7 @@ class challengeHandler{
 
     }catch(error){
       console.log("challenge db error"+error);
-      cb({ code: 500, message: "challenge db error: " + error.message });
+      cb({ code: 107, message: "challenge db error: " + error.message });
       return;
     }
 

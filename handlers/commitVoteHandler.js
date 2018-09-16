@@ -65,11 +65,11 @@ class commitVoteHandler{
       console.log("inside try");
       const records = await this.databaseMgr.commitVote(body);
       console.log("after records await");
-      //cb(null, records);
+      cb(null, records);
 
     }catch(error){
       console.log("challenge db error"+error);
-      cb({ code: 500, message: "challenge db error: " + error.message });
+      cb({ code: 107, message: "challenge db error: " + error.message });
       return;
     }
 
