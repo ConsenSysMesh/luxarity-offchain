@@ -67,7 +67,7 @@ sls invoke local -f userLogin -d '{"email" : "jdoe@gmail.com", "password" : "goo
 ///////////////////////////////
 
 //trigger: UI - user clicks promote button and sends mnetamask tx
-sls invoke local -f promoteProject -d '{"projectId" : "14", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
+sls invoke local -f promoteProject -d '{"projectId" : "99", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
 
 //trigger: TCR EVENT registry._Application
 sls invoke local -f confirmProject -d '{"listingHash" : "0x7456", "promoterPublickey" : "0x453", "projectId" : "14"}'
@@ -104,7 +104,8 @@ sls invoke local -f challengeConclusion -d '{"challengeOutcome" : "badOutcomeVar
 sls invoke local -f getVotes -d '{"projectId" : "2", "challengeId" : "1"}'
 
 //trigger: UI - user clicks vote button
-sls invoke local -f commitVote -d '{"pollId" : "1", "secretHash" : "secrethash", "salt" : "salt", "projectId" : "14", "userId" : "2", "voterPublicKey" : "0x897"}'
+sls invoke local -f commitVote -d '{"pollId" : "1", "secretHash" : "secrethash", "salt" : "salt", "voteOption" : "1", 
+"projectId" : "14", "userId" : "2", "voterPublicKey" : "0x897"}'
 
 sls invoke local -f revertCommitVote -d '{"pollId" : "2", "projectId" : "3", "userId" : "4"}'
 
@@ -117,7 +118,7 @@ revealVote '{"userId" : "2", "pollId" : "2", "voteOption" : "0"}'
 //trigger: TCR EVENT plcrVoting.VoteRevealed
 confirmRevealVote '{"voter" : "0x78", "pollId" : "2"}'
 
-sls invoke local -f revertRevealVote -d '{"pollId" : "99", "projectId" : "99", "userId" : "0x99"}'
+sls invoke local -f revertRevealVote -d '{"pollId" : "99", "projectId" : "99", "voterPublicKey" : "0x99"}'
 
 
 DO NOT USE BELOW !!!

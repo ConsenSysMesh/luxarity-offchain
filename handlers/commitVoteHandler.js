@@ -43,6 +43,17 @@ class commitVoteHandler{
       return;
     }
 
+    if (!body.voteOption) {
+      cb({ code: 400, message: "report parameter missing - voteOption" });
+      return;
+    }
+
+    if (body.voteOption != 1 && body.voteOption != 0) {
+      cb({ code: 400, message: "report parameter voteOption value must be 1 or 0" });
+      return;
+    }
+
+
     if (!body.projectId) {
       cb({ code: 400, message: "report parameter missing - projectId" });
       return;
