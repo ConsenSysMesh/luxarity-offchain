@@ -29,6 +29,11 @@ class getLogsRevealVoteHandler{
       return;
     }
 
+    if (!body.userId) {
+      cb({ code: 500, message: "report parameter missing - userId" });
+      return;
+    }
+
     if (!body.pollId) {
       cb({ code: 500, message: "report parameter missing - pollId" });
       return;
@@ -53,6 +58,20 @@ class getLogsRevealVoteHandler{
 
       console.log("inside try");
       const records = await this.databaseMgr.confirmRevealVote(body);
+      console.log("after records await");
+      //cb(null, records);
+      //return;
+
+    }catch(error){
+      console.log("getLogsRevealVoteHandler DB  error"+error);
+      cb({ code: 500, message: "getLogsRevealVoteHandler DB error: " + error.message });
+      return;
+    }
+
+    try{
+
+      console.log("inside try");
+      const records = await this.databaseMgr.projectConfirmRevealVote(body);
       console.log("after records await");
       cb(null, records);
       return;

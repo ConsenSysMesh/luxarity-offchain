@@ -104,10 +104,10 @@ sls invoke local -f challengeConclusion -d '{"challengeOutcome" : "badOutcomeVar
 sls invoke local -f getVotes -d '{"projectId" : "2", "challengeId" : "1"}'
 
 //trigger: UI - user clicks vote button
-sls invoke local -f commitVote -d '{"pollId" : "1", "secretHash" : "secrethash", "salt" : "salt", "voteOption" : "1", 
-"projectId" : "14", "userId" : "2", "voterPublicKey" : "0x897"}'
+sls invoke local -f commitVote -d '{"pollId" : "99", "secretHash" : "secrethash", "salt" : "salt", "voteOption" : "1", 
+"projectId" : "21", "userId" : "99", "voterPublicKey" : "99"}'
 
-sls invoke local -f revertCommitVote -d '{"pollId" : "2", "projectId" : "3", "userId" : "4"}'
+sls invoke local -f revertCommitVote -d '{"pollId" : "99", "projectId" : "21", "userId" : "99"}'
 
 //trigger: TCR EVENT plcrVoting._VoteCommitted
 confirmCommitVote '{"pollId" : "1", "voterPublicKey" : "0x888"}'

@@ -43,8 +43,6 @@ class revertRevealVoteHandler{
     }
 
 
-    
-  
     try{
 
       console.log("inside try");

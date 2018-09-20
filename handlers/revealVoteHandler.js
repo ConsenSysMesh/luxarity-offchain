@@ -41,7 +41,6 @@ class revealVoteHandler{
       cb({ code: 400, message: "report parameter missing - voteOption" });
       return;
     }
-
     
   
     try{

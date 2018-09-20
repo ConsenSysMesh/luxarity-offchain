@@ -42,15 +42,13 @@ class revertCommitVoteHandler{
       return;
     }
 
-
-    
   
     try{
 
       console.log("inside try");
       const records = await this.databaseMgr.revertCommitVote(body);
       console.log("after records await");
-      //cb(null, records);
+      cb(null, records);
 
     }catch(error){
       console.log("revertCommitVoteHandler db error"+error);
@@ -64,5 +62,6 @@ class revertCommitVoteHandler{
 
 
 };
+
 
 module.exports = revertCommitVoteHandler;

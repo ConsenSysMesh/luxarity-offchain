@@ -29,6 +29,11 @@ class getLogsCommitVoteHandler{
       return;
     }
 
+    if (!body.userId) {
+      cb({ code: 500, message: "report parameter missing - userId" });
+      return;
+    }
+
     if (!body.pollId) {
       cb({ code: 500, message: "report parameter missing - pollId" });
       return;
@@ -54,8 +59,22 @@ class getLogsCommitVoteHandler{
       console.log("inside try");
       const records = await this.databaseMgr.confirmCommitVote(body);
       console.log("after records await");
-      cb(null, records);
+      //cb(null, records);
+      //return;
+
+    }catch(error){
+      console.log("getLogsCommitVoteHandler DB  error"+error);
+      cb({ code: 500, message: "getLogsCommitVoteHandler DB error: " + error.message });
       return;
+    }
+
+    try{
+
+      console.log("inside try");
+      const records = await this.databaseMgr.projectConfirmCommitVote(body);
+      console.log("after records await");
+      //cb(null, records);
+      //return;
 
     }catch(error){
       console.log("getLogsCommitVoteHandler DB  error"+error);

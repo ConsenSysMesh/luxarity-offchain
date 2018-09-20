@@ -69,7 +69,6 @@ class commitVoteHandler{
       return;
     }
 
-    
   
     try{
 
@@ -79,8 +78,8 @@ class commitVoteHandler{
       cb(null, records);
 
     }catch(error){
-      console.log("challenge db error"+error);
-      cb({ code: 107, message: "challenge db error: " + error.message });
+      console.log("commitVoteHandler db error"+error);
+      cb({ code: 107, message: "commitVoteHandler db error: " + error.message });
       return;
     }
 
