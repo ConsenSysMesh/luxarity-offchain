@@ -24,8 +24,11 @@ endpoints for stg (use for testing):
   POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/confirmRevealVote
 
 
-body.projectId, body.userId, body.submissionDate, body.comment
+//trigger: UI needs to insert a project
 sls invoke local -f createComment -d '{"projectId":"99","userId":"99","submissionDate":"2018-10-10","comment":"a great comment"}'
+
+//trigger: UI needs to get comments for a project
+sls invoke local -f projectComments -d '{"projectId":"99"}'
 ///////////////////////////////
 
 //trigger: UI needs to get all projects
