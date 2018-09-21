@@ -1,5 +1,6 @@
 
-class confirmCommitVoteHandler{
+
+class projectCommentsHandler{
 
   constructor(databaseMgr){
     this.databaseMgr = databaseMgr;
@@ -7,7 +8,7 @@ class confirmCommitVoteHandler{
 
  async handle(event, context, cb) {
 
-  console.log("inside confirmCommitVoteHandler.handle");
+  console.log("inside projectCommentsHandler.handle");
 
   let body;
 
@@ -26,31 +27,26 @@ class confirmCommitVoteHandler{
     }
 
    
-    //
-     if (!body.pollId) {
-      cb({ code: 400, message: "report parameter missing - pollId" });
-      return;
-    }
 
-    if (!body.voterPublicKey) {
-      cb({ code: 400, message: "report parameter missing - voterPublicKey" });
+    if (!body.projectId) {
+      cb({ code: 400, message: "report parameter missing - projectId" });
       return;
     }
 
   
+  
     try{
 
       console.log("inside try");
-      const records = await this.databaseMgr.confirmCommitVote(body);
+      const records = await this.databaseMgr.projectComments(body);
       console.log("after records await");
       cb(null, records);
 
     }catch(error){
-      console.log("confirmCommitVoteHandler error"+error);
-      cb({ code: 500, message: "confirmCommitVoteHandler error: " + error.message });
+      console.log("projectCommentsHandler error"+error);
+      cb({ code: 500, message: "projectCommentsHandler error: " + error.message });
       return;
     }
-
 
   }
 
@@ -58,4 +54,4 @@ class confirmCommitVoteHandler{
 
 };
 
-module.exports = confirmCommitVoteHandler;
+module.exports = projectCommentsHandler;

@@ -200,6 +200,22 @@ functions:
             Fn::GetAtt:
               - ChallSuccessDeadLetterQueue
               - Arn
+  createComment:
+    handler: handler.createComment
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: createComment
+          method: post
+          cors: true
+  projectComments:
+    handler: handler.projectComments
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: projectComments
+          method: post
+          cors: true
   allProjectDet:
     handler: handler.allProjectDet
     # The `events` block defines how to trigger the handler.helloWorld code
@@ -272,14 +288,6 @@ functions:
           path: promoteProject
           method: post
           cors: true
-  confirmProject:
-    handler: handler.confirmProject
-    # The `events` block defines how to trigger the handler.helloWorld code
-    events:
-      - http:
-          path: confirmProject
-          method: post
-          cors: true
   revertPromoteProject:
     handler: handler.revertPromoteProject
     # The `events` block defines how to trigger the handler.helloWorld code
@@ -320,14 +328,6 @@ functions:
           path: revertChallenge
           method: post
           cors: true
-  confirmChallenge:
-    handler: handler.confirmChallenge
-    # The `events` block defines how to trigger the handler.helloWorld code
-    events:
-      - http:
-          path: confirmChallenge
-          method: post
-          cors: true
   getVotes:
     handler: handler.getVotes
     # The `events` block defines how to trigger the handler.helloWorld code
@@ -352,29 +352,12 @@ functions:
           path: revertCommitVote
           method: post
           cors: true
-  confirmCommitVote:
-    handler: handler.confirmCommitVote
-    # The `events` block defines how to trigger the handler.helloWorld code
-    events:
-      - http:
-          path: confirmCommitVote
-          method: post
-          cors: true
   revealVote:
     handler: handler.revealVote
     # The `events` block defines how to trigger the handler.helloWorld code
     events:
       - http:
           path: revealVote
-          method: post
-          cors: true
-    timeout: 30
-  confirmRevealVote:
-    handler: handler.confirmRevealVote
-    # The `events` block defines how to trigger the handler.helloWorld code
-    events:
-      - http:
-          path: confirmRevealVote
           method: post
           cors: true
     timeout: 30

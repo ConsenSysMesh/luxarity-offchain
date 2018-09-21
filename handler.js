@@ -19,25 +19,25 @@ const UserLoginHandler = require('./handlers/userLoginHandler');
 
 //promote handlers
 const PromoteProjectHandler = require('./handlers/promoteProjectHandler');
-const ConfirmProjectHandler = require('./handlers/confirmProjectHandler');
+//const ConfirmProjectHandler = require('./handlers/confirmProjectHandler');
 const RevertPromoteProjectHandler = require('./handlers/revertPromoteProjectHandler');
 
 //challenge handlers
 const GetMaxChallengeIdHandler = require('./handlers/getMaxChallengeIdHandler');
 const ChallengesProjectIdHandler = require('./handlers/challengesProjectIdHandler');
 const ChallengeHandler = require('./handlers/challengeHandler');
-const ConfirmChallengeHandler = require('./handlers/confirmChallengeHandler');
+//const ConfirmChallengeHandler = require('./handlers/confirmChallengeHandler');
 const RevertChallengeHandler = require('./handlers/revertChallengeHandler');
 
 //vote handlers
 const VotesProjIdChallIdHandler = require('./handlers/votesProjIdChallIdHandler');
 
 const CommitVoteHandler = require('./handlers/commitVoteHandler');
-const ConfirmCommitVoteHandler = require('./handlers/confirmCommitVoteHandler');
+//const ConfirmCommitVoteHandler = require('./handlers/confirmCommitVoteHandler');
 const RevertCommitVoteHandler = require('./handlers/revertCommitVoteHandler');
 
 const RevealVoteHandler = require('./handlers/revealVoteHandler');
-const ConfirmRevealVoteHandler = require('./handlers/confirmRevealVoteHandler');
+//const ConfirmRevealVoteHandler = require('./handlers/confirmRevealVoteHandler');
 const RevertRevealVoteHandler = require('./handlers/revertRevealVoteHandler');
 
 
@@ -67,24 +67,24 @@ const updateUserCredsHandler = new UpdateUserCredsHandler(databaseMgr);
 const userLoginHandler = new UserLoginHandler(databaseMgr);
 
 const promoteProjectHandler = new PromoteProjectHandler(databaseMgr);
-const confirmProjectHandler = new ConfirmProjectHandler(databaseMgr);
+//const confirmProjectHandler = new ConfirmProjectHandler(databaseMgr);
 const revertPromoteProjectHandler = new RevertPromoteProjectHandler(databaseMgr);
 
 const getMaxChallengeIdHandler = new GetMaxChallengeIdHandler(databaseMgr);
 const challengesProjectIdHandler = new ChallengesProjectIdHandler(databaseMgr);
 const challengeHandler = new ChallengeHandler(databaseMgr);
-const confirmChallengeHandler = new ConfirmChallengeHandler(databaseMgr);
+//const confirmChallengeHandler = new ConfirmChallengeHandler(databaseMgr);
 const revertChallengeHandler = new RevertChallengeHandler(databaseMgr);
 
 
 const votesProjIdChallIdHandler = new VotesProjIdChallIdHandler(databaseMgr);
 
 const commitVoteHandler = new CommitVoteHandler(databaseMgr);
-const confirmCommitVoteHandler = new ConfirmCommitVoteHandler(databaseMgr);
+//const confirmCommitVoteHandler = new ConfirmCommitVoteHandler(databaseMgr);
 const revertCommitVoteHandler = new RevertCommitVoteHandler(databaseMgr);
 
 const revealVoteHandler = new RevealVoteHandler(databaseMgr);
-const confirmRevealVoteHandler = new ConfirmRevealVoteHandler(databaseMgr);
+//const confirmRevealVoteHandler = new ConfirmRevealVoteHandler(databaseMgr);
 const revertRevealVoteHandler = new RevertRevealVoteHandler(databaseMgr);
 
 //const challengeConclusionHandler = new ChallengeConclusionHandler(databaseMgr);
@@ -111,6 +111,12 @@ const GetLogsChallSuccessHandler = require('./handlers/getLogsChallSuccessHandle
 const getLogsChallSuccessHandler = new GetLogsChallSuccessHandler(databaseMgr);
 const GetLogsChallFailHandler = require('./handlers/getLogsChallFailHandler');
 const getLogsChallFailHandler = new GetLogsChallFailHandler(databaseMgr);
+
+const CreateCommentHandler = require('./handlers/createCommentHandler');
+const createCommentHandler = new CreateCommentHandler(databaseMgr);
+
+const ProjectCommentsHandler = require('./handlers/projectCommentsHandler');
+const projectCommentsHandler = new ProjectCommentsHandler(databaseMgr);
 
 
 
@@ -139,7 +145,13 @@ module.exports.testEndpoint = (event, context, callback) => {
    callback(null, response);
 };*/
 
+module.exports.createComment = (event, context, callback) => {
+   preHandler(createCommentHandler, event, context, callback);
+};
 
+module.exports.projectComments = (event, context, callback) => {
+   preHandler(projectCommentsHandler, event, context, callback);
+};
 
 
 module.exports.getLogsApplication = (event, context, callback) => {
@@ -217,9 +229,9 @@ module.exports.promoteProject = (event, context, callback) => {
 };
 
 //done not needed
-module.exports.confirmProject = (event, context, callback) => {
-   preHandler(confirmProjectHandler, event, context, callback);
-};
+//module.exports.confirmProject = (event, context, callback) => {
+  // preHandler(confirmProjectHandler, event, context, callback);
+//};
 
 //done possibly not needed
 module.exports.revertPromoteProject = (event, context, callback) => {
@@ -248,9 +260,9 @@ module.exports.revertChallenge = (event, context, callback) => {
 //done
 //update record_status = confirmed in projects_det
 //update challenge in challenge table
-module.exports.confirmChallenge = (event, context, callback) => {
-   preHandler(confirmChallengeHandler, event, context, callback);
-};
+//module.exports.confirmChallenge = (event, context, callback) => {
+  // preHandler(confirmChallengeHandler, event, context, callback);
+//};
 
 
 module.exports.getVotes = (event, context, callback) => {
@@ -265,17 +277,17 @@ module.exports.revertCommitVote = (event, context, callback) => {
    preHandler(revertCommitVoteHandler, event, context, callback);
 };
 
-module.exports.confirmCommitVote = (event, context, callback) => {
-   preHandler(confirmCommitVoteHandler, event, context, callback);
-};
+//module.exports.confirmCommitVote = (event, context, callback) => {
+ //  preHandler(confirmCommitVoteHandler, event, context, callback);
+//};
 
 module.exports.revealVote = (event, context, callback) => {
    preHandler(revealVoteHandler, event, context, callback);
 };
 
-module.exports.confirmRevealVote = (event, context, callback) => {
-   preHandler(confirmRevealVoteHandler, event, context, callback);
-};
+//module.exports.confirmRevealVote = (event, context, callback) => {
+ //  preHandler(confirmRevealVoteHandler, event, context, callback);
+//};
 
 module.exports.revertRevealVote = (event, context, callback) => {
    preHandler(revertRevealVoteHandler, event, context, callback);
