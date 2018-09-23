@@ -118,9 +118,11 @@ const createCommentHandler = new CreateCommentHandler(databaseMgr);
 const ProjectCommentsHandler = require('./handlers/projectCommentsHandler');
 const projectCommentsHandler = new ProjectCommentsHandler(databaseMgr);
 
+const SetAdminDatesHandler = require('./handlers/setAdminDatesHandler');
+const setAdminDatesHandler = new SetAdminDatesHandler(databaseMgr);
 
-
-
+const GetAdminDatesHandler = require('./handlers/getAdminDatesHandler');
+const getAdminDatesHandler = new GetAdminDatesHandler(databaseMgr);
 
 //notes:
 // before tcr need:
@@ -144,6 +146,14 @@ module.exports.testEndpoint = (event, context, callback) => {
             };
    callback(null, response);
 };*/
+
+module.exports.setAdminDates = (event, context, callback) => {
+   preHandler(setAdminDatesHandler, event, context, callback);
+};
+
+module.exports.getAdminDates = (event, context, callback) => {
+   preHandler(getAdminDatesHandler, event, context, callback);
+};
 
 module.exports.createComment = (event, context, callback) => {
    preHandler(createCommentHandler, event, context, callback);

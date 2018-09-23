@@ -138,7 +138,7 @@ class createProjectHandler{
 
     //add videoUrl logic
 
-    body.submissionDate = new Date().toISOString().replace(/T.+/,'');
+    body.submissionDate = new Date().toISOString();
  
     //body.categories = "array" + body.categories;
 

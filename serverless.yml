@@ -370,6 +370,24 @@ functions:
           method: post
           cors: true
     timeout: 30
+  setAdminDates:
+    handler: handler.setAdminDates
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: setAdminDates
+          method: post
+          cors: true
+    timeout: 30
+  getAdminDates:
+    handler: handler.getAdminDates
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: getAdminDates
+          method: get
+          cors: true
+    timeout: 30
   
 
 
