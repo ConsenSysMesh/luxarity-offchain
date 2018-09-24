@@ -42,6 +42,11 @@ class revertRevealVoteHandler{
       return;
     }
 
+    if (!body.userId) {
+      cb({ code: 400, message: "report parameter missing - projectId" });
+      return;
+    }
+
 
     try{
 

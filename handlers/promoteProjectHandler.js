@@ -46,6 +46,11 @@ class promoteProjectHandler{
       return;
     }
 
+    if (!body.userId) {
+      cb({ code: 400, message: "report parameter missing - listingHash" });
+      return;
+    }
+
      
   
     try{
