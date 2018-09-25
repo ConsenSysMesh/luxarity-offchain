@@ -68,7 +68,7 @@ sls invoke local -f revertChallenge -d '{"projectId" : "16", "listingHash": "0x5
 //// returns all votes for projectId and challengeId
 sls invoke local -f getVotes -d '{"projectId" : "2", "challengeId" : "1"}'
 //// returns all votes for projectId, challengeId,. and userId
-sls invoke local -f getVotes -d '{"projectId" : "2", "challengeId" : "1", "userId" : "99"}'
+sls invoke local -f getVotes -d '{"projectId" : "21", "challengeId" : "99", "userId" : "99"}'
 
 //trigger: UI - user clicks vote button
 sls invoke local -f commitVote -d '{"pollId" : "99", "secretHash" : "secrethash", "salt" : "salt", "voteOption" : "1", 
