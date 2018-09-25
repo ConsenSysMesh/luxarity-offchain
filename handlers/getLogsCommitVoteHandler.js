@@ -111,7 +111,7 @@ class getLogsCommitVoteHandler{
     
       const contract = {
         abi: Token.abi,
-        address: '0xe9a17d98db27566a9856ede397dd2e44e8461ba0',
+        address: '0x63b98aadfdf3217d4aa2402bc79489f39bd8dcdb',
       }
 
     

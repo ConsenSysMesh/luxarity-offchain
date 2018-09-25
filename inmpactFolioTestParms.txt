@@ -1,0 +1,11 @@
+
+RegistryFactory:   0x822415a1e4d0d7f99425d794a817d9b823bdcd0c
+
+Deploying proxy contracts...
+
+Proxy contracts successfully migrated to network_id: 4
+
+impactFolio test:          0xe130eb3315f947a2a39e5bdc76aafff8898cc280
+PLCRVoting:        0x63b98aadfdf3217d4aa2402bc79489f39bd8dcdb
+Parameterizer:     0x901b008ef1f68eff9db96385958d77482dbe1278
+Registry:          0x671e06151568a92047f0cec61487b2894211b569

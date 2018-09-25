@@ -110,7 +110,7 @@ class getLogsChallengeHandler{
     
       const contract = {
         abi: Token.abi,
-        address: '0x2739345dedf4985a64269f1661bc46924374aa85',
+        address: '0x671e06151568a92047f0cec61487b2894211b569',
       }
 
     

@@ -39,7 +39,7 @@ class getLogsChallSuccessHandler{
       body.rewardPool = logrecords[0].logData.rewardPool.toString();
       body.totalTokens = logrecords[0].logData.totalTokens.toString();
       body.challengeOutcome = 'CHALLENGE_SUCCESS'
-      body.rejectionDate = new Date().toISOString().replace(/T.+/,'');
+      body.rejectionDate = new Date().toISOString();
       
     }catch(error){
       console.log("getLogsChallSuccessHandler error: "+error);
@@ -104,7 +104,7 @@ class getLogsChallSuccessHandler{
     
       const contract = {
         abi: Token.abi,
-        address: '0x2739345dedf4985a64269f1661bc46924374aa85',
+        address: '0x63b98aadfdf3217d4aa2402bc79489f39bd8dcdb',
       }
 
     

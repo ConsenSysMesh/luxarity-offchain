@@ -103,7 +103,7 @@ class getLogsChallFailHandler{
     
       const contract = {
         abi: Token.abi,
-        address: '0x2739345dedf4985a64269f1661bc46924374aa85',
+        address: '0x63b98aadfdf3217d4aa2402bc79489f39bd8dcdb',
       }
 
     
