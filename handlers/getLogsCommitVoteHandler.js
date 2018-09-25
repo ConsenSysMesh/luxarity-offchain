@@ -25,7 +25,7 @@ class getLogsCommitVoteHandler{
     }
 
     if (!body.voterPublicKey) {
-      cb({ code: 500, message: "report parameter missing - voter" });
+      cb({ code: 500, message: "report parameter missing - voterPublicKey" });
       return;
     }
 

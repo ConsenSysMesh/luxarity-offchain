@@ -79,7 +79,10 @@ sls invoke local -f revertCommitVote -d '{"pollId" : "99", "projectId" : "21", "
 //trigger: UI - user clicks reveal vote button
 revealVote '{"userId" : "99", "pollId" : "99", "voteOption" : "0"}'
 
-sls invoke local -f revertRevealVote -d '{"pollId" : "99", "projectId" : "99", "voterPublicKey" : "0x99". "userId" : "99"}'
+sls invoke local -f revertRevealVote -d '{"pollId" : "99", "projectId" : "21", "voterPublicKey" : "99", "userId" : "99"}'
+
+
+sls invoke local -f getLogsCommitVote -d '{"listingHash" : "0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f2b", "voterPublicKey" : "99", "userId" : "99", "pollId" : "99"}'
 
 
 DO NOT USE BELOW !!!  DO NOT USE BELOW !!! DO NOT USE BELOW !!! DO NOT USE BELOW !!! DO NOT USE BELOW !!! DO NOT USE BELOW !!!
