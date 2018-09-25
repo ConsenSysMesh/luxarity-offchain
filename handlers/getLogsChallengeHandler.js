@@ -41,8 +41,8 @@ class getLogsChallengeHandler{
       //console.log("commitEndDate: "+commitEndDate)
       body.challengeId = logrecords[0].logData.challengeID.toString();
       body.data = logrecords[0].logData.data.toString();
-      body.commitEndDate = new Date(logrecords[0].logData.commitEndDate.toString() * 1000).toISOString().replace(/T.+/,'');
-      body.revealEndDate = new Date(logrecords[0].logData.revealEndDate.toString() * 1000).toISOString().replace(/T.+/,'');
+      body.commitEndDate = new Date(logrecords[0].logData.commitEndDate.toString() * 1000);
+      body.revealEndDate = new Date(logrecords[0].logData.revealEndDate.toString() * 1000);
       body.challenger = logrecords[0].logData.challenger.toString();
       //cb(null, logrecords);
       //return;

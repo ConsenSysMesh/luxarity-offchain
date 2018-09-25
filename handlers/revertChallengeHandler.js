@@ -37,7 +37,7 @@ class revertChallengeHandler{
       return;
     }
 
-    body.submissionDate = new Date().toISOString().replace(/T.+/,'');
+    body.submissionDate = new Date().toISOString();
 
 
     try{
