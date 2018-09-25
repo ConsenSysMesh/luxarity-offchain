@@ -1,27 +1,3 @@
-endpoints for stg (use for testing):
-  GET - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/testEndpoint2
-  GET - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/allProjectDet
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/projectDet
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/projectsUser
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/createProject
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/createProjectS3
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/createUser
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/updateUserCreds
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/user
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/userLogin
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/promoteProject
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/confirmProject
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/revertPromoteProject
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/createAccount
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/challenge
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/revertChallenge
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/confirmChallenge
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/commitVote
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/confirmCommitVote
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/test1
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/challengeConclusion
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/revealVote
-  POST - https://05kzqdqfz3.execute-api.us-west-1.amazonaws.com/stg/confirmRevealVote
 
 
 //trigger: UI needs to insert a project
@@ -72,9 +48,6 @@ sls invoke local -f userLogin -d '{"email" : "jdoe@gmail.com", "password" : "goo
 //trigger: UI - user clicks promote button and sends mnetamask tx
 sls invoke local -f promoteProject -d '{"projectId" : "99", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
 
-//trigger: TCR EVENT registry._Application
-sls invoke local -f confirmProject -d '{"listingHash" : "0x7456", "promoterPublickey" : "0x453", "projectId" : "14"}'
-
 //no event
 sls invoke local -f revertPromoteProject -d '{"projectId" : "15"}'
 
@@ -89,22 +62,13 @@ sls invoke local -f challenge -d '{"projectId" : "1", "listingHash": "0xc89efdaa
 sls invoke local -f revertChallenge -d '{"projectId" : "16", "listingHash": "0x56"}'
 
 
-//trigger: TCR EVENT registry._Challenge
-sls invoke local -f confirmChallenge -d '{"listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengeId" : "3", "data" : "some data", "commitEndDate" : "2018-07-29", "revealEndDate" : "2018-07-29", "challenger" : "0x897"}'
-
-//trigger:  TCR EVENT registry._ChallengeSucceeded
-sls invoke local -f challengeConclusion -d '{"challengeOutcome" : "Success", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengeId" : "3", "rewardPool" : "1000", "totalTokens" : "1100"}'
-
-//trigger:  TCR EVENT registry._ChallengeFailed
-sls invoke local -f challengeConclusion -d '{"challengeOutcome" : "Failed", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengeId" : "2", "rewardPool" : "1000", "totalTokens" : "1100"}'
-
-//test: bad challengeOutcome input variable
-sls invoke local -f challengeConclusion -d '{"challengeOutcome" : "badOutcomeVariable", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengeId" : "2", "rewardPool" : "1000", "totalTokens" : "1100"}'
-
-
 ///////////////////////////////
 
+//trigger: UI - needs to get votes for reveal workflow
+//// returns all votes for projectId and challengeId
 sls invoke local -f getVotes -d '{"projectId" : "2", "challengeId" : "1"}'
+//// returns all votes for projectId, challengeId,. and userId
+sls invoke local -f getVotes -d '{"projectId" : "2", "challengeId" : "1", "userId" : "99"}'
 
 //trigger: UI - user clicks vote button
 sls invoke local -f commitVote -d '{"pollId" : "99", "secretHash" : "secrethash", "salt" : "salt", "voteOption" : "1", 
@@ -112,21 +76,15 @@ sls invoke local -f commitVote -d '{"pollId" : "99", "secretHash" : "secrethash"
 
 sls invoke local -f revertCommitVote -d '{"pollId" : "99", "projectId" : "21", "userId" : "99"}'
 
-//trigger: TCR EVENT plcrVoting._VoteCommitted
-confirmCommitVote '{"pollId" : "1", "voterPublicKey" : "0x888"}'
-
 //trigger: UI - user clicks reveal vote button
-revealVote '{"userId" : "2", "pollId" : "2", "voteOption" : "0"}'
+revealVote '{"userId" : "99", "pollId" : "99", "voteOption" : "0"}'
 
-//trigger: TCR EVENT plcrVoting.VoteRevealed
-confirmRevealVote '{"voter" : "0x78", "pollId" : "2"}'
-
-sls invoke local -f revertRevealVote -d '{"pollId" : "99", "projectId" : "99", "voterPublicKey" : "0x99"}'
+sls invoke local -f revertRevealVote -d '{"pollId" : "99", "projectId" : "99", "voterPublicKey" : "0x99". "userId" : "99"}'
 
 
-DO NOT USE BELOW !!!
-DO NOT USE BELOW !!!
-DO NOT USE BELOW !!!
+DO NOT USE BELOW !!!  DO NOT USE BELOW !!! DO NOT USE BELOW !!! DO NOT USE BELOW !!! DO NOT USE BELOW !!! DO NOT USE BELOW !!!
+DO NOT USE BELOW !!!  DO NOT USE BELOW !!! DO NOT USE BELOW !!! DO NOT USE BELOW !!! DO NOT USE BELOW !!! DO NOT USE BELOW !!!
+
 endpoints for develop (currently in use):
   GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/testEndpoint
   GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/testEndpoint2
@@ -155,6 +113,28 @@ endpoints for develop (currently in use):
   POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmRevealVote
 
 //////////////////    OLD    //////////////////////////
+
+//trigger: TCR EVENT plcrVoting.VoteRevealed
+confirmRevealVote '{"voter" : "0x78", "pollId" : "2"}'
+
+//trigger: TCR EVENT plcrVoting._VoteCommitted
+confirmCommitVote '{"pollId" : "1", "voterPublicKey" : "0x888"}'
+
+//trigger: TCR EVENT registry._Challenge
+sls invoke local -f confirmChallenge -d '{"listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengeId" : "3", "data" : "some data", "commitEndDate" : "2018-07-29", "revealEndDate" : "2018-07-29", "challenger" : "0x897"}'
+
+//trigger:  TCR EVENT registry._ChallengeSucceeded
+sls invoke local -f challengeConclusion -d '{"challengeOutcome" : "Success", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengeId" : "3", "rewardPool" : "1000", "totalTokens" : "1100"}'
+
+//trigger:  TCR EVENT registry._ChallengeFailed
+sls invoke local -f challengeConclusion -d '{"challengeOutcome" : "Failed", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengeId" : "2", "rewardPool" : "1000", "totalTokens" : "1100"}'
+
+//test: bad challengeOutcome input variable
+sls invoke local -f challengeConclusion -d '{"challengeOutcome" : "badOutcomeVariable", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengeId" : "2", "rewardPool" : "1000", "totalTokens" : "1100"}'
+
+
+//trigger: TCR EVENT registry._Application
+sls invoke local -f confirmProject -d '{"listingHash" : "0x7456", "promoterPublickey" : "0x453", "projectId" : "14"}'
 
 
 sls invoke local -f helloWorld

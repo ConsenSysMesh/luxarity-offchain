@@ -53,7 +53,7 @@ class revertRevealVoteHandler{
       console.log("inside try");
       const records = await this.databaseMgr.revertRevealVote(body);
       console.log("after records await");
-      //cb(null, records);
+      cb(null, records);
 
     }catch(error){
       console.log("revertRevealVoteHandler db error"+error);
