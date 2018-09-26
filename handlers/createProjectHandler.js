@@ -139,6 +139,7 @@ class createProjectHandler{
     //add videoUrl logic
 
     body.submissionDate = new Date().toISOString();
+    body.submitterId = body.submitterId.toString();
  
     //body.categories = "array" + body.categories;
 
