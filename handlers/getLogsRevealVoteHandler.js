@@ -124,12 +124,17 @@ class getLogsRevealVoteHandler{
 
       // event name(s)
       //const eventNames = ['_PollCreated']
-      const eventNames = ['_VoteCommitted']
+      const eventNames = ['_VoteRevealed']
+
+      const intPollId = parseInt(body.pollId, 10);
+      console.log(intPollId)
+      const hexPollId = (intPollId).toString(16)
+      console.log(hexPollId)
 
       // indexed event emission arg values (un-hashed filter topics)
       const indexedFilterValues = {
         voter: body.voterPublicKey,
-        pollID: '0x'+body.pollId
+        pollID: '0x'+hexPollId
         //listingHash: '0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f2b'
         //bad listingHash:'0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f6h'
         //good listingHash:'0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f2b'
