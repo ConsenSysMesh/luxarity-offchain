@@ -19,7 +19,7 @@ sls invoke local -f projectsUser -d '{"userId" : "2"}'
 
 //trigger: UI user completes 'project application' process
 ////minimum fields required
-sls invoke local -f createProject -d '{ "title" : "irelandtest", "location" : "s", "imageUrl" : "sdf",  "submitterId" : "2" }'
+sls invoke local -f createProject -d '{ "title" : "irelandtest", "location" : "s", "imageUrl" : "sdf",  "submitterId" : 2 }'
 
 ////without video
 sls invoke local -f createProject -d '{"title" : "rrsrr", "location" : "sdf", "url" : "sdf", "categories" : "ds", "startDate" : "2018-07-29", "endDate" : "2018-07-29", "problemSummary" : "dsf", "problemEvidence" : "dfs", "solution" : "sdf", "stage" : "sdf", "impact" : "sdf", "funding" : "sdf", "team" : "sdf", "ready" : "true", "workplan" : "sdf", "risks" : "sdf", "outcomes" : "sdf", "outcome1" : "sdf", "outcome2" : "sdf", "outcome3" : "sdf", "longTermImpact" : "sdf", "learnings" : "sdf", "benefits" : "sdf", "budgetUrl" : "sdf", "financialSustainability" : "sdf", "imageUrl" : "sdf",  "submitterId" : "2" }'
