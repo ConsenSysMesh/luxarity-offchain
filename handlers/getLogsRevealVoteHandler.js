@@ -111,7 +111,7 @@ class getLogsRevealVoteHandler{
     
       const contract = {
         abi: Token.abi,
-        address: '0x63b98aadfdf3217d4aa2402bc79489f39bd8dcdb',
+        address: '0x1191c8c35de3d3d72dc719d7f9c7d563f9e5cb00',
       }
 
     

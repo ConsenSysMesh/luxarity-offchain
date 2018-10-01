@@ -81,7 +81,7 @@ class getLogsApplicationHandler{
     
       const contract = {
         abi: Token.abi,
-        address: '0x671e06151568a92047f0cec61487b2894211b569',
+        address: '0x28ad2c93b70c3fa5ddbcdab4aa6a6fcf7fa159d9',
       }
 
     
