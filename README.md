@@ -1,11 +1,10 @@
 # Backend Serverless Build for WWF
-For supporting WWF's ImpactFolio TCR deployment. <br/>
+For supporting WWF's ImpactFolio TCR smart contracts and User Interface, http://impactfolio.org. <br/>
 Serverless provides lambda function endpoints for interacting with postgres database. <br/>
 Lambda-Sensui's relay function is also available for sending signed meta transactions. <br/>
 
-** Test environment = stg, current prod environment = develop**
-**!!! make default stage in serverless.yml = stg !!!**
-**!!! then use "sls deploy --stage stg" !!!**
+**Current prod environment = stg | Current test environment = tst**
+When deploying, configure serverless.yml default environment as stg/tst
  
 [WWF Technical Architecture Doc](https://docs.google.com/presentation/d/1c0_-6NLb3zSFwZoRipR61ZYAWnpHLSEbhy_f66GJLYk/edit#slide=id.g3e0cd18cee_0_402)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [WWF TCR Parameters Doc](https://docs.google.com/presentation/d/1UT11ReifnIXT-PaXYplvHWXDeT8_dB4ECmEHJvmY7Fo/edit#slide=id.g3caa06f710_0_1136) <br/>
