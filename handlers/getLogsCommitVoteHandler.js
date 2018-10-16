@@ -68,19 +68,6 @@ class getLogsCommitVoteHandler{
       return;
     }
 
-    try{
-
-      console.log("inside try");
-      const records = await this.databaseMgr.projectConfirmCommitVote(body);
-      console.log("after records await");
-      //cb(null, records);
-      //return;
-
-    }catch(error){
-      console.log("getLogsCommitVoteHandler DB  error"+error);
-      cb({ code: 500, message: "getLogsCommitVoteHandler DB error: " + error.message });
-      return;
-    }
 
 
   }

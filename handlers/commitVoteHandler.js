@@ -69,6 +69,21 @@ class commitVoteHandler{
       return;
     }
 
+
+    
+
+    try{
+
+      console.log("inside try");
+      const records = await this.databaseMgr.projectCommitVote(body);
+      console.log("after records await");
+      //cb(null, records);
+
+    }catch(error){
+      console.log("projectCommitVote db error"+error);
+      cb({ code: 107, message: "projectCommitVote db error: " + error.message });
+      return;
+    }
   
     try{
 
