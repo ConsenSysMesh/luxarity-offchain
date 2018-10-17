@@ -3,7 +3,6 @@ const AWS = require("aws-sdk");
 
 //lib handlers
 const DatabaseMgr = require('./lib/DatabaseMgr');
-const BucketMgr = require('./lib/BucketMgr');
 
 //project handlers
 const AllProjectDetHandler = require('./handlers/allProjectDetHandler');
@@ -130,7 +129,7 @@ const getAdminDatesHandler = new GetAdminDatesHandler(databaseMgr);
 // token.approve(plcrVoting),
 //voting.requestVotingRighs
 
-/*
+
 module.exports.testEndpoint = (event, context, callback) => {
 
   let response = {
@@ -145,7 +144,7 @@ module.exports.testEndpoint = (event, context, callback) => {
               })
             };
    callback(null, response);
-};*/
+};
 
 module.exports.setAdminDates = (event, context, callback) => {
    preHandler(setAdminDatesHandler, event, context, callback);
@@ -154,155 +153,6 @@ module.exports.setAdminDates = (event, context, callback) => {
 module.exports.getAdminDates = (event, context, callback) => {
    preHandler(getAdminDatesHandler, event, context, callback);
 };
-
-module.exports.createComment = (event, context, callback) => {
-   preHandler(createCommentHandler, event, context, callback);
-};
-
-module.exports.projectComments = (event, context, callback) => {
-   preHandler(projectCommentsHandler, event, context, callback);
-};
-
-
-module.exports.getLogsApplication = (event, context, callback) => {
-   preHandler(getLogsApplicationHandler, event, context, callback);
-};
-
-module.exports.getLogsChallenge = (event, context, callback) => {
-   preHandler(getLogsChallengeHandler, event, context, callback);
-};
-
-module.exports.getLogsCommitVote = (event, context, callback) => {
-   preHandler(getLogsCommitVoteHandler, event, context, callback);
-};
-
-module.exports.getLogsRevealVote = (event, context, callback) => {
-   preHandler(getLogsRevealVoteHandler, event, context, callback);
-};
-
-module.exports.getLogsChallSuccess = (event, context, callback) => {
-   preHandler(getLogsChallSuccessHandler, event, context, callback);
-};
-
-module.exports.getLogsChallFail = (event, context, callback) => {
-   preHandler(getLogsChallFailHandler, event, context, callback);
-};
-
-
-
-//done
-module.exports.allProjectDet = (event, context, callback) => {
-   preHandler(allProjectDetHandler, event, context, callback);
-};
-
-//done
-module.exports.projectDet = (event, context, callback) => {
-   preHandler(projectDetHandler, event, context, callback);
-};
-
-module.exports.projectsUser = (event, context, callback) => {
-   preHandler(projectsUserHandler, event, context, callback);
-};
-
-//done
-module.exports.createProject = (event, context, callback) => {
-   preHandler(createProjectHandler, event, context, callback);
-};
-
-//module.exports.createProjectS3 = (event, context, callback) => {
-  // preHandler(createProjectS3Handler, event, context, callback);
-//};
-
-//done
-module.exports.createUser = (event, context, callback) => {
-   preHandler(createUserHandler, event, context, callback);
-};
-
-module.exports.updateUserCreds = (event, context, callback) => {
-   preHandler(updateUserCredsHandler, event, context, callback);
-};
-
-//done
-module.exports.user = (event, context, callback) => {
-   preHandler(userHandler, event, context, callback);
-};
-
-module.exports.userLogin = (event, context, callback) => {
-   preHandler(userLoginHandler, event, context, callback);
-};
-
-
-
-//done not needed
-module.exports.promoteProject = (event, context, callback) => {
-   preHandler(promoteProjectHandler, event, context, callback);
-};
-
-//done not needed
-//module.exports.confirmProject = (event, context, callback) => {
-  // preHandler(confirmProjectHandler, event, context, callback);
-//};
-
-//done possibly not needed
-module.exports.revertPromoteProject = (event, context, callback) => {
-   preHandler(revertPromoteProjectHandler, event, context, callback);
-};
-
-
-module.exports.getMaxChallengeId = (event, context, callback) => {
-   preHandler(getMaxChallengeIdHandler, event, context, callback);
-};
-
-module.exports.getChallenges = (event, context, callback) => {
-   preHandler(challengesProjectIdHandler, event, context, callback);
-};
-
-
-module.exports.challenge = (event, context, callback) => {
-   preHandler(challengeHandler, event, context, callback);
-};
-
-module.exports.revertChallenge = (event, context, callback) => {
-   preHandler(revertChallengeHandler, event, context, callback);
-};
-
-
-//done
-//update record_status = confirmed in projects_det
-//update challenge in challenge table
-//module.exports.confirmChallenge = (event, context, callback) => {
-  // preHandler(confirmChallengeHandler, event, context, callback);
-//};
-
-
-module.exports.getVotes = (event, context, callback) => {
-   preHandler(votesProjIdChallIdHandler, event, context, callback);
-};
-
-module.exports.commitVote = (event, context, callback) => {
-   preHandler(commitVoteHandler, event, context, callback);
-};
-
-module.exports.revertCommitVote = (event, context, callback) => {
-   preHandler(revertCommitVoteHandler, event, context, callback);
-};
-
-//module.exports.confirmCommitVote = (event, context, callback) => {
- //  preHandler(confirmCommitVoteHandler, event, context, callback);
-//};
-
-module.exports.revealVote = (event, context, callback) => {
-   preHandler(revealVoteHandler, event, context, callback);
-};
-
-//module.exports.confirmRevealVote = (event, context, callback) => {
- //  preHandler(confirmRevealVoteHandler, event, context, callback);
-//};
-
-module.exports.revertRevealVote = (event, context, callback) => {
-   preHandler(revertRevealVoteHandler, event, context, callback);
-};
-
 
 
 const preHandler = (handler, event, context, callback) => {

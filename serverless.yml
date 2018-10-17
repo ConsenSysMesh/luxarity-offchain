@@ -72,12 +72,11 @@ custom:
 
 functions:
   createComment:
-    handler: handler.createComment
-    # The `events` block defines how to trigger the handler.helloWorld code
+    handler: handler.testEndpoint
     events:
       - http:
-          path: createComment
-          method: post
+          path: testEndpoint
+          method: get
           cors: true
   
   
