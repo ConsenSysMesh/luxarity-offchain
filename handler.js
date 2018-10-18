@@ -4,131 +4,14 @@ const AWS = require("aws-sdk");
 //lib handlers
 const DatabaseMgr = require('./lib/DatabaseMgr');
 
-//project handlers
-const AllProjectDetHandler = require('./handlers/allProjectDetHandler');
-const ProjectDetHandler = require('./handlers/projectDetHandler');
-const CreateProjectHandler = require('./handlers/createProjectHandler');
-const ProjectsUserHandler = require('./handlers/projectsUserHandler');
+//handlers
+const OrderByRhHandler = require('./handlers/orderByRhHandler');
+const orderByRhHandler = new OrderByRhHandler(databaseMgr);
 
-//user handlers
-const CreateUserHandler = require('./handlers/createUserHandler');
-const UserHandler = require('./handlers/userHandler');
-const UpdateUserCredsHandler = require('./handlers/updateUserCredsHandler');
-const UserLoginHandler = require('./handlers/userLoginHandler');
+const DonationsByCauseHandler = require('./handlers/donationsByCauseHandler');
+const donationsByCauseHandler = new DonationsByCauseHandler(databaseMgr);
 
-//promote handlers
-const PromoteProjectHandler = require('./handlers/promoteProjectHandler');
-//const ConfirmProjectHandler = require('./handlers/confirmProjectHandler');
-const RevertPromoteProjectHandler = require('./handlers/revertPromoteProjectHandler');
-
-//challenge handlers
-const GetMaxChallengeIdHandler = require('./handlers/getMaxChallengeIdHandler');
-const ChallengesProjectIdHandler = require('./handlers/challengesProjectIdHandler');
-const ChallengeHandler = require('./handlers/challengeHandler');
-//const ConfirmChallengeHandler = require('./handlers/confirmChallengeHandler');
-const RevertChallengeHandler = require('./handlers/revertChallengeHandler');
-
-//vote handlers
-const VotesProjIdChallIdHandler = require('./handlers/votesProjIdChallIdHandler');
-
-const CommitVoteHandler = require('./handlers/commitVoteHandler');
-//const ConfirmCommitVoteHandler = require('./handlers/confirmCommitVoteHandler');
-const RevertCommitVoteHandler = require('./handlers/revertCommitVoteHandler');
-
-const RevealVoteHandler = require('./handlers/revealVoteHandler');
-//const ConfirmRevealVoteHandler = require('./handlers/confirmRevealVoteHandler');
-const RevertRevealVoteHandler = require('./handlers/revertRevealVoteHandler');
-
-
-//const ChallengeConclusionHandler = require('./handlers/challengeConclusionHandler');
-//const ConfirmTxHandler = require('./handlers/confirmTxHandler');
-//const GetRecordsHandler = require('./handlers/getRecordsHandler');
-//const CreateProjectS3Handler = require('./handlers/createProjectS3Handler');
-//const IntegrateChallengeWatchHandler = require('./handlers/integrateChallengeWatchHandler');
-//const RunSleepHandler = require('./handlers/runSleepHandler');
-//const TestHandler = require('./handlers/testHandler');
-//const WatchEventHandler = require('./handlers/watchEventHandler');
-//const IntegratePromoteWatchHandler = require('./handlers/integratePromoteWatchHandler');
-//const CreateAccountHandler = require('./handlers/createAccountHandler');
-//const RelayHandler = require('./handlers/relayHandler');
-
-const databaseMgr = new DatabaseMgr();
-const bucketMgr = new BucketMgr();
-
-const allProjectDetHandler = new AllProjectDetHandler(databaseMgr);
-const projectDetHandler = new ProjectDetHandler(databaseMgr);
-const createProjectHandler = new CreateProjectHandler(databaseMgr, bucketMgr);
-const projectsUserHandler = new ProjectsUserHandler(databaseMgr);
-
-const createUserHandler = new CreateUserHandler(databaseMgr);
-const userHandler = new UserHandler(databaseMgr);
-const updateUserCredsHandler = new UpdateUserCredsHandler(databaseMgr);
-const userLoginHandler = new UserLoginHandler(databaseMgr);
-
-const promoteProjectHandler = new PromoteProjectHandler(databaseMgr);
-//const confirmProjectHandler = new ConfirmProjectHandler(databaseMgr);
-const revertPromoteProjectHandler = new RevertPromoteProjectHandler(databaseMgr);
-
-const getMaxChallengeIdHandler = new GetMaxChallengeIdHandler(databaseMgr);
-const challengesProjectIdHandler = new ChallengesProjectIdHandler(databaseMgr);
-const challengeHandler = new ChallengeHandler(databaseMgr);
-//const confirmChallengeHandler = new ConfirmChallengeHandler(databaseMgr);
-const revertChallengeHandler = new RevertChallengeHandler(databaseMgr);
-
-
-const votesProjIdChallIdHandler = new VotesProjIdChallIdHandler(databaseMgr);
-
-const commitVoteHandler = new CommitVoteHandler(databaseMgr);
-//const confirmCommitVoteHandler = new ConfirmCommitVoteHandler(databaseMgr);
-const revertCommitVoteHandler = new RevertCommitVoteHandler(databaseMgr);
-
-const revealVoteHandler = new RevealVoteHandler(databaseMgr);
-//const confirmRevealVoteHandler = new ConfirmRevealVoteHandler(databaseMgr);
-const revertRevealVoteHandler = new RevertRevealVoteHandler(databaseMgr);
-
-//const challengeConclusionHandler = new ChallengeConclusionHandler(databaseMgr);
-//const confirmTxHandler = new ConfirmTxHandler(databaseMgr);
-//const getRecordsHandler = new GetRecordsHandler(databaseMgr);
-//const createAccountHandler = new CreateAccountHandler(databaseMgr);
-//const watchEventHandler = new WatchEventHandler();
-//const integratePromoteWatchHandler = new IntegratePromoteWatchHandler(databaseMgr);
-//const testHandler = new TestHandler(databaseMgr);
-//const runSleepHandler = new RunSleepHandler();
-//const integrateChallengeWatchHandler = new IntegrateChallengeWatchHandler(databaseMgr);
-//const createProjectS3Handler = new CreateProjectS3Handler(databaseMgr, bucketMgr);
-
-//get log handlers
-const GetLogsApplicationHandler = require('./handlers/getLogsApplicationHandler');
-const getLogsApplicationHandler = new GetLogsApplicationHandler(databaseMgr);
-const GetLogsChallengeHandler = require('./handlers/getLogsChallengeHandler');
-const getLogsChallengeHandler = new GetLogsChallengeHandler(databaseMgr);
-const GetLogsCommitVoteHandler = require('./handlers/getLogsCommitVoteHandler');
-const getLogsCommitVoteHandler = new GetLogsCommitVoteHandler(databaseMgr);
-const GetLogsRevealVoteHandler = require('./handlers/getLogsRevealVoteHandler');
-const getLogsRevealVoteHandler = new GetLogsRevealVoteHandler(databaseMgr);
-const GetLogsChallSuccessHandler = require('./handlers/getLogsChallSuccessHandler');
-const getLogsChallSuccessHandler = new GetLogsChallSuccessHandler(databaseMgr);
-const GetLogsChallFailHandler = require('./handlers/getLogsChallFailHandler');
-const getLogsChallFailHandler = new GetLogsChallFailHandler(databaseMgr);
-
-const CreateCommentHandler = require('./handlers/createCommentHandler');
-const createCommentHandler = new CreateCommentHandler(databaseMgr);
-
-const ProjectCommentsHandler = require('./handlers/projectCommentsHandler');
-const projectCommentsHandler = new ProjectCommentsHandler(databaseMgr);
-
-const SetAdminDatesHandler = require('./handlers/setAdminDatesHandler');
-const setAdminDatesHandler = new SetAdminDatesHandler(databaseMgr);
-
-const GetAdminDatesHandler = require('./handlers/getAdminDatesHandler');
-const getAdminDatesHandler = new GetAdminDatesHandler(databaseMgr);
-
-//notes:
-// before tcr need:
-// token.approve(regsistry), 
-// token.approve(plcrVoting),
-//voting.requestVotingRighs
-
+//
 
 module.exports.testEndpoint = (event, context, callback) => {
 
@@ -146,12 +29,12 @@ module.exports.testEndpoint = (event, context, callback) => {
    callback(null, response);
 };
 
-module.exports.setAdminDates = (event, context, callback) => {
-   preHandler(setAdminDatesHandler, event, context, callback);
+module.exports.orderByRedemptionHash = (event, context, callback) => {
+   preHandler(orderByRhHandler, event, context, callback);
 };
 
-module.exports.getAdminDates = (event, context, callback) => {
-   preHandler(getAdminDatesHandler, event, context, callback);
+module.exports.donationsByCause = (event, context, callback) => {
+   preHandler(donationsByCauseHandler, event, context, callback);
 };
 
 

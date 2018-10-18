@@ -1,6 +1,6 @@
 
 
-class userHandler{
+class orderByRhHandler{
 
   constructor(databaseMgr){
     this.databaseMgr = databaseMgr;
@@ -8,7 +8,7 @@ class userHandler{
 
  async handle(event, context, cb) {
 
-  console.log("inside userHandler.handle");
+  console.log("inside orderByRhHandler.handle");
 
   let body;
 
@@ -28,28 +28,22 @@ class userHandler{
 
    
 
-    if (!body.userId) {
-      cb({ code: 400, message: "report parameter missing - userId" });
+    if (!body.redemptionHash) {
+      cb({ code: 400, message: "report parameter missing - redemptionHash" });
       return;
     }
-
-    if (!body.password) {
-      cb({ code: 400, message: "report parameter missing - password" });
-      return;
-    }
-
   
   
     try{
 
       console.log("inside try");
-      const records = await this.databaseMgr.updateUserCreds(body);
+      const records = await this.databaseMgr.ordersByRedemptionhash(body);
       console.log("after records await");
       cb(null, records);
 
     }catch(error){
-      console.log("userHandler error"+error);
-      cb({ code: 500, message: "userHandler: " + error.message });
+      console.log("orderByRhHandler error"+error);
+      cb({ code: 500, message: "orderByRhHandler error: " + error.message });
       return;
     }
 
@@ -59,4 +53,4 @@ class userHandler{
 
 };
 
-module.exports = userHandler;
+module.exports = orderByRhHandler;

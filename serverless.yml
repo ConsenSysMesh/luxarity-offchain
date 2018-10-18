@@ -43,26 +43,6 @@ plugins:
   - serverless-kms-secrets
   #- serverless-webpack
 
-
-resources:
-  Resources:
-    newstgApplicationQueue:
-      Type: "AWS::SQS::Queue"
-      Properties:
-        QueueName: "newstgApplicationQueue"
-        VisibilityTimeout: 30 # 30 sec.
-        MessageRetentionPeriod: 60 # 60 sec.
-        RedrivePolicy:
-          deadLetterTargetArn:
-            "Fn::GetAtt":
-              - ApplicationDeadLetterQueue
-              - Arn
-          maxReceiveCount: 2
-    ApplicationDeadLetterQueue:
-      Type: "AWS::SQS::Queue"
-      Properties:
-        QueueName: "newstgApplicationDLQ"
-        MessageRetentionPeriod: 1209600 # 14 days in seconds
         
 custom:
   serverless-kms-secrets:
@@ -77,6 +57,20 @@ functions:
       - http:
           path: testEndpoint
           method: get
+          cors: true
+  orderByRedemptionHash:
+    handler: handler.orderByRedemptionHash
+    events:
+      - http:
+          path: orderByRedemptionHash
+          method: post
+          cors: true
+  donationsByCause:
+    handler: handler.donationsByCause
+    events:
+      - http:
+          path: donationsByCause
+          method: post
           cors: true
   
   

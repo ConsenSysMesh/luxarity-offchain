@@ -1,6 +1,6 @@
 
 
-class revertPromoteProjectHandler{
+class donationsByCauseHandler{
 
   constructor(databaseMgr){
     this.databaseMgr = databaseMgr;
@@ -8,9 +8,9 @@ class revertPromoteProjectHandler{
 
  async handle(event, context, cb) {
 
-  console.log("inside revertPromoteProjectHandler.handle");
+  console.log("inside donationsByCauseHandler.handle");
 
-    let body;
+  let body;
 
     if (event && !event.body) {
       body = event;
@@ -26,23 +26,24 @@ class revertPromoteProjectHandler{
       return;
     }
 
-    // when registy.apply() fails
+   
 
-     if (!body.projectId) {
-      cb({ code: 400, message: "report parameter missing - projectId" });
+    if (!body.causeId) {
+      cb({ code: 400, message: "report parameter missing - causeId" });
       return;
     }
+
   
     try{
 
       console.log("inside try");
-      const records = await this.databaseMgr.revertPromoteProject(body);
+      const records = await this.databaseMgr.donationsByCause(body);
       console.log("after records await");
       cb(null, records);
 
     }catch(error){
-      console.log("revertPromoteProjectHandler error"+error);
-      cb({ code: 500, message: "getTestRecrodsError: " + err.message });
+      console.log("donationsByCauseHandler error"+error);
+      cb({ code: 500, message: "donationsByCauseHandler error: " + error.message });
       return;
     }
 
@@ -52,4 +53,4 @@ class revertPromoteProjectHandler{
 
 };
 
-module.exports = revertPromoteProjectHandler;
+module.exports = donationsByCauseHandler;
