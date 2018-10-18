@@ -1,183 +1,19 @@
+GET - https://s415yxp3a1.execute-api.us-west-1.amazonaws.com/stg/testEndpoint
+
+///////
+sls invoke local -f ordersByRedemptionHash -d '{"redemptionHash":"12345"}'
+
+POST - https://s415yxp3a1.execute-api.us-west-1.amazonaws.com/stg/ordersByRedemptionHash
+
+{"redemptionHash":"12345"}
+
+///////
+
+POST - https://s415yxp3a1.execute-api.us-west-1.amazonaws.com/stg/donationsByCause
+
+{"causeId":"1"}
+
+sls invoke local -f donationsByCause -d '{"causeId":"1"}'
 
 
-//trigger: UI needs to insert a project
-sls invoke local -f createComment -d '{"projectId":"99","userId":"99","submissionDate":"2018-10-10","comment":"a great comment"}'
 
-//trigger: UI needs to get comments for a project
-sls invoke local -f projectComments -d '{"projectId":"99"}'
-///////////////////////////////
-
-//trigger: UI needs to get all projects
-sls invoke local -f allProjectDet
-
-//trigger: UI needs to get project by projectId
-sls invoke local -f projectDet -d '{"projectId" : "1"}'
-
-//trigger: UI needs to get all projects for userId
-sls invoke local -f projectsUser -d '{"userId" : "2"}'
-
-
-//trigger: UI user completes 'project application' process
-////minimum fields required
-sls invoke local -f createProject -d '{ "title" : "irelandtest", "location" : "s", "imageUrl" : "sdf",  "submitterId" : 2 }'
-
-////without video
-sls invoke local -f createProject -d '{"title" : "rrsrr", "location" : "sdf", "url" : "sdf", "categories" : "ds", "startDate" : "2018-07-29", "endDate" : "2018-07-29", "problemSummary" : "dsf", "problemEvidence" : "dfs", "solution" : "sdf", "stage" : "sdf", "impact" : "sdf", "funding" : "sdf", "team" : "sdf", "ready" : "true", "workplan" : "sdf", "risks" : "sdf", "outcomes" : "sdf", "outcome1" : "sdf", "outcome2" : "sdf", "outcome3" : "sdf", "longTermImpact" : "sdf", "learnings" : "sdf", "benefits" : "sdf", "budgetUrl" : "sdf", "financialSustainability" : "sdf", "imageUrl" : "sdf",  "submitterId" : "2" }'
-
-////with video
-sls invoke local -f createProject -d '{"title" : "rrdsfrr", "location" : "sdf", "url" : "sdf", "categories" : "ds", "startDate" : "2018-07-29", "endDate" : "2018-07-29", "problemSummary" : "dsf", "problemEvidence" : "dfs", "solution" : "sdf", "stage" : "sdf", "impact" : "sdf", "funding" : "sdf", "team" : "sdf", "ready" : "true", "workplan" : "sdf", "risks" : "sdf", "outcomes" : "sdf", "outcome1" : "sdf", "outcome2" : "sdf", "outcome3" : "sdf", "longTermImpact" : "sdf", "learnings" : "sdf", "benefits" : "sdf", "budgetUrl" : "sdf", "financialSustainability" : "sdf", "imageUrl" : "sdf", "videoUrl": "sdf", "submitterId" : "2" }'
-
-//!SEE createProjectS3 at bottom for S3 implementation
-
-///////////////////////////////
-
-//trigger: UI - user completes create user process
-sls invoke local -f createUser -d '{"name" : "Jane Smith", "email" : "jsmith@gmail.com", "password" : "anothergoodpw"}'
-
-//trigger: UI needs to get specific user
-sls invoke local -f user -d '{"userId" : "1"}'
-
-//trigger: UI updating user credentials
-sls invoke local -f updateUserCreds -d '{"userId" : "10", "password" : "new password"}'
-
-//trigger: UI login 
-sls invoke local -f userLogin -d '{"email" : "jdoe@gmail.com", "password" : "goodpassword" }'
-
-///////////////////////////////
-
-//trigger: UI - user clicks promote button and sends mnetamask tx
-sls invoke local -f promoteProject -d '{"projectId" : "21", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd", "userId" : "" }'
-
-//no event
-sls invoke local -f revertPromoteProject -d '{"projectId" : "228"}'
-
-///////////////////////////////
-
-sls invoke local -f getChallenges -d '{"projectId" : "3"}'
-
-//trigger: UI - user clicks challenge button and sends mnetamask tx
-sls invoke local -f challenge -d '{"projectId" : "1", "listingHash": "0xc89efdaa54c0f20c7adf612882df0950f5a951637e0307cdcb4c672f298b8bc6", "challengerPublicKey" : "0x765240498af58315108030984a2169aa80E12451"}'
-
-//trigger: UI - registry.challenge tx fails
-sls invoke local -f revertChallenge -d '{"projectId" : "16", "listingHash": "0x56"}'
-
-
-///////////////////////////////
-
-//trigger: UI - needs to get votes for reveal workflow
-//// returns all votes for projectId and challengeId
-sls invoke local -f getVotes -d '{"projectId" : "2", "challengeId" : "1"}'
-//// returns all votes for projectId, challengeId,. and userId
-sls invoke local -f getVotes -d '{"projectId" : "21", "challengeId" : "99", "userId" : "99"}'
-
-//trigger: UI - user clicks vote button
-sls invoke local -f commitVote -d '{"pollId" : "99", "secretHash" : "secrethash", "salt" : "salt", "voteOption" : "1", 
-"projectId" : "21", "userId" : "99", "voterPublicKey" : "99"}'
-
-sls invoke local -f revertCommitVote -d '{"pollId" : "99", "projectId" : "21", "userId" : "99"}'
-
-//trigger: UI - user clicks reveal vote button
-revealVote '{"userId" : "99", "pollId" : "99", "voteOption" : "0"}'
-
-sls invoke local -f revertRevealVote -d '{"pollId" : "99", "projectId" : "21", "voterPublicKey" : "99", "userId" : "99"}'
-
-
-sls invoke local -f getLogsCommitVote -d '{"listingHash" : "0x2d47c9dcff2e972b00379ff506c22bf4ca293e9bf8850348781707f267825f2b", "voterPublicKey" : "99", "userId" : "99", "pollId" : "99"}'
-
-
-DO NOT USE BELOW !!!  DO NOT USE BELOW !!! DO NOT USE BELOW !!! DO NOT USE BELOW !!! DO NOT USE BELOW !!! DO NOT USE BELOW !!!
-DO NOT USE BELOW !!!  DO NOT USE BELOW !!! DO NOT USE BELOW !!! DO NOT USE BELOW !!! DO NOT USE BELOW !!! DO NOT USE BELOW !!!
-
-endpoints for develop (currently in use):
-  GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/testEndpoint
-  GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/testEndpoint2
-  GET - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/allProjectDet
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/projectDet
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/projectsUser
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createProject
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createProjectS3
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createUser
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/updateUserCreds
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/user
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/userLogin
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/promoteProject
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmProject
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revertPromoteProject
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/createAccount
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/challenge
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revertChallenge
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmChallenge
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/commitVote
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmCommitVote
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/test1
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/sleep
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/challengeConclusion
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/revealVote
-  POST - https://fljm3tlhk5.execute-api.us-west-1.amazonaws.com/develop/confirmRevealVote
-
-//////////////////    OLD    //////////////////////////
-
-//trigger: TCR EVENT plcrVoting.VoteRevealed
-confirmRevealVote '{"voter" : "0x78", "pollId" : "2"}'
-
-//trigger: TCR EVENT plcrVoting._VoteCommitted
-confirmCommitVote '{"pollId" : "1", "voterPublicKey" : "0x888"}'
-
-//trigger: TCR EVENT registry._Challenge
-sls invoke local -f confirmChallenge -d '{"listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengeId" : "3", "data" : "some data", "commitEndDate" : "2018-07-29", "revealEndDate" : "2018-07-29", "challenger" : "0x897"}'
-
-//trigger:  TCR EVENT registry._ChallengeSucceeded
-sls invoke local -f challengeConclusion -d '{"challengeOutcome" : "Success", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengeId" : "3", "rewardPool" : "1000", "totalTokens" : "1100"}'
-
-//trigger:  TCR EVENT registry._ChallengeFailed
-sls invoke local -f challengeConclusion -d '{"challengeOutcome" : "Failed", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengeId" : "2", "rewardPool" : "1000", "totalTokens" : "1100"}'
-
-//test: bad challengeOutcome input variable
-sls invoke local -f challengeConclusion -d '{"challengeOutcome" : "badOutcomeVariable", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengeId" : "2", "rewardPool" : "1000", "totalTokens" : "1100"}'
-
-
-//trigger: TCR EVENT registry._Application
-sls invoke local -f confirmProject -d '{"listingHash" : "0x7456", "promoterPublickey" : "0x453", "projectId" : "14"}'
-
-
-sls invoke local -f helloWorld
-
-//trigger: UI user completes 'start application' process
-sls invoke local -f createAccount -d '{"userId" : "3", "projectCategory" : "test", "projectProblem" : "test",  "projectApproach" : "test", "projectStage" : "test", "projectImpact" : "test", "fundingGoal" : "test", "teamInfo" : "test"}'
-
-//returns success
-sls invoke local -f integratePromoteWatch -d '{"projectId" : "14", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd", "sleepMs" : "30000"}'
-
-//bad listingHash returns error
-sls invoke local -f integratePromoteWatch -d '{"projectId" : "3", "listingHash" : "0xbd61837be06d94e1ae9192878e518907b30a9e66e0810d1e139231d4ae17ed37" , "promoterPublicKey" : "0xbb011cdbfc28404baaa2d40a5ace94e9fb5695bd" }'
-
-sls invoke local -f watchEvent
-
-sls invoke local -f test1 -d '{"projectId" : "3", "userId" : "4", "submissionDate" : "2018-07-29", "listingHash": "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "challengerPublicKey" : "0xD176f6907Ae1E699b39F78cf4582B019518E2B80"}'
-
-
-sls invoke local -f confirmTx -d '{"txStatus" : "Success", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37", "sleepMs" : "30000"}'
-
-sls invoke local -f confirmTx -d '{"txStatus" : "Failed", "listingHash" : "0xbd61837be06d94e1ae9192878e518908b30a9e66e0810d1e139231d4ae17ed37"}'
-
-sls invoke local -f sleep -d '{"sleepMs" : "1000"}'
-
-sls invoke local -f relay -d '{"metaSignedTx" : "f9022380808094da8c6dce9e9a85e6f9df7b09b2354da44cb4833180b90204c3f44c0a000000000000000000000000000000000000000000000000000000000000001b8f350a51bad1e9786436aff379b12576287a343ac927e590ad22bf31d9a3f94738174cdb10457408c8acccc0f1a65db1c1bdcea4e406434c1689a63fb10ec92e00000000000000000000000087ea811785c4bd30fc104c2543cf8ed90f7eeec700000000000000000000000000000000000000000000000000000000000000c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000104701b8826000000000000000000000000f978f6a993d595e67b2662cbe04b140b4b675c2b000000000000000000000000b4238d73e491e97bcabdc10e9787f53ba929f44800000000000000000000000061e0cebf793fa4a0092404e928f80b4b5bb8de72000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000002460fe47b1000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001c8080", "blockchain" : "rinkeby"}'
-
-sls invoke local -f createProject -d '{"title" : "proj14", "location" : "Quebec", "descriptionShort" : "short desc14", "descriptionLong" : "long desc3", "teamNumber" : "3", "teamName" : "Ramparts", "submitterId" : "03", "submissionDate" : "2018-07-29", "tags" : "Global Warming", "mediaTitle" : "pondImage", "images" : "https://www.google.com/search?q=sample+image&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiIm8W92P7cAhUHLsAKHaNVAxsQ_AUICigB&biw=1133&bih=681#imgrc=CwPbs8S_fuhr5M:"}'
-
-sls invoke local -f createProjectS3 -d '{
-  "title": "Billy Dengus2",
-  "location": "somewhere",
-  "descriptionShort": "testing",
-  "descriptionLong": "testinggg",
-  "teamNumber": 1,
-  "teamName": "uhmmmmmm",
-  "submitterId": 1,
-  "submissionDate" : "2018-07-29",
-  "status": "legit",
-  "tags": "test,testing",
-  "mediaTitle": "John Krungesen",
-  "deliverer_id" : "1",
-  "images": ["iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAMAAADDpiTIAAADAFBMVEUAAAAAAAAAAAAAAAA/AD8zMzMqKiokJCQfHx8cHBwZGRkuFxcqFSonJyckJCQiIiIfHx8eHh4cHBwoGhomGSYkJCQiIiIhISEfHx8eHh4nHR0lHBwkGyQjIyMiIiIgICAfHx8mHh4lHh4kHR0jHCMiGyIhISEgICAfHx8lHx8kHh4jHR0iHCIhHCEhISEgICAlHx8kHx8jHh4jHh4iHSIhHCEhISElICAkHx8jHx8jHh4iHh4iHSIhHSElICAkICAjHx8jHx8iHh4iHh4hHiEhHSEkICAjICAjHx8iHx8iHx8hHh4hHiEkHSEjHSAjICAjHx8iHx8iHx8hHh4kHiEkHiEjHSAjICAiHx8iHx8hHx8hHh4kHiEjHiAjHSAiICAiHx8iHx8hHx8kHh4jHiEjHiAjHiAiICAiHx8hHx8kHx8jHh4jHiEjHiAiHiAiHSAiHx8kHx8jHx8jHx8jHiAiHiAiHiAiHSAiHx8jHx8jHx8jHx8iHiAiHiAiHiAiHiAjHx8jHx8jHx8jHx8iHiAiHiAiHiAjHiAjHx8jHx8jHx8iHx8iHSAiHiAiHiAjHiAjHx8jHx8hHx8iHx8iHyAiHiAjHiAjHiAjHh4hHx8iHx8iHx8iHyAjHSAjHiAjHiAjHh4hHx8iHx8iHx8jHyAjHSAjHiAjHiAhHh4iHx8iHx8iHx8jHyAjHSAjHSAhHiAhHh4iHx8iHx8jHx8jHyAjHSAjHSAhHiAiHh4iHh4jHx8jHx8jHyAjHyAhHSAhHSAiHh4iHh4jHx8jHx8jHyAhHyAhHSAiHSAiHh4jHh4jHx8jHx8jHyAhHyAhHSAiHSAjHR4jHh4jHx8jHx8hHyAhHyAiHSAjHSAjHR4jHh4jHx8hHx8hHyAhHyAiHyAjHSAjHR4jHR4hHh4hHx8hHyAiHyAjHyAjHSAjHR4jHR4hHh4hHx8hHyAjHyAjHyAjHSAjHR4hHR4hHR4hHx8iHyAjHyAjHyAjHSAhHR4hHR4hHR4hHx8jHyAjHyAjHyAjHyAVnf49AAAA/3RSTlMAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyAhIiMkJSYnKCkqKywtLi8wMTIzNDU2Nzg5Ojs8PT4/QEFCQ0RFRkdISUpLTE1O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"]
-}'
