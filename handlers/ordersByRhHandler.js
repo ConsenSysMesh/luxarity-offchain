@@ -1,6 +1,6 @@
 
 
-class orderByRhHandler{
+class ordersByRhHandler{
 
   constructor(databaseMgr){
     this.databaseMgr = databaseMgr;
@@ -8,7 +8,7 @@ class orderByRhHandler{
 
  async handle(event, context, cb) {
 
-  console.log("inside orderByRhHandler.handle");
+  console.log("inside ordersByRhHandler.handle");
 
   let body;
 
@@ -42,8 +42,8 @@ class orderByRhHandler{
       cb(null, records);
 
     }catch(error){
-      console.log("orderByRhHandler error"+error);
-      cb({ code: 500, message: "orderByRhHandler error: " + error.message });
+      console.log("ordersByRhHandler error"+error);
+      cb({ code: 500, message: "ordersByRhHandler error: " + error.message });
       return;
     }
 
@@ -53,4 +53,4 @@ class orderByRhHandler{
 
 };
 
-module.exports = orderByRhHandler;
+module.exports = ordersByRhHandler;

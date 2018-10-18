@@ -3,10 +3,11 @@ const AWS = require("aws-sdk");
 
 //lib handlers
 const DatabaseMgr = require('./lib/DatabaseMgr');
+const databaseMgr = new DatabaseMgr();
 
 //handlers
-const OrderByRhHandler = require('./handlers/orderByRhHandler');
-const orderByRhHandler = new OrderByRhHandler(databaseMgr);
+const OrdersByRhHandler = require('./handlers/ordersByRhHandler');
+const ordersByRhHandler = new OrdersByRhHandler(databaseMgr);
 
 const DonationsByCauseHandler = require('./handlers/donationsByCauseHandler');
 const donationsByCauseHandler = new DonationsByCauseHandler(databaseMgr);
@@ -29,8 +30,8 @@ module.exports.testEndpoint = (event, context, callback) => {
    callback(null, response);
 };
 
-module.exports.orderByRedemptionHash = (event, context, callback) => {
-   preHandler(orderByRhHandler, event, context, callback);
+module.exports.ordersByRedemptionHash = (event, context, callback) => {
+   preHandler(ordersByRhHandler, event, context, callback);
 };
 
 module.exports.donationsByCause = (event, context, callback) => {
@@ -41,7 +42,7 @@ module.exports.donationsByCause = (event, context, callback) => {
 const preHandler = (handler, event, context, callback) => {
   console.log("event: "+event);
   console.log("inside preHandler");
-  if (!databaseMgr.isSecretsSet() || !bucketMgr.isSecretsSet()) {
+  if (!databaseMgr.isSecretsSet() ) {
     const kms = new AWS.KMS();
     kms
       .decrypt({
@@ -52,7 +53,6 @@ const preHandler = (handler, event, context, callback) => {
         const decrypted = JSON.parse(String(data.Plaintext));
         //ethereumMgr.setSecrets(decrypted);
         databaseMgr.setSecrets(decrypted);
-        bucketMgr.setSecrets(decrypted);
         //console.log("secrets:", decrypted);
         doHandler(handler, event, context, callback);
       });

@@ -51,18 +51,18 @@ custom:
   #webpackIncludeModules: true
 
 functions:
-  createComment:
+  testEndpoint:
     handler: handler.testEndpoint
     events:
       - http:
           path: testEndpoint
           method: get
           cors: true
-  orderByRedemptionHash:
-    handler: handler.orderByRedemptionHash
+  ordersByRedemptionHash:
+    handler: handler.ordersByRedemptionHash
     events:
       - http:
-          path: orderByRedemptionHash
+          path: ordersByRedemptionHash
           method: post
           cors: true
   donationsByCause:
