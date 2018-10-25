@@ -1,19 +1,28 @@
-GET - https://s415yxp3a1.execute-api.us-west-1.amazonaws.com/stg/testEndpoint
+ GET - https://j0qezna9a1.execute-api.us-east-1.amazonaws.com/stg/testEndpoint
 
 ///////
 sls invoke local -f ordersByRedemptionHash -d '{"redemptionHash":"12345"}'
 
-POST - https://s415yxp3a1.execute-api.us-west-1.amazonaws.com/stg/ordersByRedemptionHash
+POST - https://j0qezna9a1.execute-api.us-east-1.amazonaws.com/stg/ordersByRedemptionHash
 
 {"redemptionHash":"12345"}
 
 ///////
 
-POST - https://s415yxp3a1.execute-api.us-west-1.amazonaws.com/stg/donationsByCause
+POST - https://j0qezna9a1.execute-api.us-east-1.amazonaws.com/stg/donationsByCause
 
 {"causeId":"1"}
 
 sls invoke local -f donationsByCause -d '{"causeId":"1"}'
 
+///////
+
+GET - https://j0qezna9a1.execute-api.us-east-1.amazonaws.com/stg/totalDonations
+
+sls invoke -f totalDonations
 
 
+ 
+  
+  
+  

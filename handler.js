@@ -12,6 +12,9 @@ const ordersByRhHandler = new OrdersByRhHandler(databaseMgr);
 const DonationsByCauseHandler = require('./handlers/donationsByCauseHandler');
 const donationsByCauseHandler = new DonationsByCauseHandler(databaseMgr);
 
+const TotalDonationsHandler = require('./handlers/totalDonationsHandler');
+const totalDonationsHandler = new TotalDonationsHandler(databaseMgr);
+
 //
 
 module.exports.testEndpoint = (event, context, callback) => {
@@ -37,6 +40,11 @@ module.exports.ordersByRedemptionHash = (event, context, callback) => {
 module.exports.donationsByCause = (event, context, callback) => {
    preHandler(donationsByCauseHandler, event, context, callback);
 };
+
+module.exports.totalDonations = (event, context, callback) => {
+   preHandler(totalDonationsHandler, event, context, callback);
+};
+
 
 
 const preHandler = (handler, event, context, callback) => {
