@@ -79,6 +79,13 @@ functions:
           path: totalDonations
           method: get
           cors: true
+  totalSales:
+    handler: handler.totalSales
+    events:
+      - http:
+          path: totalSales
+          method: get
+          cors: true
   
   
 
