@@ -18,6 +18,7 @@ const totalDonationsHandler = new TotalDonationsHandler(databaseMgr);
 const InsertOrderHandler = require('./handlers/insertOrderHandler');
 const insertOrderHandler = new InsertOrderHandler(databaseMgr);
 
+
 //
 
 module.exports.testEndpoint = (event, context, callback) => {
@@ -50,7 +51,7 @@ module.exports.totalDonations = (event, context, callback) => {
 
 module.exports.insertOrder = (event, context, callback) => {
    preHandler(insertOrderHandler, event, context, callback);
-};
+ };
 
 
 
