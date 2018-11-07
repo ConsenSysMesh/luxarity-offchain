@@ -15,6 +15,9 @@ const donationsByCauseHandler = new DonationsByCauseHandler(databaseMgr);
 const TotalDonationsHandler = require('./handlers/totalDonationsHandler');
 const totalDonationsHandler = new TotalDonationsHandler(databaseMgr);
 
+const InsertOrderHandler = require('./handlers/insertOrderHandler');
+const insertOrderHandler = new InsertOrderHandler(databaseMgr);
+
 //
 
 module.exports.testEndpoint = (event, context, callback) => {
@@ -45,6 +48,10 @@ module.exports.totalDonations = (event, context, callback) => {
    preHandler(totalDonationsHandler, event, context, callback);
 };
 
+module.exports.insertOrder = (event, context, callback) => {
+   preHandler(insertOrderHandler, event, context, callback);
+};
+
 
 
 const preHandler = (handler, event, context, callback) => {
@@ -60,6 +67,7 @@ const preHandler = (handler, event, context, callback) => {
       .then(data => {
         const decrypted = JSON.parse(String(data.Plaintext));
         //ethereumMgr.setSecrets(decrypted);
+        console.log("setting db secrets")
         databaseMgr.setSecrets(decrypted);
         //console.log("secrets:", decrypted);
         doHandler(handler, event, context, callback);

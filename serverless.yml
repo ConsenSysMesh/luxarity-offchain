@@ -1,12 +1,12 @@
 # serverless.yml
 
 
-service: luxarity-offchain
+service: lux-test-offchain
 # The `provider` block defines where your service will be deployed
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: ${opt:stage, 'stg'}
+  stage: ${opt:stage, 'tst'}
   region: us-east-1 
   iamRoleStatements:
     - Effect: Allow
@@ -78,6 +78,13 @@ functions:
       - http:
           path: totalDonations
           method: get
+          cors: true
+  insertOrder:
+    handler: handler.insertOrder
+    events:
+      - http:
+          path: insertOrder
+          method: post
           cors: true
   
   
