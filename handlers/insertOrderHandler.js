@@ -60,6 +60,8 @@ class insertOrderHandler{
       cb({ code: 500, message: "blockchain parameter not valid" });
       return;
     }
+
+    body.orderDate = new Date().toISOString();
   
     try{
 
